@@ -1,14 +1,8 @@
-#summary One-sentence summary of this page.
+#summary Frequently Asked Questions
 #labels faq,Featured
 
-= Introduction =
+= Frequently asked questions about Q for Eclipse =
 
-Add your content here.
+== Test ==
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+test
