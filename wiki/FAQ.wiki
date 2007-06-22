@@ -9,7 +9,7 @@ It will allow you to run Maven goals from the Eclipse IDE, create new Maven proj
 
 == How do I install it? ==
 
-Refer to Installation
+Refer to [Installation]
 
 == What are the differences between this plugin and m2eclipse (aka Tycho)? ==
 
