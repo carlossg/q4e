@@ -3,4 +3,41 @@
 
 = Update site =
 
-We are currently working on an update site for you to use.
+*We are currently working on creating an update site for you to use.*
+
+= Installation Requirements =
+The following is required to use the Q for Eclipse Plugin:
+ * Eclipse 3.3RC3 [http://download.eclipse.org/eclipse/downloads/]
+ * Java 5 [http://java.sun.com/]
+
+= Installing the Eclipse Integration Plugin =
+
+This section explains how to install the Q for Eclipse Plugin for the Eclipse Integrated Development Environment (IDE).
+
+== Installing from the Update Site ==
+This section discusses how to update your existing, already installed version of Eclipse to use the plugin.
+
+To update your Eclipse installation perform the following steps:
+ # Open Eclipse. On the menu bar, click Help > Software Updates > Find and Install. An installation wizard opens. 
+ # The first page of the wizard is the Feature Updates page, where you can select the method for locating features to install. Select Search for new features to install, then click Next to display the next page of the wizard.
+ # On the Update sites to visit page, click the New Remote Site button (located on the right side). A small pop-up appears, allowing you to set up a bookmark for the site from which you will download the Q for Eclipse Plugin. 
+ # Enter a name or alias for the site from which you want to download the plugin (for example, *Q for Eclipse*). Then, enter the following URL for the download site:  `http://q4e.googlecode.com/svn/update`. 
+   Note:  If you are behind a firewall that requires a proxy you must setup a proxy in Eclipse to reach the remote site.  To setup a proxy go to Window > Preferences and in the new window select Network Connections located under General in the left hand expandable menu to establish a Manual Proxy Configuration.  
+ # Click OK to add the new site to the list of sites in the window of the wizard
+ # Click the box to select the site you just added, then click Finish. Eclipse then searches the site for available features you can install and and displays them in hierarchical tree structure on a Search Results page
+ # On the Search Results page, click to select the box to the left of the feature(s) you want to install (including the Q for Eclipse plugin).  Then, below the list of features, click to select Show the latest version of a feature only. Click Next to display the Feature License screen of the wizard
+ # The Feature License screen shows a list of the features you selected that have license agreements you must accept before installing them.  Below the list window, click the first option to indicate you accept the license agreement(s), then click Next to move to the next wizard screen. 
+ # The Installation screen lists all of the features/plugins you have chosen to install, along with the corresponding directories into which they will install 
+ # Click Finish to download the features/plugins. After downloading, a Feature Verification screen will appear.
+ # On the Feature Verification screen, verify that you want to install the features you selected. To install all of the features, click Install All. 
+ # When installation is complete, a window appears asking you whether you would like to restart Eclipse. Click Yes to restart so the new features will take effect.
+
+
+== Verifying the installation ==
+
+Follow this procedure to verify that the Q for Eclipse Plugin successfully installed on Eclipse:
+
+ # After Eclipse has been restarted, click on Help > About Eclipse SDK.
+ # On the pop-up, click Plug-in Details. A list of all plugins installed on Eclipse will appear. 
+ # Scroll down and look for the Q for Eclipse Plugin you just installed by looking for the name Kepler in the Plug-in Name. 
+
