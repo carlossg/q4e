@@ -1,4 +1,5 @@
 #summary Installation of the plugin.
+#labels Featured,Phase-Deploy
 
 = Update site =
 
