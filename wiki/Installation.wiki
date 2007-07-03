@@ -21,7 +21,7 @@ To update your Eclipse installation perform the following steps:
  # Open Eclipse. On the menu bar, click Help > Software Updates > Find and Install. An installation wizard opens. 
  # The first page of the wizard is the Feature Updates page, where you can select the method for locating features to install. Select Search for new features to install, then click Next to display the next page of the wizard.
  # On the Update sites to visit page, click the New Remote Site button (located on the right side). A small pop-up appears, allowing you to set up a bookmark for the site from which you will download the Q for Eclipse Plugin. 
- # Enter a name or alias for the site from which you want to download the plugin (for example, *Q for Eclipse*). Then, enter the following URL for the download site:  `http://q4e.googlecode.com/svn/trunk/updatesite/`. 
+ # Enter a name or alias for the site from which you want to download the plugin (for example, *Q for Eclipse*). Then, enter the following URL for the download site:  *`http://q4e.googlecode.com/svn/trunk/updatesite/`*. 
    Note:  If you are behind a firewall that requires a proxy you must setup a proxy in Eclipse to reach the remote site.  To setup a proxy go to Window > Preferences and in the new window select Network Connections located under General in the left hand expandable menu to establish a Manual Proxy Configuration.  
  # Click OK to add the new site to the list of sites in the window of the wizard
  # Click the box to select the site you just added, then click Finish. Eclipse then searches the site for available features you can install and and displays them in hierarchical tree structure on a Search Results page
