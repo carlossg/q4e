@@ -1,6 +1,8 @@
 #summary Installation of the plugin.
 #labels Featured,Phase-Deploy
 
+The project is in a technology preview status, there are features that are not yet implemented, but you may find it useful.
+
 = Update site =
 
 *`http://q4e.googlecode.com/svn/trunk/updatesite/`*
