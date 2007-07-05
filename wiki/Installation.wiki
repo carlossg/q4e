@@ -3,7 +3,7 @@
 
 = Update site =
 
-*We are currently working on creating an update site for you to use.*
+*`http://q4e.googlecode.com/svn/trunk/updatesite/`*
 
 = Installation Requirements =
 The following is required to use the Q for Eclipse Plugin:
