@@ -16,3 +16,7 @@ Refer to [Installation]
 The objective of this plugin is to be part of the [http://www.eclipse.org Eclipse Foundation], for that reason the license is EPL and we are going to follow the foundation procedures. Thanks to the sponsorship of [http://www.devzuz.com DevZuz], an [http://www.eclipse.org/membership/showMember.php?member_id=824 Eclipse Strategic Developer Member] we are in a good position to achieve this goal.
 
 Besides the objective, there are technical differences. While m2eclipse shows Maven output in a console, Q is based in events and will show them in an organized way that allows filtering by severity, search,... Functionality like the dependency graph, direct import of projects or creation of new projects using the archetype mechanism are only present in Q.
+
+== Why the name Q? ==
+
+Q, named after the [http://en.wikipedia.org/wiki/Q_(James_Bond) special agent Q] in the James Bond books and movies
