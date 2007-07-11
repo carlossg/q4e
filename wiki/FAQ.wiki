@@ -19,4 +19,4 @@ Besides the objective, there are technical differences. While m2eclipse shows Ma
 
 == Why the name Q? ==
 
-Q, named after the [http://en.wikipedia.org/wiki/Q_(James_Bond) special agent Q] in the James Bond books and movies
+Q, named after the [http://en.wikipedia.org/wiki/Q_(James_Bond) special agent Q] in the James Bond books and movies. No double meaning or anything like that, we are just James Bond fans ;)
