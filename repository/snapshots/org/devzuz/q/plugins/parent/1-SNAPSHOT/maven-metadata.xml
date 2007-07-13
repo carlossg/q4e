@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+  <groupId>org.devzuz.q.plugins</groupId>
+  <artifactId>parent</artifactId>
+  <version>1-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20070713.201911</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20070713201912</lastUpdated>
+  </versioning>
+</metadata>
