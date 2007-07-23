@@ -9,3 +9,75 @@ We will cover the architecture of the project
 = Slides =
 
 [http://q4e.googlecode.com/svn/trunk/docs/Q.odp Introduction to Q]
+
+
+= Architecture =
+
+[http://q4e.googlecode.com/svn/trunk/docs/architecture.png]
+
+The modules in italic are experimental
+
+== Maven core Eclipse wrapper ==
+
+ * org.devzuz.q.maven.core
+
+== JDT integration ==
+
+ * org.devzuz.q.maven.jdt.core
+ * org.devzuz.q.maven.jdt.ui
+
+== User interface ==
+
+ * org.devzuz.q.maven.ui
+ * org.devzuz.q.maven.wizard
+
+== Feature and update site ==
+
+ * org.devzuz.q.update
+ * org.devzuz.q.feature
+
+== Buckminster integration ==
+
+ * org.devzuz.q.buckminster.maven
+
+
+== Repository integration == 
+
+APIs and code to integrate with Maven repositories
+
+ * org.devzuz.q.repository.api
+ * org.devzuz.q.repository.core
+ * org.devzuz.q.repository.ui
+
+
+== Third party libraries ==
+
+Features and plugins created to use third party libraries
+
+ * org.apache.maven.embedder
+  * The maven embedder, allows to run Maven embedded inside Eclipse
+ * org.devzuz.q.feature.maven
+  * Feature that wraps the embedder
+ * org.apache.commons.collections
+  * Commons collections feature
+ * org.prefuse
+  * Prefuse library for graph visualization
+ * org.prefuse.feature
+  * Feature encapsulating Prefuse plugin
+
+== Experimental ==
+
+=== _Target platform provisioner_ ===
+
+ * org.devzuz.q.maven.pde.targetplatform
+
+=== _Eclipse Wagon_ ===
+
+ * org.devzuz.q.maven.wagon
+
+=== _ECF Provider_ ===
+
+ * org.devzuz.q.ecf.provider.filetransfer
+
+
+
