@@ -8,4 +8,4 @@ We will cover the architecture of the project
 
 = Slides =
 
-[https://q4e.googlecode.com/svn/trunk/docs/Q.odp Introduction to Q]
+[http://q4e.googlecode.com/svn/trunk/docs/Q.odp Introduction to Q]
