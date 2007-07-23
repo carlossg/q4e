@@ -20,16 +20,34 @@ The modules in italic are experimental
 == Maven core Eclipse wrapper ==
 
  * org.devzuz.q.maven.core
+  * Wraps the Maven Embedder API to add Eclipse specific operations
+  * Adds functionality not currently present in the Maven Embedder
 
 == JDT integration ==
 
  * org.devzuz.q.maven.jdt.core
+  * Maven nature
+  * Classpath container
  * org.devzuz.q.maven.jdt.ui
+  * Enabel/Disable nature menu actions
+  * Launch configuration
+  * POM editor
+  * Import project job
+  * Project scanner
 
 == User interface ==
 
  * org.devzuz.q.maven.ui
+  * Menu actions for goals
+  * Dependency graph
+  * Repository indexer (should be elsewhere?)
+  * Manage dependencies dialog
+  * Archetype list dialog
+  * Global/project preference pages
+  * Maven event view
  * org.devzuz.q.maven.wizard
+  * New Maven project from archetype wizard
+  * Import wizard
 
 == Feature and update site ==
 
@@ -78,6 +96,5 @@ Features and plugins created to use third party libraries
 === _ECF Provider_ ===
 
  * org.devzuz.q.ecf.provider.filetransfer
-
 
 
