@@ -110,7 +110,7 @@ Then you can do your changes and run with
  * Run - open debug dialog
  * Right click on Eclipse application, select New
  * Give it a name
- * In the plugin tabs make sure all the org.devzuz.q.* plugins are checked in the Workspace section and unchecked in the Target platform section
+ * In the plugin tabs make sure all the org.devzuz.q plugins are checked in the Workspace section and unchecked in the Target platform section
  * Click the Debug button
 
 A new Eclipse instance is launched with all the plugins you checked, including the Q ones built from sources
