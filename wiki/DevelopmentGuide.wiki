@@ -1,0 +1,11 @@
+#summary Guide for developers of the project.
+#labels Featured,Phase-Design
+
+= Introduction =
+
+We will cover the architecture of the project
+
+
+= Slides =
+
+[https://q4e.googlecode.com/svn/trunk/docs/Q.odp Introduction to Q]
