@@ -1,4 +1,5 @@
-Some Useful Testing Strategy
+Some really useful testing strategy you can use to test 
+this project.
 
 = Introduction =
 
@@ -18,11 +19,37 @@ delete it when you want to test a new version.
 
 = Details =
 
+*Creating the extension location*
+
+- Download and unzip the pre-created extension location in the _Downloads_
+  section to any directory. (http://q4e.googlecode.com/files/experimental-extensions.zip)
 
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+- In eclipse, _Help >> Software Updates >> Manage Configuration_ ,
+  right click on the root element of the tree (_Eclipse SDK_), then
+  _Add >> Extension Location_ , then indicate the directory of the archived file
+  you just extracted.
+
+Now you have an extension location.
+
+*Installing the plugin*
+
+- Install the plugin, _Help >> Software Updates >> Find and Install >> Select for new features to install_ , then click _New Remote Site_
+
+- Type q4e on the dialog name and the update-site url (_http://q4e.googlecode.com/svn/trunk/updatesite/_) on the URL.
+
+- Check the q4e then _Finish_.
+
+- Just follow the dialog. After the license agreement part, you will be asked for the
+features to install and in what location to install them. Click _Change Location_ , 
+indicate the extension location you have just created.
+
+- Just follow the rest of the dialogs.
+
+Voila. Your q4e plugins are now installed in your extension location.
+
+*Testing the new versions*
+
+- Just delete anything under the _Features_ and _Plugins_ directory in your extension-location and install q4e on the same extension location.
 
 
