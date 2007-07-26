@@ -1,0 +1,28 @@
+Some Useful Testing Strategy
+
+= Introduction =
+
+One of the "cleaner" ways to test this project
+without polluting your main eclipse distribution 
+is to add an extension location and putting the 
+q4e plugins there.
+
+Without an extension location, the q4e plugins are 
+installed in your eclipse distribution directory
+which means it will be placed alongside the main eclipse
+plugins. 
+
+The advantage of this approach is to enable you to
+turn on/turn off the q4e installation and be easily able to 
+delete it when you want to test a new version.
+
+= Details =
+
+
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+
