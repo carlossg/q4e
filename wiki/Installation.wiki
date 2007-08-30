@@ -29,7 +29,7 @@ To update your Eclipse installation perform the following steps:
  # Click the box to select the site you just added, then click Finish. Eclipse then searches the site for available features you can install and and displays them in hierarchical tree structure on a Search Results page
  # On the Search Results page, click to select the box to the left of the feature(s) you want to install (including the Q for Eclipse plugin).  Then, below the list of features, click to select Show the latest version of a feature only. Click Next to display the Feature License screen of the wizard
  # The Feature License screen shows a list of the features you selected that have license agreements you must accept before installing them.  Below the list window, click the first option to indicate you accept the license agreement(s), then click Next to move to the next wizard screen. 
- # The Installation screen lists all of the features/plugins you have chosen to install, along with the corresponding directories into which they will install 
+ # The Installation screen lists all of the features/plugins you have chosen to install, along with the corresponding directories into which they will install. You can create a new location by clicking on the "Change location" button.
  # Click Finish to download the features/plugins. After downloading, a Feature Verification screen will appear.
  # On the Feature Verification screen, verify that you want to install the features you selected. To install all of the features, click Install All. 
  # When installation is complete, a window appears asking you whether you would like to restart Eclipse. Click Yes to restart so the new features will take effect.
