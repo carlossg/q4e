@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.devzuz.q.feature"
+      label="%featureName"
+      version="0.2.0.v200708302159"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <update label="%updateSiteName" url="http://q4e.googlecode.com/svn/trunk/updatesite"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.eclipse.core.databinding"/>
+      <import plugin="org.eclipse.jface.databinding"/>
+      <import plugin="org.eclipse.swt"/>
+      <import feature="org.apache.commons.collections.feature" version="3.2.0.200705282147"/>
+      <import feature="org.prefuse.feature" version="1.0.0.v20060715"/>
+      <import feature="org.apache.maven.feature" version="2.1.0.571188"/>
+   </requires>
+
+   <plugin
+         id="org.devzuz.q.repository.ui"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.repository.core"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.repository.api"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.maven.jdt.ui"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.maven.jdt.core"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.maven.ui"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.maven.wagon"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.ecf.provider.filetransfer"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.maven.pde.targetplatform"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.maven.wizard"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.bundle.classpath"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.maven.core"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+   <plugin
+         id="org.devzuz.q.buckminster.maven"
+         download-size="0"
+         install-size="0"
+         version="0.2.0.v200708302115"
+         unpack="false"/>
+
+</feature>
