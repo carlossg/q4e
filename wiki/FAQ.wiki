@@ -17,7 +17,7 @@ The objective of this plugin is to be part of the [http://www.eclipse.org Eclips
 
 Besides the objective, there are technical differences. While m2eclipse shows Maven output in a console, Q is based in events and will show them in an organized way that allows filtering by severity, search,... Functionality like the dependency graph, or creation of new projects using the archetype mechanism are only present in Q.
 
-Also it's designed with reusability and extension in mind so other people can develop their own plugins on top of the different bits and pieces (see for instance [http://ramblingabout.wordpress.com/2007/09/02/candy-for-appfuse-will-be-under-extreme-refactoring/ Candy for Appfuse]).
+Also it's implemented in several modules with reusability and extension in mind so other people can develop their own plugins taking advantage of the functionality they need (see for instance [http://ramblingabout.wordpress.com/2007/09/02/candy-for-appfuse-will-be-under-extreme-refactoring/ Candy for Appfuse]).
 
 == Why the name Q? ==
 
