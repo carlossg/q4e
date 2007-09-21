@@ -131,9 +131,11 @@ A new Eclipse instance is launched with all the plugins you checked, including t
 = Making a release =
 
  * change all versions x.y.z.qualifier to x2.y2.z2.qualifier, where x2.y2.z2 is the new version to release
- ** this probably happens right after making the previous release
- ** to change all plugin versions at a time you can go to the feature, set the new version, and in the plugins tab click on versions and force feature version into plugins
- 
+  * this probably happens right after making the previous release
+  * to change all plugin versions at a time you can go to the feature, set the new version, and in the plugins tab click on versions and force feature version into plugins
  * go to the update site and click build all
  * tag sources
  * the update site now has the new plugins
+ 
+ 
+ 
