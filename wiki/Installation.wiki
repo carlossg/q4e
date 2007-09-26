@@ -42,3 +42,7 @@ Follow this procedure to verify that the Q for Eclipse Plugin successfully insta
  # After Eclipse has been restarted, click on Help > About Eclipse SDK.
  # On the pop-up, click Plug-in Details. A list of all plugins installed on Eclipse will appear. 
  # Scroll down and look for the Q for Eclipse Plugin you just installed by looking for the name Kepler in the Plug-in Name. 
+
+= Questions =
+
+if you have any questions or experience problems, please give us your feedback at [http://groups.google.com/group/q4e-users our user mailing list]
