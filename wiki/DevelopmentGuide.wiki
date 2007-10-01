@@ -103,7 +103,8 @@ Features and plugins created to use third party libraries
 
  * [Installation Install latest version] from update site to get all required libraries
  * Check out the [http://code.google.com/p/q4e/source sources] from Subversion
- * Import all existing projects in your Eclipse workspace
+ * Import all existing projects in your Eclipse workspace.
+   * At this point, org.devzuz.q.buckminster.maven might display build errors. You can safely ignore them (or close the project).
 
 Then you can do your changes and run with
 
