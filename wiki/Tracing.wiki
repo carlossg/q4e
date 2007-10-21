@@ -1,0 +1,39 @@
+#summary Debugging q4e with traces
+#labels Phase-Implementation
+= Introduction =
+
+Q4e plug-ins can generate traces to standard out when the traces are enabled.
+
+This document describes how to enable tracing in a run-time workbench, what kind of traces will generate each supported trace option and how to implement traces in other plug-ins.
+
+For a general introduction to tracing in eclipse, you can refer to the [http://http//help.eclipse.org/help33/index.jsp?topic=/org.eclipse.pde.doc.user/guide/tools/launchers/tracing.htm eclipse help] or this [http://ramblingabout.wordpress.com/2007/10/20/tracing-plug-ins-in-eclipse/ blog entry].
+
+= Usage =
+
+To enable tracing when starting a new run-time workbench, two changes are needed in the launch configuration:
+
+  # Add the `-debug` flag the program arguments. This is the master switch for enabling traces.
+    * [http://q4e.googlecode.com/svn/wiki/img/trace/trace-commandline.png]
+  # Select the desired tracing options in the _Tracing_ tab.
+    * [http://q4e.googlecode.com/svn/wiki/img/trace/trace-options.png]
+
+Once the trace options are selected and the run-time workbench has been launched, trace messages can be seen in the console of the launcher eclipse.
+
+[http://q4e.googlecode.com/svn/wiki/img/trace/trace-console.png]
+
+== Traceable plug-ins in q4e ==
+
+This is the list of plug-ins which support generating traces and the description of the available trace options.
+
+=== org.devzuz.q.maven.jdt.core ===
+
+  * `org.devzuz.q.maven.jdt.core/debug` : Global trace switch for this plug-in. This option must be enabled if tracing this plug-in is desired.
+  * `org.devzuz.q.maven.jdt.core/debug/jdtResourceListener` : Trace for events related to the resource listener.
+  * `org.devzuz.q.maven.jdt.core/debug/classpathUpdate` : Trace for events related to classpath updates.
+  * `org.devzuz.q.maven.jdt.core/debug/timing` : This switch enables/disables time information in every other trace.
+
+= Implementation =
+
+This section tries to set the _standard_ way in *q4e* for adding new trace options in to a plug-in, or how to implement tracing in a plug-in that does not support tracing yet.
+
+*To be done... *
