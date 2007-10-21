@@ -6,7 +6,7 @@ Q4e plug-ins can generate traces to standard out when the traces are enabled.
 
 This document describes how to enable tracing in a run-time workbench, what kind of traces will generate each supported trace option and how to implement traces in other plug-ins.
 
-For a general introduction to tracing in eclipse, you can refer to the [http//help.eclipse.org/help33/index.jsp?topic=/org.eclipse.pde.doc.user/guide/tools/launchers/tracing.htm eclipse help] or this [http://ramblingabout.wordpress.com/2007/10/20/tracing-plug-ins-in-eclipse/ blog entry].
+For a general introduction to tracing in eclipse, you can refer to the [http://help.eclipse.org/help33/index.jsp?topic=/org.eclipse.pde.doc.user/guide/tools/launchers/tracing.htm eclipse help] or this [http://ramblingabout.wordpress.com/2007/10/20/tracing-plug-ins-in-eclipse/ blog entry].
 
 = Usage =
 
