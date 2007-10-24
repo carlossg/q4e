@@ -29,7 +29,7 @@
          id="org.apache.maven.embedder"
          download-size="0"
          install-size="0"
-         version="2.1.0.587165"
+         version="2.1.0.587793"
          unpack="false"/>
 
    <plugin
@@ -37,6 +37,13 @@
          download-size="0"
          install-size="0"
          version="1.0.0.v200709131616"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.lang"
+         download-size="0"
+         install-size="0"
+         version="2.1.0.v200709131643"
          unpack="false"/>
 
 </feature>
