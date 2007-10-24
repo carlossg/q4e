@@ -1,77 +1,70 @@
 Manifest-Version: 1.0
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Created-By: 1.5.0_10 (Sun Microsystems Inc.)
-Import-Package: com.jcraft.jsch,
- org.apache.commons.cli;version="[1.0.0,2.0.0)",
- org.w3c.dom,
- org.xml.sax
+Import-Package: com.jcraft.jsch,org.apache.commons.cli;version="[1.0.0
+ ,2.0.0)",org.w3c.dom,org.xml.sax
 Embed-Transitive: true
 Embed-StripGroup: true
-Include-Resource: LICENSE.txt,NOTICE.txt,lib/maven-embedder-2.1-SNAPSH
- OT.jar=C:\Documents and Settings\csanchez\.m2\repository\org\apache\m
- aven\maven-embedder\2.1-SNAPSHOT\maven-embedder-2.1-SNAPSHOT.jar,lib/
- maven-build-context-2.1-SNAPSHOT.jar=C:\Documents and Settings\csanch
- ez\.m2\repository\org\apache\maven\maven-build-context\2.1-SNAPSHOT\m
- aven-build-context-2.1-SNAPSHOT.jar,lib/maven-plugin-api-2.1-SNAPSHOT
- .jar=C:\Documents and Settings\csanchez\.m2\repository\org\apache\mav
- en\maven-plugin-api\2.1-SNAPSHOT\maven-plugin-api-2.1-SNAPSHOT.jar,li
- b/wagon-ssh-common-1.0-beta-2.jar=C:\Documents and Settings\csanchez\
- .m2\repository\org\apache\maven\wagon\wagon-ssh-common\1.0-beta-2\wag
- on-ssh-common-1.0-beta-2.jar,lib/maven-monitor-2.1-SNAPSHOT.jar=C:\Do
- cuments and Settings\csanchez\.m2\repository\org\apache\maven\maven-m
- onitor\2.1-SNAPSHOT\maven-monitor-2.1-SNAPSHOT.jar,lib/maven-lifecycl
- e-2.1-SNAPSHOT.jar=C:\Documents and Settings\csanchez\.m2\repository\
- org\apache\maven\maven-lifecycle\2.1-SNAPSHOT\maven-lifecycle-2.1-SNA
- PSHOT.jar,lib/doxia-sink-api-1.0-alpha-9.jar=C:\Documents and Setting
- s\csanchez\.m2\repository\org\apache\maven\doxia\doxia-sink-api\1.0-a
- lpha-9\doxia-sink-api-1.0-alpha-9.jar,lib/plexus-container-default-1.
- 0-alpha-34.jar=C:\Documents and Settings\csanchez\.m2\repository\org\
- codehaus\plexus\plexus-container-default\1.0-alpha-34\plexus-containe
- r-default-1.0-alpha-34.jar,lib/plexus-utils-1.4.5.jar=C:\Documents an
- d Settings\csanchez\.m2\repository\org\codehaus\plexus\plexus-utils\1
- .4.5\plexus-utils-1.4.5.jar,lib/maven-plugin-descriptor-2.1-SNAPSHOT.
- jar=C:\Documents and Settings\csanchez\.m2\repository\org\apache\mave
- n\maven-plugin-descriptor\2.1-SNAPSHOT\maven-plugin-descriptor-2.1-SN
- APSHOT.jar,lib/wagon-http-shared-1.0-beta-2.jar=C:\Documents and Sett
- ings\csanchez\.m2\repository\org\apache\maven\wagon\wagon-http-shared
- \1.0-beta-2\wagon-http-shared-1.0-beta-2.jar,lib/plexus-component-api
- -1.0-alpha-16.jar=C:\Documents and Settings\csanchez\.m2\repository\o
- rg\codehaus\plexus\plexus-component-api\1.0-alpha-16\plexus-component
- -api-1.0-alpha-16.jar,lib/wagon-ssh-1.0-beta-2.jar=C:\Documents and S
- ettings\csanchez\.m2\repository\org\apache\maven\wagon\wagon-ssh\1.0-
- beta-2\wagon-ssh-1.0-beta-2.jar,lib/plexus-interactivity-api-1.0-alph
- a-6.jar=C:\Documents and Settings\csanchez\.m2\repository\org\codehau
- s\plexus\plexus-interactivity-api\1.0-alpha-6\plexus-interactivity-ap
- i-1.0-alpha-6.jar,lib/wagon-provider-api-1.0-beta-2.jar=C:\Documents 
- and Settings\csanchez\.m2\repository\org\apache\maven\wagon\wagon-pro
- vider-api\1.0-beta-2\wagon-provider-api-1.0-beta-2.jar,lib/maven-prof
- ile-2.1-SNAPSHOT.jar=C:\Documents and Settings\csanchez\.m2\repositor
- y\org\apache\maven\maven-profile\2.1-SNAPSHOT\maven-profile-2.1-SNAPS
- HOT.jar,lib/plexus-classworlds-1.2-alpha-10.jar=C:\Documents and Sett
- ings\csanchez\.m2\repository\org\codehaus\plexus\plexus-classworlds\1
- .2-alpha-10\plexus-classworlds-1.2-alpha-10.jar,lib/wagon-http-lightw
- eight-1.0-beta-2.jar=C:\Documents and Settings\csanchez\.m2\repositor
- y\org\apache\maven\wagon\wagon-http-lightweight\1.0-beta-2\wagon-http
- -lightweight-1.0-beta-2.jar,lib/wagon-file-1.0-beta-2.jar=C:\Document
- s and Settings\csanchez\.m2\repository\org\apache\maven\wagon\wagon-f
- ile\1.0-beta-2\wagon-file-1.0-beta-2.jar,lib/wagon-ssh-external-1.0-b
- eta-2.jar=C:\Documents and Settings\csanchez\.m2\repository\org\apach
- e\maven\wagon\wagon-ssh-external\1.0-beta-2\wagon-ssh-external-1.0-be
- ta-2.jar,lib/maven-model-2.1-SNAPSHOT.jar=C:\Documents and Settings\c
- sanchez\.m2\repository\org\apache\maven\maven-model\2.1-SNAPSHOT\mave
- n-model-2.1-SNAPSHOT.jar,lib/jtidy-4aug2000r7-dev.jar=C:\Documents an
- d Settings\csanchez\.m2\repository\jtidy\jtidy\4aug2000r7-dev\jtidy-4
- aug2000r7-dev.jar,lib/maven-project-2.1-SNAPSHOT.jar=C:\Documents and
-  Settings\csanchez\.m2\repository\org\apache\maven\maven-project\2.1-
- SNAPSHOT\maven-project-2.1-SNAPSHOT.jar,lib/maven-reporting-api-2.1-S
+Include-Resource: LICENSE.txt,NOTICE.txt,lib/maven-profile-2.1-SNAPSHO
+ T.jar=C:\Documents and Settings\csanchez\.m2\repository\org\apache\ma
+ ven\maven-profile\2.1-SNAPSHOT\maven-profile-2.1-SNAPSHOT.jar,lib/ple
+ xus-classworlds-1.2-alpha-10.jar=C:\Documents and Settings\csanchez\.
+ m2\repository\org\codehaus\plexus\plexus-classworlds\1.2-alpha-10\ple
+ xus-classworlds-1.2-alpha-10.jar,lib/wagon-http-lightweight-1.0-beta-
+ 2.jar=C:\Documents and Settings\csanchez\.m2\repository\org\apache\ma
+ ven\wagon\wagon-http-lightweight\1.0-beta-2\wagon-http-lightweight-1.
+ 0-beta-2.jar,lib/maven-build-context-2.1-SNAPSHOT.jar=C:\Documents an
+ d Settings\csanchez\.m2\repository\org\apache\maven\maven-build-conte
+ xt\2.1-SNAPSHOT\maven-build-context-2.1-SNAPSHOT.jar,lib/wagon-ssh-ex
+ ternal-1.0-beta-2.jar=C:\Documents and Settings\csanchez\.m2\reposito
+ ry\org\apache\maven\wagon\wagon-ssh-external\1.0-beta-2\wagon-ssh-ext
+ ernal-1.0-beta-2.jar,lib/wagon-file-1.0-beta-2.jar=C:\Documents and S
+ ettings\csanchez\.m2\repository\org\apache\maven\wagon\wagon-file\1.0
+ -beta-2\wagon-file-1.0-beta-2.jar,lib/wagon-ssh-common-1.0-beta-2.jar
+ =C:\Documents and Settings\csanchez\.m2\repository\org\apache\maven\w
+ agon\wagon-ssh-common\1.0-beta-2\wagon-ssh-common-1.0-beta-2.jar,lib/
+ maven-reporting-api-2.1-SNAPSHOT.jar=C:\Documents and Settings\csanch
+ ez\.m2\repository\org\apache\maven\maven-reporting-api\2.1-SNAPSHOT\m
+ aven-reporting-api-2.1-SNAPSHOT.jar,lib/plexus-container-default-1.0-
+ alpha-34.jar=C:\Documents and Settings\csanchez\.m2\repository\org\co
+ dehaus\plexus\plexus-container-default\1.0-alpha-34\plexus-container-
+ default-1.0-alpha-34.jar,lib/doxia-sink-api-1.0-alpha-9.jar=C:\Docume
+ nts and Settings\csanchez\.m2\repository\org\apache\maven\doxia\doxia
+ -sink-api\1.0-alpha-9\doxia-sink-api-1.0-alpha-9.jar,lib/jtidy-4aug20
+ 00r7-dev.jar=C:\Documents and Settings\csanchez\.m2\repository\jtidy\
+ jtidy\4aug2000r7-dev\jtidy-4aug2000r7-dev.jar,lib/plexus-utils-1.4.5.
+ jar=C:\Documents and Settings\csanchez\.m2\repository\org\codehaus\pl
+ exus\plexus-utils\1.4.5\plexus-utils-1.4.5.jar,lib/wagon-http-shared-
+ 1.0-beta-2.jar=C:\Documents and Settings\csanchez\.m2\repository\org\
+ apache\maven\wagon\wagon-http-shared\1.0-beta-2\wagon-http-shared-1.0
+ -beta-2.jar,lib/maven-model-2.1-SNAPSHOT.jar=C:\Documents and Setting
+ s\csanchez\.m2\repository\org\apache\maven\maven-model\2.1-SNAPSHOT\m
+ aven-model-2.1-SNAPSHOT.jar,lib/plexus-component-api-1.0-alpha-16.jar
+ =C:\Documents and Settings\csanchez\.m2\repository\org\codehaus\plexu
+ s\plexus-component-api\1.0-alpha-16\plexus-component-api-1.0-alpha-16
+ .jar,lib/wagon-ssh-1.0-beta-2.jar=C:\Documents and Settings\csanchez\
+ .m2\repository\org\apache\maven\wagon\wagon-ssh\1.0-beta-2\wagon-ssh-
+ 1.0-beta-2.jar,lib/maven-lifecycle-2.1-SNAPSHOT.jar=C:\Documents and 
+ Settings\csanchez\.m2\repository\org\apache\maven\maven-lifecycle\2.1
+ -SNAPSHOT\maven-lifecycle-2.1-SNAPSHOT.jar,lib/maven-plugin-api-2.1-S
  NAPSHOT.jar=C:\Documents and Settings\csanchez\.m2\repository\org\apa
- che\maven\maven-reporting-api\2.1-SNAPSHOT\maven-reporting-api-2.1-SN
- APSHOT.jar,lib/maven-core-2.1-SNAPSHOT.jar=C:\Documents and Settings\
- csanchez\.m2\repository\org\apache\maven\maven-core\2.1-SNAPSHOT\mave
- n-core-2.1-SNAPSHOT.jar,lib/maven-artifact-3.0-SNAPSHOT.jar=C:\Docume
- nts and Settings\csanchez\.m2\repository\org\apache\maven\artifact\ma
- ven-artifact\3.0-SNAPSHOT\maven-artifact-3.0-SNAPSHOT.jar
-Bnd-LastModified: 1193182524015
+ che\maven\maven-plugin-api\2.1-SNAPSHOT\maven-plugin-api-2.1-SNAPSHOT
+ .jar,lib/plexus-interactivity-api-1.0-alpha-6.jar=C:\Documents and Se
+ ttings\csanchez\.m2\repository\org\codehaus\plexus\plexus-interactivi
+ ty-api\1.0-alpha-6\plexus-interactivity-api-1.0-alpha-6.jar,lib/maven
+ -project-2.1-SNAPSHOT.jar=C:\Documents and Settings\csanchez\.m2\repo
+ sitory\org\apache\maven\maven-project\2.1-SNAPSHOT\maven-project-2.1-
+ SNAPSHOT.jar,lib/maven-core-2.1-SNAPSHOT.jar=C:\Documents and Setting
+ s\csanchez\.m2\repository\org\apache\maven\maven-core\2.1-SNAPSHOT\ma
+ ven-core-2.1-SNAPSHOT.jar,lib/maven-artifact-3.0-SNAPSHOT.jar=C:\Docu
+ ments and Settings\csanchez\.m2\repository\org\apache\maven\artifact\
+ maven-artifact\3.0-SNAPSHOT\maven-artifact-3.0-SNAPSHOT.jar,lib/wagon
+ -provider-api-1.0-beta-2.jar=C:\Documents and Settings\csanchez\.m2\r
+ epository\org\apache\maven\wagon\wagon-provider-api\1.0-beta-2\wagon-
+ provider-api-1.0-beta-2.jar,lib/maven-embedder-2.1-SNAPSHOT.jar=C:\Do
+ cuments and Settings\csanchez\.m2\repository\org\apache\maven\maven-e
+ mbedder\2.1-SNAPSHOT\maven-embedder-2.1-SNAPSHOT.jar
+Bnd-LastModified: 1193203886998
 Export-Package: org.apache.maven.plugin.version;uses:="org.apache.mave
  n.artifact.repository,org.apache.maven.artifact.versioning,org.codeha
  us.plexus.util,org.apache.maven.artifact,org.apache.maven.model,org.a
@@ -380,13 +373,13 @@ Export-Package: org.apache.maven.plugin.version;uses:="org.apache.mave
  org.codehaus.plexus.component.configurator.expression,org.codehaus.pl
  exus.util,org.codehaus.plexus.component.configurator,org.codehaus.ple
  xus.configuration,org.codehaus.plexus.component.configurator.converte
- rs.lookup",org.apache.maven.profiles;uses:="org.codehaus.plexus.util,
- org.codehaus.plexus.component.repository.exception,org.apache.maven.p
- rofiles.activation,org.codehaus.plexus.util.xml,org.codehaus.plexus.u
- til.interpolation,org.apache.maven.model,org.codehaus.plexus,org.code
- haus.plexus.logging,org.apache.maven.profiles.io.xpp3,org.codehaus.pl
- exus.context,org.codehaus.plexus.util.xml.pull",org.apache.maven.life
- cycle.model,org.apache.maven.doxia.sink,org.codehaus.plexus.lifecycle
+ rs.lookup",org.apache.maven.lifecycle.model,org.apache.maven.profiles
+ ;uses:="org.codehaus.plexus.util,org.codehaus.plexus.component.reposi
+ tory.exception,org.apache.maven.profiles.activation,org.codehaus.plex
+ us.util.xml,org.codehaus.plexus.util.interpolation,org.apache.maven.m
+ odel,org.codehaus.plexus,org.codehaus.plexus.logging,org.apache.maven
+ .profiles.io.xpp3,org.codehaus.plexus.context,org.codehaus.plexus.uti
+ l.xml.pull",org.apache.maven.doxia.sink,org.codehaus.plexus.lifecycle
  ;uses:="org.codehaus.plexus.classworlds.realm,org.codehaus.plexus.com
  ponent.manager,org.codehaus.plexus.personality.plexus.lifecycle.phase
  ,org.codehaus.plexus.lifecycle.phase,org.codehaus.plexus",org.apache.
@@ -543,28 +536,26 @@ Export-Package: org.apache.maven.plugin.version;uses:="org.apache.mave
  exus,org.codehaus.plexus.classworlds.realm,org.apache.maven.project.b
  uild.model,org.apache.maven.artifact.resolver,org.apache.maven.projec
  t,org.codehaus.plexus.context,org.apache.maven.context"
-Bundle-Version: 2.1.0.587694
+Bundle-Version: 2.1.0.587793
 Ignore-Package: org.codehaus.plexus.util.cli.shell,org.codehaus.plexus
  .util.dag,org.codehaus.plexus.util,org.codehaus.plexus.util.cli,org.c
  odehaus.plexus.util.reflection,org.codehaus.plexus.util.interpolation
  ,junit.framework,org.codehaus.plexus.util.introspection
 Bundle-Name: Q for Eclipse Maven Embedder
 Bundle-Description: Maven Embedder for the Q project
-Bundle-ClassPath: .,lib/maven-embedder-2.1-SNAPSHOT.jar,lib/maven-buil
- d-context-2.1-SNAPSHOT.jar,lib/maven-plugin-api-2.1-SNAPSHOT.jar,lib/
- wagon-ssh-common-1.0-beta-2.jar,lib/maven-monitor-2.1-SNAPSHOT.jar,li
- b/maven-lifecycle-2.1-SNAPSHOT.jar,lib/doxia-sink-api-1.0-alpha-9.jar
- ,lib/plexus-container-default-1.0-alpha-34.jar,lib/plexus-utils-1.4.5
- .jar,lib/maven-plugin-descriptor-2.1-SNAPSHOT.jar,lib/wagon-http-shar
- ed-1.0-beta-2.jar,lib/plexus-component-api-1.0-alpha-16.jar,lib/wagon
- -ssh-1.0-beta-2.jar,lib/plexus-interactivity-api-1.0-alpha-6.jar,lib/
- wagon-provider-api-1.0-beta-2.jar,lib/maven-profile-2.1-SNAPSHOT.jar,
- lib/plexus-classworlds-1.2-alpha-10.jar,lib/wagon-http-lightweight-1.
- 0-beta-2.jar,lib/wagon-file-1.0-beta-2.jar,lib/wagon-ssh-external-1.0
- -beta-2.jar,lib/maven-model-2.1-SNAPSHOT.jar,lib/jtidy-4aug2000r7-dev
- .jar,lib/maven-project-2.1-SNAPSHOT.jar,lib/maven-reporting-api-2.1-S
- NAPSHOT.jar,lib/maven-core-2.1-SNAPSHOT.jar,lib/maven-artifact-3.0-SN
- APSHOT.jar
+Bundle-ClassPath: .,lib/maven-profile-2.1-SNAPSHOT.jar,lib/plexus-clas
+ sworlds-1.2-alpha-10.jar,lib/wagon-http-lightweight-1.0-beta-2.jar,li
+ b/maven-build-context-2.1-SNAPSHOT.jar,lib/wagon-ssh-external-1.0-bet
+ a-2.jar,lib/wagon-file-1.0-beta-2.jar,lib/wagon-ssh-common-1.0-beta-2
+ .jar,lib/maven-reporting-api-2.1-SNAPSHOT.jar,lib/plexus-container-de
+ fault-1.0-alpha-34.jar,lib/doxia-sink-api-1.0-alpha-9.jar,lib/jtidy-4
+ aug2000r7-dev.jar,lib/plexus-utils-1.4.5.jar,lib/wagon-http-shared-1.
+ 0-beta-2.jar,lib/maven-model-2.1-SNAPSHOT.jar,lib/plexus-component-ap
+ i-1.0-alpha-16.jar,lib/wagon-ssh-1.0-beta-2.jar,lib/maven-lifecycle-2
+ .1-SNAPSHOT.jar,lib/maven-plugin-api-2.1-SNAPSHOT.jar,lib/plexus-inte
+ ractivity-api-1.0-alpha-6.jar,lib/maven-project-2.1-SNAPSHOT.jar,lib/
+ maven-core-2.1-SNAPSHOT.jar,lib/maven-artifact-3.0-SNAPSHOT.jar,lib/w
+ agon-provider-api-1.0-beta-2.jar,lib/maven-embedder-2.1-SNAPSHOT.jar
 Bundle-DocURL: http://www.apache.org/
 Private-Package: lib,licenses,org.codehaus.classworlds,org.codehaus.do
  xia.sink,org.codehaus.plexus.util,org.codehaus.plexus.util.cli,org.co
