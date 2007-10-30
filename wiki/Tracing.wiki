@@ -36,4 +36,145 @@ This is the list of plug-ins which support generating traces and the description
 
 This section tries to set the _standard_ way in *q4e* for adding new trace options in to a plug-in, or how to implement tracing in a plug-in that does not support tracing yet.
 
-*To be done... *
+For reference, check the implementation in `org.devzuz.q.maven.jdt.core`:
+  * The [http://q4e.googlecode.com/svn/trunk/plugins/maven/jdt/core/src/main/java/org/devzuz/q/maven/jdt/core/Activator.java Activator]'s trace method.
+  * The [http://q4e.googlecode.com/svn/trunk/plugins/maven/jdt/core/src/main/java/org/devzuz/q/maven/jdt/core/internal/TraceOption.java TraceOption] enum.
+
+== TraceOption ==
+Because there are only so many trace options, it makes sense to use an enumeration class to manage them.
+
+Each of the enumeration values will have a property for accessing the trace option (as a `String`) that it represents. This option must have the format:
+
+{{{PLUGIN_ID/debug/myTraceOption}}}
+
+For example: `org.devzuz.q.maven.jdt.core/debug/classpathUpdate` (you probably remember the format from the previous sections).
+
+So the code looks like:
+
+{{{
+public enum TraceOption
+{
+    JDT_RESOURCE_LISTENER( "/jdtResourceListener" ), CLASSPATH_UPDATE( "/classpathUpdate" );
+
+    private final String value;
+
+    TraceOption( String value )
+    {
+        this.value = Activator.PLUGIN_GLOBAL_TRACE_OPTION + value;
+    }
+
+    /**
+     * Obtains the string value of the trace option, including the plug-in ID and global debug prefix.
+     * 
+     * For example: <code>org.devzuz.q.maven.jdt.core/debug/classpathUpdate</code>
+     * 
+     * @return the string value of the trace option.
+     */
+    public String getValue()
+    {
+        return value;
+    }
+
+}
+}}}
+
+In this code, `Activator.PLUGIN_GLOBAL_TRACE_OPTION` is defined as the plugin id followed by the `/debug` string. As described earlier, this is (by convention) the global trace switch.
+
+If you need a new trace option, just create a new value in the enumeration, and add the default value to the `.options` file.
+
+Now let's see how tracing is done.
+
+== trace() method ==
+
+The method is defined as:
+
+{{{
+/**
+     * Sends trace messages to stdout if the specified trace option is enabled.
+     * 
+     * This is intended only for developing and debugging. The use of variable number of parameters avoids the cost of
+     * building the message when the debug option is not enabled.
+     * 
+     * @param traceOption
+     *            the trace option enabling the message trace.
+     * @param messageParts
+     *            a variable number of objects with each part of the message to display.
+     */
+    public static void trace( TraceOption traceOption, Object... messageParts )
+    {
+      // implementation
+    }
+}}}
+
+As explained in the javadoc, `trace` signature uses the vararg feature in java 5. This allows callers to avoid building a `String` to call this method, which will reduce the performance impact of tracing.
+
+A client will tipically call this method as:
+
+{{{
+  Activator.trace(TraceOption.MY_OPTION, "The object ", myObject, " has been traced!");
+}}}
+
+Inside `trace`, some checks must be performed to meet tracing conventions:
+  * Check if the running platform is in debug mode.
+  * Check if the global flag for the plug-in is enabled.
+
+This is done with the following code:
+
+{{{
+        if ( !Platform.inDebugMode() )
+        {
+            return;
+        }
+        String globalTraceValue = Platform.getDebugOption( PLUGIN_GLOBAL_TRACE_OPTION );
+        if ( null == globalTraceValue || !globalTraceValue.equals( "true" ) )
+        {
+            return;
+        }
+}}}
+
+Checking if the platform is in debug mode is straightforward. For checking the value of the global flag, we must first check that it has a value and then if the value is the string `true` (Eclipse automatically passes that value when checking the trace option in the launch configuration).
+
+Now we check if the specific trace option is enabled. Code is similar to checking the global option.
+
+{{{
+        String value = Platform.getDebugOption( traceOption.getValue() );
+        if ( null != value && value.equals( "true" ) )
+        {
+           // Everything OK, let's trace!
+        }
+}}}
+
+Tracing is as simple as `println`. Since we have used varargs, we can exploit that to output the parameters without creating a `String`.
+
+{{{
+            System.out.print( "[" );
+            System.out.print( traceOption );
+            System.out.print( "] " );
+            for ( int i = 0; i < messageParts.length; i++ )
+            {
+                System.out.print( messageParts[i] );
+            }
+            System.out.println();
+}}}
+
+=== Timing ===
+
+Trace options can also be used inside the `trace` method to enable additional details to the printed trace when requested.
+
+For example, we can have a trace option for adding a timestamp to every trace:
+
+{{{
+            String timingValue = Platform.getDebugOption( PLUGIN_GLOBAL_TRACE_OPTION + "/timing" );
+            if ( null != timingValue && timingValue.equals( "true" ) )
+            {
+                if ( null == TIME_FORMAT )
+                {
+                    TIME_FORMAT = new SimpleDateFormat( "HH:mm:ss.SSS  " );
+                }
+                System.out.print( TIME_FORMAT.format( new Date() ) );
+            }
+}}}
+
+In this case, we've chosen to *not* have a `TraceOption` value for timing, since it can not be directly used.
+
+Being extremely conservative, we do a lazy initialization of the `TIME_FORMAT` field, so it is not created when timing information is not requested.
