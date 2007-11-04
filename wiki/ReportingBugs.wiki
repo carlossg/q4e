@@ -1,0 +1,26 @@
+#summary Guidelines for submitting better bug reports.
+#labels Phase-QA
+
+= Introduction =
+
+The q4e developers test each release, add new features, provide support on the lists, review bug reports... That's quite a lot of work!
+
+One place where you can help is in providing good reports when entering a new bug in the  [[http://code.google.com/p/q4e/issues/list Issue Tracker]].
+
+
+= What is a good report? =
+
+It's very simple:
+
+Provide *all* the information the developer's will need for finding the same bug on his computer. Those are *great* bug reports.
+
+The following list contains the typical information required for great bug reports. In some circumstances, some of them might not be available. Telling so in the issue report is usually good enough.
+
+  * *Version information:* If you got q4e from the update site, which version was it? If you've built it from SVN, which revision have you checked out?
+    * For accurate version reporting, use the _About Eclipse Platform_ dialog (in the _Help_ menu for Windows and Linux, _Eclipse_ menu for mac) and choose _Configuration Details_. Copy the displayed text to a text file and attach it to the issue report.
+    * It is always nice to read the summary of this information in the bug report, so if you know it, state the q4e and eclipse version you're using.
+  * *Error messages and exception traces*, reported on the Eclipse Error Log or on the Maven Events View. Both allow copy&paste or exporting its contents to a file.
+  * *A test case*. Can be one of the following:
+    * an eclipse workspace. In such case, just attach a zip file to the issue when creating it.
+    * a publicly available project. The developers will need the repository and version/tag to checkout
+    * some files providing a simplified test case. This is the *best* of all options.
