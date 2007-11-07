@@ -24,3 +24,5 @@ The following list contains the typical information required for great bug repor
     * an eclipse workspace. In such case, just attach a zip file to the issue when creating it.
     * a publicly available project. The developers will need the repository and version/tag to checkout
     * some files providing a simplified test case. This is the *best* of all options.
+
+It is also appropriate to include long stacktraces as attachments instead of as part of the comments. That makes the issue page more readable, specially when the number of comments starts to grow. It might be useful to include a couple of lines to point at something, though.
