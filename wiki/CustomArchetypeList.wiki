@@ -3,7 +3,7 @@
 
 = Introduction =
 
-Q4E comes configured with a default archetype list provider (the _Wiki Provider_), which uses the contents of this wiki page (more precisely, the source form of the page) to create the list of available archetypes presented by the new maven project wizard.
+Q4E comes configured with a default archetype list provider (the _Wiki Provider_), which uses the contents of [http://docs.codehaus.org/display/MAVENUSER/Archetypes+List this wiki page] (more precisely, [http://docs.codehaus.org/pages/viewpagesrc.action?pageId=48400 the source form] of the page) to create the list of available archetypes presented by the new maven project wizard.
 
 The _Wiki Provider_ can be configured for accessing other URLs, so you can provide your own list of archetypes. Currently, only `http://` and `https://` urls are suported, but starting with 0.3.0, also `file://` urls will be valid.
 
