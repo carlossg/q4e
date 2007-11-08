@@ -1,0 +1,51 @@
+#summary How to create a new archetype list.
+#labels Phase-Support
+
+= Introduction =
+
+Q4E comes configured with a default archetype list provider (the _Wiki Provider_), which uses the contents of this wiki page (more precisely, the source form of the page) to create the list of available archetypes presented by the new maven project wizard.
+
+The _Wiki Provider_ can be configured for accessing other URLs, so you can provide your own list of archetypes. Currently, only `http://` and `https://` urls are suported, but starting with 0.3.0, also `file://` urls will be valid.
+
+
+= Creating the archetype list =
+
+The format understood by the _Wiki Provider_ is the following:
+
+{{{
+<br>| Artifact Id | Group Id | Version | Repository | Description |
+<br>| Artifact Id 2 | Group Id 2 | Version 2 | Repository 2 | Description 2 |
+...
+<br>| Artifact Id n | Group Id n | Version n | Repository n | Description n |
+}}}
+
+*Note:* The `<br>` must be typed literally at the start of every line, and the first pipe must be just after it, without whitespace in between.
+
+For example:
+{{{
+<br>|my-artifact|my.group|1.1|[http://my.repo.com/is/cool]|My nice description|
+<br>|my-other-artifact|my.group|3.1|[http://my.repo.com/is/cool]|Brief description|
+}}}
+
+= Configuring a new _Wiki Provider_ =
+Once your archetype list is complete and has been made accessible at a given URL, the next step is to tell q4e about that url.
+
+For this example, let's suppose it is in my personal web at `http://localhost/~amuino/arch.txt`.
+
+Open Eclipse preferences and navigate to _Maven > Archetype Preferences_.
+
+[http://q4e.googlecode.com/svn/wiki/img/archetype/Archetype-Preferences.png]
+
+Here you can add a new archetype list using the _New..._ button. _Edit..._ will let you edit an existing list. And, of course, you can delete a list simply by selecting it and pressing _Remove_.
+
+Let's add the new list. Press _New..._.
+
+[http://q4e.googlecode.com/svn/wiki/img/archetype/New-Archetype-Source.png]
+
+The dialog allows selecting an URL where the list can be found and its type (or format).
+
+Currently, the only available type is _Wiki Provider_.
+
+To complete the example, type the location of your list (`http://localhost/~amuino/arch.txt`) and press _Ok_.
+
+Done! Now you're ready for creating a new maven project using the archetypes on your list.
