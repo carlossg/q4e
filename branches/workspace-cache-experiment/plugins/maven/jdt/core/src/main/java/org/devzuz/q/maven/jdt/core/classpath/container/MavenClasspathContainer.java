@@ -23,7 +23,9 @@ import org.devzuz.q.maven.embedder.IMavenProject;
 import org.devzuz.q.maven.embedder.MavenExecutionStatus;
 import org.devzuz.q.maven.embedder.MavenManager;
 import org.devzuz.q.maven.embedder.MavenUtils;
+import org.devzuz.q.maven.jdt.core.MavenClasspathHelper;
 import org.devzuz.q.maven.jdt.core.MavenJdtCoreActivator;
+import org.devzuz.q.maven.jdt.core.cache.MavenProjectInfo;
 import org.devzuz.q.maven.jdt.core.exception.MavenExceptionHandler;
 import org.devzuz.q.maven.jdt.core.internal.TraceOption;
 import org.devzuz.q.maven.ui.preferences.MavenPreferenceManager;
@@ -242,14 +244,15 @@ public class MavenClasspathContainer implements IClasspathContainer
         }
     }
 
-    private Map<String, IProject> getWorkspaceProjects()
+    private Map< MavenProjectInfo , IProject > getWorkspaceProjects()
     {
-        Map<String, IProject> projectsByName = new HashMap<String, IProject>();
+        Map< MavenProjectInfo, IProject > projectsByName = new HashMap< MavenProjectInfo , IProject >();
         IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
         for ( IProject project : projects )
         {
-            projectsByName.put( project.getName(), project );
+            projectsByName.put( MavenClasspathHelper.getMavenProjectInfo( project ) , project );
         }
+        
         return projectsByName;
     }
 
@@ -267,7 +270,7 @@ public class MavenClasspathContainer implements IClasspathContainer
      */
     @SuppressWarnings( "unchecked" )
     private void resolveArtifacts( IMavenProject mavenProject, List<IClasspathEntry> classpathEntries,
-                                   Set<IMavenArtifact> artifacts, Map<String, IProject> workspaceProjects )
+                                   Set<IMavenArtifact> artifacts, Map< MavenProjectInfo, IProject > workspaceProjects )
     {
         boolean downloadSources = MavenPreferenceManager.getMavenPreferenceManager().downloadSources();
         for ( IMavenArtifact artifact : artifacts )
@@ -275,20 +278,10 @@ public class MavenClasspathContainer implements IClasspathContainer
             IClasspathEntry entry = resolveArtifact( mavenProject, artifact, workspaceProjects, downloadSources );
             if ( entry != null )
             {
-                // classpathEntries.contains( entry ) doesn't work as expected.
-                if ( classpathContainsFolder( classpathEntries, entry ) )
+                if ( ! MavenClasspathHelper.classpathContainsFolder( classpathEntries, entry ) )
                 {
-                    // two dependencies with same artifactId match a workspace project so don't link both to the same
-                    // workspace project.
-                    // If these are two artifacts with different type, thats ok.
-                    // FIXME If they have different groupId, we have a problem.
-                    IPath path = entry.getPath();
-                    entry = resolveArtifact( mavenProject, artifact, Collections.EMPTY_MAP, downloadSources );
-                    MavenExceptionHandler.warning( project,
-                                                   "Two dependencies with same artifactId match the workspace project "
-                                                                   + path );
+                    classpathEntries.add( entry );
                 }
-                classpathEntries.add( entry );
             }
         }
     }
@@ -301,14 +294,14 @@ public class MavenClasspathContainer implements IClasspathContainer
      * @return the resulting classpath entry or null if should not be added to the classpath
      */
     protected IClasspathEntry resolveArtifact( IMavenProject mavenProject, IMavenArtifact artifact,
-                                               Map<String, IProject> workspaceProjects, boolean downloadSources )
+                                               Map< MavenProjectInfo , IProject > workspaceProjects, boolean downloadSources )
     {
         IClasspathAttribute[] attributes = new IClasspathAttribute[0];
 
         /*
          * if dependency is a project in the workspace use a project dependency instead of the jar dependency
          */
-        IProject project = workspaceProjects.get( artifact.getArtifactId() );
+        IProject project = getWorkspaceProject( workspaceProjects , artifact );
         if ( project == null )
         {
             project = workspaceProjects.get( artifact.getGroupId() + "." + artifact.getArtifactId() );
@@ -425,17 +418,17 @@ public class MavenClasspathContainer implements IClasspathContainer
 
         return null;
     }
-
-    private boolean classpathContainsFolder( List<IClasspathEntry> classpathSrcEntries, IClasspathEntry folder )
+    
+    private IProject getWorkspaceProject( Map< MavenProjectInfo , IProject > workspaceProjects , IMavenArtifact artifact )
     {
-        for ( IClasspathEntry entry : classpathSrcEntries )
+        for( Map.Entry< MavenProjectInfo, IProject > entry : workspaceProjects.entrySet() )
         {
-            if ( entry.getPath().equals( folder.getPath() ) )
+            if( entry.getKey().equals( artifact.getArtifactId() , artifact.getGroupId() , artifact.getVersion() ) )
             {
-                return true;
+                return entry.getValue();
             }
         }
-
-        return false;
+        
+        return null;
     }
 }

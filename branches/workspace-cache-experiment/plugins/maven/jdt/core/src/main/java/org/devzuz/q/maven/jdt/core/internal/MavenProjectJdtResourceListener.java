@@ -6,15 +6,7 @@
  **************************************************************************************************/
 package org.devzuz.q.maven.jdt.core.internal;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.devzuz.q.maven.embedder.MavenManager;
+import org.devzuz.q.maven.jdt.core.MavenClasspathHelper;
 import org.devzuz.q.maven.jdt.core.MavenJdtCoreActivator;
 import org.devzuz.q.maven.jdt.core.MavenNatureHelper;
 import org.devzuz.q.maven.jdt.core.classpath.container.MavenClasspathContainer;
@@ -25,7 +17,6 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -174,64 +165,10 @@ public class MavenProjectJdtResourceListener implements IResourceChangeListener
         }
         else if ( classpath.getEntryKind() == IClasspathEntry.CPE_LIBRARY )
         {
-            return getMavenProjectTriplet( classpath ).equals( getMavenProjectTriplet( project ) );
+            return MavenClasspathHelper.getMavenProjectInfo( classpath ).equals( MavenClasspathHelper.getMavenProjectInfo( project ) );
         }
 
         return false;
-    }
-
-    private static String getMavenProjectTriplet( IClasspathEntry classpathEntry )
-    {
-        int repoSegmentCount = MavenManager.getMaven().getLocalRepository().getBaseDirectoryPath().segmentCount();
-        IPath classpath = classpathEntry.getPath();
-        int segmentCount = classpath.segmentCount();
-        String version = classpath.segment( segmentCount - 2 );
-        String artifactId = classpath.segment( segmentCount - 3 );
-
-        StringBuilder groupId = new StringBuilder( "" );
-        for ( int i = repoSegmentCount; i < segmentCount - 3; i++ )
-        {
-            // Attach the dot
-            if ( i != repoSegmentCount )
-                groupId.append( "." );
-            groupId.append( classpath.segment( i ) );
-        }
-
-        return groupId.toString() + "-" + artifactId + "-" + version;
-    }
-
-    private static String getMavenProjectTriplet( IProject iproject )
-    {
-        StringBuilder strProjectInfoData = new StringBuilder( "" );
-
-        File pom = new File( iproject.getFile( POM_XML ).getLocation().toOSString() );
-        try
-        {
-            FileReader filetoread = new FileReader( pom );
-            Model pomModel = new MavenXpp3Reader().read( filetoread );
-            strProjectInfoData.append( pomModel.getGroupId() + "-" );
-            strProjectInfoData.append( pomModel.getArtifactId() + "-" );
-            strProjectInfoData.append( pomModel.getVersion() );
-            pomModel = null;
-            filetoread.close();
-        }
-        catch ( FileNotFoundException fnfe )
-        {
-            // TODO Auto-generated catch block
-            fnfe.printStackTrace();
-        }
-        catch ( IOException ioe )
-        {
-            // TODO Auto-generated catch block
-            ioe.printStackTrace();
-        }
-        catch ( XmlPullParserException xppe )
-        {
-            // TODO Auto-generated catch block
-            xppe.printStackTrace();
-        }
-        pom = null;
-        return strProjectInfoData.toString();
     }
 
     /**
