@@ -1,5 +1,5 @@
 #summary Guidelines for submitting better bug reports.
-#labels Phase-QA
+#labels Phase-QA,Featured
 
 = Introduction =
 
