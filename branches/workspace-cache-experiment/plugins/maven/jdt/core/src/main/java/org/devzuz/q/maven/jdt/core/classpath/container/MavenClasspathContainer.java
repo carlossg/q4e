@@ -8,7 +8,6 @@ package org.devzuz.q.maven.jdt.core.classpath.container;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;

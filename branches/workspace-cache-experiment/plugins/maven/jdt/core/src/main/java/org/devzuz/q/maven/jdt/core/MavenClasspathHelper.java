@@ -52,17 +52,31 @@ public class MavenClasspathHelper
         return MavenProjectInfo.newMavenProjectInfo( artifactId , groupId.toString() , version );
     }
 
-    // TODO : This does not work on child poms .. groupId will be null
-    //        We must go up to the parent if groupId of child pom is null
     public static MavenProjectInfo getMavenProjectInfo( IProject iproject )
     {
         File pom = new File( iproject.getFile( POM_XML ).getLocation().toOSString() );
+
         MavenProjectInfo info = null;
         try
         {
             FileReader filetoread = new FileReader( pom );
             Model pomModel = new MavenXpp3Reader().read( filetoread );
-            info = MavenProjectInfo.newMavenProjectInfo( pomModel.getArtifactId() , pomModel.getGroupId() , pomModel.getVersion() );
+            
+            String artifactId = pomModel.getArtifactId();
+            String groupId = pomModel.getGroupId();
+            String version = pomModel.getVersion();
+            
+            if( artifactId == null || artifactId.equals( "" ) )
+                artifactId = pomModel.getParent().getArtifactId();
+            
+            if( groupId == null || groupId.equals( "" ) )
+                groupId = pomModel.getParent().getGroupId();
+            
+            if( version == null || version.equals( "" ) )
+                version = pomModel.getParent().getVersion();
+            
+            info = MavenProjectInfo.newMavenProjectInfo( artifactId , groupId , version );
+            
             pomModel = null;
             filetoread.close();
         }
