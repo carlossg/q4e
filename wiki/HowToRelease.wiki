@@ -9,9 +9,7 @@ When creating a release, the following steps are needed.
   # Checkout tag (if needed).
     * Use the name: `a.b.c.vyyyyMMddHHmm`
   # Build update site for the tag 
-  # Create and commit the update site.
-    * I think SVN allows commits into a tag, but I'm not sure.
-    * This can also work by committing to a "testing" update site on trunk, allowing existing users to test the built version and provide feedback before the official release.
+  # Create and commit the developer's update site at `http://q4e.googlecode.com/svn/trunk/updatesite-dev/`.
   # Announce to dev list
   # Basic testing of the release in the tagged version (maybe with help of users).
     * This can last for a some days, so early adopters can provide feedback (maybe doing the above steps on a Friday, this way users/contributors can do tests at home).
