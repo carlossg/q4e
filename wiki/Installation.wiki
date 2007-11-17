@@ -5,7 +5,9 @@ The project is in a technology preview status, there are features that are not y
 
 = Update site =
 
-*`http://q4e.googlecode.com/svn/trunk/updatesite/`*
+==`http://q4e.googlecode.com/svn/trunk/updatesite/`==
+
+There's also a developer's update site used for testing at `http://q4e.googlecode.com/svn/trunk/updatesite-dev/`
 
 = Installation Requirements =
 The following is required to use the Q for Eclipse Plugin:
