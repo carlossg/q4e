@@ -11,6 +11,22 @@ It will allow you to run Maven goals from the Eclipse IDE, create new Maven proj
 
 Refer to [Installation]
 
+== Why the plugin is not at the Eclipse Foundation? ==
+
+A new project proposal has been approved at the Eclipse Foundation to add Q4E as an official Eclipse project.
+
+The proposal is called [http://www.eclipse.org/proposals/iam/ Eclipse Integration for Apache Maven (Eclipse IAM)]  and is the first step to become a project.
+
+Discussions about the creation will happen in the newsgroup at
+ * server: news.eclipse.org
+ * group: eclipse.technology.iam
+ * [http://www.eclipse.org/newsportal/thread.php?group=eclipse.technology.iam Web interface]
+
+The discussions will have as objective gathering the community interested in having the project in the Eclipse Foundation and finding two mentors from the [http://www.eclipse.org/org/foundation/council.php#architecture Eclipse Architecture Council]
+
+When ready, we can go through the creation review process.
+
+
 == What are the differences between this plugin and m2eclipse (aka Tycho)? ==
 
 The objective of this plugin is to be part of the [http://www.eclipse.org Eclipse Foundation], for that reason the license is EPL and we are going to follow the foundation procedures. Thanks to the sponsorship of [http://www.devzuz.com DevZuz], an [http://www.eclipse.org/membership/showMember.php?member_id=824 Eclipse Strategic Developer Member] we are in a good position to achieve this goal.
