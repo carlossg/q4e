@@ -39,6 +39,12 @@ For example:
 0.2.3.v200710232136
 }}}
 
+An example of the command to run would be (from the checked-out source root). 
+{{{
+svn copy https://q4e.googlecode.com/svn/trunk \
+  https://q4e.googlecode.com/svn/tags/0.3.0.v200711192308 \
+  -m "tag for pre-releasing to dev site"
+}}}
 == Check out tag ==
 This ensures that the release is built from the tag contents, so it can be rebuilt if needed.
 
