@@ -36,7 +36,7 @@ The tag name must be `q4e-version.vdate`:
 
 For example:
 {{{
-0.2.3.200710232136
+0.2.3.v200710232136
 }}}
 
 == Check out tag ==
