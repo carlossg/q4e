@@ -1,5 +1,7 @@
 package org.devzuz.q.maven.jdt.core.cache;
 
+import org.apache.maven.model.Model;
+
 public class MavenProjectInfo
 {
     private String artifactId;
@@ -8,18 +10,43 @@ public class MavenProjectInfo
 
     private String version;
     
-    public static MavenProjectInfo newMavenProjectInfo( String artifactId, String groupId, String version )
+    // I dislike this because it gives the idea that the MavenProjectInfo is just groupId, artifact Id and version
+    // But we'll keep it for now for convenience
+    // -- start --
+    public static MavenProjectInfo newMavenProjectInfo( String groupId , String artifactId, String version )
     {
-        return new MavenProjectInfo( artifactId, groupId, version );
+        return new MavenProjectInfo( groupId , artifactId , version );
     }
-
-    public MavenProjectInfo( String artifactId, String groupId, String version )
+    
+    public MavenProjectInfo( String groupId , String artifactId, String version )
     {
-        this.artifactId = artifactId;
         this.groupId = groupId;
+        this.artifactId = artifactId;
         this.version = version;
     }
-
+    // -- end --
+    
+    public static MavenProjectInfo newMavenProjectInfo( Model pomModel )
+    {
+        return new MavenProjectInfo( pomModel );
+    }
+    
+    public MavenProjectInfo( Model pomModel )
+    {
+        artifactId = pomModel.getArtifactId();
+        groupId = pomModel.getGroupId();
+        version = pomModel.getVersion();
+        
+        if( artifactId == null || artifactId.equals( "" ) )
+            artifactId = pomModel.getParent().getArtifactId();
+        
+        if( groupId == null || groupId.equals( "" ) )
+            groupId = pomModel.getParent().getGroupId();
+        
+        if( version == null || version.equals( "" ) )
+            version = pomModel.getParent().getVersion();
+    }
+    
     public String getArtifactId()
     {
         return artifactId;

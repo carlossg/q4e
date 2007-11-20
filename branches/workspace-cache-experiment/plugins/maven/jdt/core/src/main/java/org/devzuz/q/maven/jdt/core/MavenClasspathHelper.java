@@ -49,7 +49,7 @@ public class MavenClasspathHelper
             groupId.append( classpath.segment( i ) );
         }
 
-        return MavenProjectInfo.newMavenProjectInfo( artifactId , groupId.toString() , version );
+        return MavenProjectInfo.newMavenProjectInfo( groupId.toString() , artifactId , version );
     }
 
     public static MavenProjectInfo getMavenProjectInfo( IProject iproject )
@@ -62,20 +62,7 @@ public class MavenClasspathHelper
             FileReader filetoread = new FileReader( pom );
             Model pomModel = new MavenXpp3Reader().read( filetoread );
             
-            String artifactId = pomModel.getArtifactId();
-            String groupId = pomModel.getGroupId();
-            String version = pomModel.getVersion();
-            
-            if( artifactId == null || artifactId.equals( "" ) )
-                artifactId = pomModel.getParent().getArtifactId();
-            
-            if( groupId == null || groupId.equals( "" ) )
-                groupId = pomModel.getParent().getGroupId();
-            
-            if( version == null || version.equals( "" ) )
-                version = pomModel.getParent().getVersion();
-            
-            info = MavenProjectInfo.newMavenProjectInfo( artifactId , groupId , version );
+            info = MavenProjectInfo.newMavenProjectInfo( pomModel );
             
             pomModel = null;
             filetoread.close();
