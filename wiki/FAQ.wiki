@@ -35,6 +35,8 @@ Besides the objective, there are technical differences. While m2eclipse shows Ma
 
 Also it's implemented in several modules with reusability and extension in mind so other people can develop their own plugins taking advantage of the functionality they need (see for instance [http://ramblingabout.wordpress.com/2007/09/02/candy-for-appfuse-will-be-under-extreme-refactoring/ Candy for Appfuse]).
 
+In any case the underlying Maven libraries used for both plugins are the same (the Maven Embedder) and both plugin developers collaborate in its development.
+
 == Why the name Q? ==
 
 Q, named after the [http://en.wikipedia.org/wiki/Q_(James_Bond) special agent Q] in the James Bond books and movies. No double meaning or anything like that, we are just James Bond fans ;)
