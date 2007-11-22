@@ -281,7 +281,7 @@ public class EclipseMaven implements IMaven
         }
 
         request.setBaseDirectory( mavenProject.getBaseDirectory() );
-        request.setPomFile( mavenProject.getPomFile().getAbsolutePath() );
+        request.setPom( mavenProject.getPomFile() );
 
         Properties executionProperties = new Properties();
         executionProperties.putAll( System.getProperties() );
@@ -302,13 +302,13 @@ public class EclipseMaven implements IMaven
 
         return request;
     }
-
+    
     public IMavenProject getMavenProject( IProject project, boolean resolveTransitively ) throws CoreException
     {
         EclipseMavenProject mavenProject = new EclipseMavenProject( project );
         return getMavenProject( mavenProject, resolveTransitively );
     }
-
+    
     public IMavenProject getMavenProject( IFile projectSpecification, boolean resolveTransitively )
         throws CoreException
     {
@@ -338,8 +338,7 @@ public class EclipseMaven implements IMaven
                                                                         "Unable to read project",
                                                                         eclipseMavenExecutionResult ) );
                 }
-                // TODO should we call refreshProject?
-                // -erle- : I think we should, otherwise, I can't get the mavenProject object, it is null.
+
                 mavenProject.refreshDependencies( status.getProject() );
                 mavenProject.refreshProject( status.getProject() );
             }
@@ -377,7 +376,7 @@ public class EclipseMaven implements IMaven
             }
             MavenProject mavenRawProject =
                 mavenProjectBuilder.buildFromRepository( artifact, remoteArtifactRepositories,
-                                                         getMavenEmbedder().getLocalRepository(), true );
+                                                         getMavenEmbedder().getLocalRepository() );
             EclipseMavenProject mavenProject = new EclipseMavenProject( new EclipseMavenArtifact( artifact ) );
             mavenProject.refreshProject( mavenRawProject );
             return mavenProject;
@@ -429,6 +428,7 @@ public class EclipseMaven implements IMaven
 
             // TODO present the error in a user friendly way
             // Fail when you have a settings.xml file and it does not parse
+            // TODO How about use validationResult.isValid() ?
             if ( validationResult.isUserSettingsFilePresent() && !validationResult.isUserSettingsFileParses() )
             {
                 throw new QCoreException( new Status( Status.ERROR, MavenCoreActivator.PLUGIN_ID,

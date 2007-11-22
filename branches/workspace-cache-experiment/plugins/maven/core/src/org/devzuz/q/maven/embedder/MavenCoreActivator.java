@@ -28,6 +28,8 @@ public class MavenCoreActivator implements BundleActivator
     private static MavenCoreActivator plugin;
 
     private EclipseMaven mavenInstance;
+    
+    private MavenProjectsManager projectsManager;
 
     private Logger logger;
 
@@ -46,6 +48,10 @@ public class MavenCoreActivator implements BundleActivator
         // Initialize the maven instance
         mavenInstance = new EclipseMaven();
         mavenInstance.start();
+        
+        // Initialize the maven workspace projects manager
+        projectsManager = new MavenProjectsManager();
+        
         ExtensionPointHelper.resolveExtensionPoints( this );
     }
 
@@ -68,6 +74,11 @@ public class MavenCoreActivator implements BundleActivator
     public EclipseMaven getMavenInstance()
     {
         return mavenInstance;
+    }
+    
+    public MavenProjectsManager getMavenProjectsManager()
+    {
+        return projectsManager;
     }
 
     public void setMavenInstance( EclipseMaven mavenInstance )

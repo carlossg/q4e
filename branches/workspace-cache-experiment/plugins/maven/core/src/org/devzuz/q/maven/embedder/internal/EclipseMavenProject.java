@@ -213,7 +213,6 @@ public class EclipseMavenProject implements IMavenProject
     public void refreshDependencies( MavenProject mavenRawProject )
     {
         // TODO use the dependency graph tool
-
         allArtifacts.clear();
         for ( Object obj : mavenRawProject.getArtifacts() )
         {

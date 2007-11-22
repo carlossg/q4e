@@ -27,7 +27,7 @@ public class EclipseMavenProjectAdapterFactory implements IAdapterFactory
             if ( adaptableObject instanceof IProject )
                 try
                 {
-                    return MavenManager.getMaven().getMavenProject( (IProject) adaptableObject, true );
+                    return MavenManager.getMavenProjectsManager().getMavenProject( (IProject) adaptableObject, true );
                 }
                 catch ( CoreException e )
                 {
@@ -38,7 +38,7 @@ public class EclipseMavenProjectAdapterFactory implements IAdapterFactory
             {
                 try
                 {
-                    return MavenManager.getMaven().getMavenProject( ( (IFile) adaptableObject ).getProject(), true );
+                    return MavenManager.getMavenProjectsManager().getMavenProject( ( (IFile) adaptableObject ).getProject(), true );
                 }
                 catch ( CoreException e )
                 {
