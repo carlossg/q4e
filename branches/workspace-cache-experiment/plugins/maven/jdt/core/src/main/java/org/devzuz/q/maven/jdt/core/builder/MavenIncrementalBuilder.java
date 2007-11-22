@@ -77,7 +77,7 @@ public class MavenIncrementalBuilder extends IncrementalProjectBuilder
         {
             MavenJdtCoreActivator.getLogger().log( ce );
         }
-
+        
         new UpdateClasspathJob( project ).schedule();
     }
 

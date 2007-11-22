@@ -1,4 +1,4 @@
-package org.devzuz.q.maven.jdt.core.cache;
+package org.devzuz.q.maven.jdt.core;
 
 import org.apache.maven.model.Model;
 
@@ -10,9 +10,6 @@ public class MavenProjectInfo
 
     private String version;
     
-    // I dislike this because it gives the idea that the MavenProjectInfo is just groupId, artifact Id and version
-    // But we'll keep it for now for convenience
-    // -- start --
     public static MavenProjectInfo newMavenProjectInfo( String groupId , String artifactId, String version )
     {
         return new MavenProjectInfo( groupId , artifactId , version );
@@ -24,7 +21,6 @@ public class MavenProjectInfo
         this.artifactId = artifactId;
         this.version = version;
     }
-    // -- end --
     
     public static MavenProjectInfo newMavenProjectInfo( Model pomModel )
     {

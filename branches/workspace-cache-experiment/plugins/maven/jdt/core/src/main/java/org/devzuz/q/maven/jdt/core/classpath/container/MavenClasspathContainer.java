@@ -24,7 +24,6 @@ import org.devzuz.q.maven.embedder.MavenManager;
 import org.devzuz.q.maven.embedder.MavenUtils;
 import org.devzuz.q.maven.jdt.core.MavenClasspathHelper;
 import org.devzuz.q.maven.jdt.core.MavenJdtCoreActivator;
-import org.devzuz.q.maven.jdt.core.cache.MavenProjectInfo;
 import org.devzuz.q.maven.jdt.core.exception.MavenExceptionHandler;
 import org.devzuz.q.maven.jdt.core.internal.TraceOption;
 import org.devzuz.q.maven.ui.preferences.MavenPreferenceManager;
@@ -113,7 +112,7 @@ public class MavenClasspathContainer implements IClasspathContainer
             this.project = mavenProject.getProject();
 
             List<IClasspathEntry> newClasspathEntries = new ArrayList<IClasspathEntry>( artifacts.size() );
-            resolveArtifacts( mavenProject, newClasspathEntries, artifacts, getWorkspaceProjects() );
+            resolveArtifacts( mavenProject, newClasspathEntries, artifacts );
             classpathEntries = newClasspathEntries.toArray( new IClasspathEntry[newClasspathEntries.size()] );
         }
     }
@@ -143,7 +142,7 @@ public class MavenClasspathContainer implements IClasspathContainer
 
         try
         {
-            IMavenProject mavenProject = MavenManager.getMaven().getMavenProject( project, true );
+            IMavenProject mavenProject = MavenManager.getMavenProjectsManager().getMavenProject( project, true );
             container.refreshClasspath( mavenProject, mavenProject.getArtifacts() );
         }
         catch ( CoreException e )
@@ -243,18 +242,6 @@ public class MavenClasspathContainer implements IClasspathContainer
         }
     }
 
-    private Map< MavenProjectInfo , IProject > getWorkspaceProjects()
-    {
-        Map< MavenProjectInfo, IProject > projectsByName = new HashMap< MavenProjectInfo , IProject >();
-        IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-        for ( IProject project : projects )
-        {
-            projectsByName.put( MavenClasspathHelper.getMavenProjectInfo( project ) , project );
-        }
-        
-        return projectsByName;
-    }
-
     /**
      * Resolves IMavenArtifacts into the entries in the classpath container, using project or library dependencies
      * 
@@ -269,12 +256,12 @@ public class MavenClasspathContainer implements IClasspathContainer
      */
     @SuppressWarnings( "unchecked" )
     private void resolveArtifacts( IMavenProject mavenProject, List<IClasspathEntry> classpathEntries,
-                                   Set<IMavenArtifact> artifacts, Map< MavenProjectInfo, IProject > workspaceProjects )
+                                   Set<IMavenArtifact> artifacts )
     {
         boolean downloadSources = MavenPreferenceManager.getMavenPreferenceManager().downloadSources();
         for ( IMavenArtifact artifact : artifacts )
         {
-            IClasspathEntry entry = resolveArtifact( mavenProject, artifact, workspaceProjects, downloadSources );
+            IClasspathEntry entry = resolveArtifact( mavenProject, artifact, downloadSources );
             if ( entry != null )
             {
                 if ( ! MavenClasspathHelper.classpathContainsFolder( classpathEntries, entry ) )
@@ -292,19 +279,16 @@ public class MavenClasspathContainer implements IClasspathContainer
      * @param workspaceProjects
      * @return the resulting classpath entry or null if should not be added to the classpath
      */
-    protected IClasspathEntry resolveArtifact( IMavenProject mavenProject, IMavenArtifact artifact,
-                                               Map< MavenProjectInfo , IProject > workspaceProjects, boolean downloadSources )
+    protected IClasspathEntry resolveArtifact( IMavenProject mavenProject, IMavenArtifact artifact, boolean downloadSources )
     {
         IClasspathAttribute[] attributes = new IClasspathAttribute[0];
 
         /*
          * if dependency is a project in the workspace use a project dependency instead of the jar dependency
          */
-        IProject project = getWorkspaceProject( workspaceProjects , artifact );
-        if ( project == null )
-        {
-            project = workspaceProjects.get( artifact.getGroupId() + "." + artifact.getArtifactId() );
-        }
+        project = MavenManager.getMavenProjectsManager().getWorkspaceProject( artifact.getGroupId() , 
+                                                                              artifact.getArtifactId(), 
+                                                                              artifact.getVersion() );
 
         boolean export = false;
         String scope = artifact.getScope();
@@ -415,19 +399,6 @@ public class MavenClasspathContainer implements IClasspathContainer
             }
         }
 
-        return null;
-    }
-    
-    private IProject getWorkspaceProject( Map< MavenProjectInfo , IProject > workspaceProjects , IMavenArtifact artifact )
-    {
-        for( Map.Entry< MavenProjectInfo, IProject > entry : workspaceProjects.entrySet() )
-        {
-            if( entry.getKey().equals( artifact.getArtifactId() , artifact.getGroupId() , artifact.getVersion() ) )
-            {
-                return entry.getValue();
-            }
-        }
-        
         return null;
     }
 }

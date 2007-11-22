@@ -99,7 +99,6 @@ public class MavenNature
     public void configure()
         throws CoreException
     {
-        
         try
         {
             addBuilder();
@@ -185,7 +184,7 @@ public class MavenNature
         IJavaProject javaProject = JavaCore.create( project );
         try
         {
-            IMavenProject mavenProject = MavenManager.getMaven().getMavenProject( project, false );
+            IMavenProject mavenProject = MavenManager.getMavenProjectsManager().getMavenProject( project, false );
             
             // use a Set that will keep the order of elements added
             Set<IClasspathEntry> classpathEntriesSet = new ListOrderedSet();
