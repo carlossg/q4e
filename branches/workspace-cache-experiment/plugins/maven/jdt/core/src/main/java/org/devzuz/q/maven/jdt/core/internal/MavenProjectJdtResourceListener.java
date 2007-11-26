@@ -12,6 +12,7 @@ import org.devzuz.q.maven.jdt.core.MavenJdtCoreActivator;
 import org.devzuz.q.maven.jdt.core.MavenNatureHelper;
 import org.devzuz.q.maven.jdt.core.classpath.container.MavenClasspathContainer;
 import org.devzuz.q.maven.jdt.core.classpath.container.UpdateClasspathJob;
+import org.devzuz.q.maven.jdt.core.exception.MavenExceptionHandler;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
@@ -183,8 +184,7 @@ public class MavenProjectJdtResourceListener implements IResourceChangeListener
             }
             catch( CoreException e )
             {
-                // TODO : Handle this
-                System.out.println("CoreException in MavenProjectJdtResourceListener.classpathEqualsProject()");
+                MavenExceptionHandler.handle( project , e );
             }
         }
 
