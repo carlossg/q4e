@@ -15,33 +15,39 @@ public class MavenProjectManager
         mavenProjects = new HashMap< IProject , MavenProjectCachedInfo >();
     }
     
-    /*
-    public void addMavenProject( IProject project , IMavenProject mavenProject )
-    {
-        mavenProjects.put( project , MavenProjectCachedInfo.newMavenProjectCachedInfo( mavenProject ) );
-    }*/
-    
     public void removeMavenProject( IProject project )
     {
         mavenProjects.remove( project );
+    }
+    
+    public void setMavenProjectModified( IProject project )
+    {
+        MavenProjectCachedInfo cachedProject = mavenProjects.get( project );
+        if( cachedProject != null )
+        {
+            cachedProject.setModified( true );
+        }
     }
     
     public IMavenProject getMavenProject( IProject project , boolean resolveTransitively ) throws CoreException
     {
         MavenProjectCachedInfo cachedProject = mavenProjects.get( project );
         
-        // TODO : We should also check the digest of the project's POM against our last digest, coz if it
-        // changed, we should read the maven project again from the embedder
-        
-        // If we haven't cached the project yet or if we have cached the project but it's not resolved
-        // transitively and resolveTransitively is true
+        // If we haven't cached the project yet or if the maven project's pom was modified or 
+        // if we have cached the project but it's not resolved transitively and resolveTransitively is true
         if( ( cachedProject == null ) ||
+            ( cachedProject.isModified() ) ||
             ( ( cachedProject.resolvedTransitively == false ) && 
               ( resolveTransitively == true ) ) )
         {
             IMavenProject mavenProject = MavenManager.getMaven().getMavenProject( project , resolveTransitively );
             cachedProject =  MavenProjectCachedInfo.newMavenProjectCachedInfo( mavenProject , resolveTransitively );
-            mavenProjects.put( project , cachedProject );
+            // TODO : Do we need to explicitly set the old value contained therein to null so it could be garbage collected ?
+            MavenProjectCachedInfo oldInfo = mavenProjects.put( project , cachedProject );
+            if( oldInfo != null )
+            {
+                oldInfo = null;
+            }
         }
         
         return cachedProject.getMavenProject();
@@ -72,19 +78,19 @@ public class MavenProjectManager
     {
         private IMavenProject mavenProject;
         private boolean       resolvedTransitively = false;
-        private String        pomDigest;
+        private boolean       modified = false;
         
         public static MavenProjectCachedInfo newMavenProjectCachedInfo( IMavenProject mavenProject , boolean resolvedTransitively )
         {
             // TODO : add digest so we could detect if mavenProject's POM has changed
-            return new MavenProjectCachedInfo( mavenProject , resolvedTransitively , "" );
+            return new MavenProjectCachedInfo( mavenProject , resolvedTransitively , true );
         }
         
-        private MavenProjectCachedInfo( IMavenProject project , boolean resolvedTransitively, String pomDigest )
+        private MavenProjectCachedInfo( IMavenProject project , boolean resolvedTransitively, boolean modified )
         {
             this.mavenProject = project;
             this.resolvedTransitively = resolvedTransitively;
-            this.pomDigest = pomDigest;
+            this.modified = modified;
         }
         
         public IMavenProject getMavenProject()
@@ -96,16 +102,6 @@ public class MavenProjectManager
         {
             this.mavenProject = mavenProject;
         }
-        
-        public String getPomDigest()
-        {
-            return pomDigest;
-        }
-        
-        public void setPomDigest( String pomDigest )
-        {
-            this.pomDigest = pomDigest;
-        }
 
         public boolean isResolvedTransitively()
         {
@@ -115,6 +111,16 @@ public class MavenProjectManager
         public void setResolvedTransitively( boolean resolvedTransitively )
         {
             this.resolvedTransitively = resolvedTransitively;
+        }
+
+        public boolean isModified()
+        {
+            return modified;
+        }
+
+        public void setModified( boolean modified )
+        {
+            this.modified = modified;
         }
     }
 }
