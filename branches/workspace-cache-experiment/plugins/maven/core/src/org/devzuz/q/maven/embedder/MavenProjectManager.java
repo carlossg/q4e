@@ -6,19 +6,20 @@ import java.util.Map;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 
-public class MavenProjectsManager
+public class MavenProjectManager
 {
     private Map< IProject , MavenProjectCachedInfo > mavenProjects;
     
-    public MavenProjectsManager()
+    public MavenProjectManager()
     {
         mavenProjects = new HashMap< IProject , MavenProjectCachedInfo >();
     }
     
+    /*
     public void addMavenProject( IProject project , IMavenProject mavenProject )
     {
         mavenProjects.put( project , MavenProjectCachedInfo.newMavenProjectCachedInfo( mavenProject ) );
-    }
+    }*/
     
     public void removeMavenProject( IProject project )
     {
@@ -35,11 +36,11 @@ public class MavenProjectsManager
         // If we haven't cached the project yet or if we have cached the project but it's not resolved
         // transitively and resolveTransitively is true
         if( ( cachedProject == null ) ||
-            ( ( cachedProject.getMavenProject().getArtifacts() == null ) && 
+            ( ( cachedProject.resolvedTransitively == false ) && 
               ( resolveTransitively == true ) ) )
         {
             IMavenProject mavenProject = MavenManager.getMaven().getMavenProject( project , resolveTransitively );
-            cachedProject =  MavenProjectCachedInfo.newMavenProjectCachedInfo( mavenProject );
+            cachedProject =  MavenProjectCachedInfo.newMavenProjectCachedInfo( mavenProject , resolveTransitively );
             mavenProjects.put( project , cachedProject );
         }
         
@@ -62,20 +63,27 @@ public class MavenProjectsManager
         return null;
     }
     
+    public IProject[] getWorkspaceProjects()
+    {
+        return mavenProjects.keySet().toArray( new IProject[ mavenProjects.size() ] );
+    }
+    
     private static class MavenProjectCachedInfo
     {
         private IMavenProject mavenProject;
+        private boolean       resolvedTransitively = false;
         private String        pomDigest;
         
-        public static MavenProjectCachedInfo newMavenProjectCachedInfo( IMavenProject mavenProject )
+        public static MavenProjectCachedInfo newMavenProjectCachedInfo( IMavenProject mavenProject , boolean resolvedTransitively )
         {
             // TODO : add digest so we could detect if mavenProject's POM has changed
-            return new MavenProjectCachedInfo( mavenProject , "" );
+            return new MavenProjectCachedInfo( mavenProject , resolvedTransitively , "" );
         }
         
-        private MavenProjectCachedInfo( IMavenProject project , String pomDigest )
+        private MavenProjectCachedInfo( IMavenProject project , boolean resolvedTransitively, String pomDigest )
         {
             this.mavenProject = project;
+            this.resolvedTransitively = resolvedTransitively;
             this.pomDigest = pomDigest;
         }
         
@@ -97,6 +105,16 @@ public class MavenProjectsManager
         public void setPomDigest( String pomDigest )
         {
             this.pomDigest = pomDigest;
+        }
+
+        public boolean isResolvedTransitively()
+        {
+            return resolvedTransitively;
+        }
+
+        public void setResolvedTransitively( boolean resolvedTransitively )
+        {
+            this.resolvedTransitively = resolvedTransitively;
         }
     }
 }

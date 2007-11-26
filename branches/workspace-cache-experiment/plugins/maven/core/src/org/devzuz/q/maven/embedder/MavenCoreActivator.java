@@ -29,7 +29,7 @@ public class MavenCoreActivator implements BundleActivator
 
     private EclipseMaven mavenInstance;
     
-    private MavenProjectsManager projectsManager;
+    private MavenProjectManager projectsManager;
 
     private Logger logger;
 
@@ -50,7 +50,7 @@ public class MavenCoreActivator implements BundleActivator
         mavenInstance.start();
         
         // Initialize the maven workspace projects manager
-        projectsManager = new MavenProjectsManager();
+        projectsManager = new MavenProjectManager();
         
         ExtensionPointHelper.resolveExtensionPoints( this );
     }
@@ -76,7 +76,7 @@ public class MavenCoreActivator implements BundleActivator
         return mavenInstance;
     }
     
-    public MavenProjectsManager getMavenProjectsManager()
+    public MavenProjectManager getMavenProjectsManager()
     {
         return projectsManager;
     }

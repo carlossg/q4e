@@ -14,7 +14,7 @@ public class MavenManager
         return MavenCoreActivator.getDefault().getMavenInstance();
     }
     
-    public static MavenProjectsManager getMavenProjectsManager()
+    public static MavenProjectManager getMavenProjectsManager()
     {
         return MavenCoreActivator.getDefault().getMavenProjectsManager();
     }
