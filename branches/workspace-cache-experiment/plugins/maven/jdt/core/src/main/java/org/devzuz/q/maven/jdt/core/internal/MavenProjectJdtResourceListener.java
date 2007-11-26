@@ -6,7 +6,8 @@
  **************************************************************************************************/
 package org.devzuz.q.maven.jdt.core.internal;
 
-import org.devzuz.q.maven.jdt.core.MavenClasspathHelper;
+import org.devzuz.q.maven.embedder.IMavenProject;
+import org.devzuz.q.maven.embedder.MavenManager;
 import org.devzuz.q.maven.jdt.core.MavenJdtCoreActivator;
 import org.devzuz.q.maven.jdt.core.MavenNatureHelper;
 import org.devzuz.q.maven.jdt.core.classpath.container.MavenClasspathContainer;
@@ -17,6 +18,7 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -87,6 +89,11 @@ public class MavenProjectJdtResourceListener implements IResourceChangeListener
                     MavenJdtCoreActivator.trace( TraceOption.JDT_RESOURCE_LISTENER,
                                                  "Skipping because it has no pom.xml: " + project );
                 }
+            }
+            
+            if( event.getType() == IResourceChangeEvent.PRE_DELETE )
+            {
+                MavenManager.getMavenProjectsManager().removeMavenProject( project );
             }
         }
     }
@@ -165,7 +172,20 @@ public class MavenProjectJdtResourceListener implements IResourceChangeListener
         }
         else if ( classpath.getEntryKind() == IClasspathEntry.CPE_LIBRARY )
         {
-            return MavenClasspathHelper.getMavenProjectInfo( classpath ).equals( MavenClasspathHelper.getMavenProjectInfo( project ) );
+            try
+            {
+                IMavenProject mavenProject = MavenManager.getMavenProjectsManager().getMavenProject( project, false );
+                String [] classpathMavenInfo = getMavenProjectInfo( classpath );
+                
+                return mavenProject.getGroupId().equals( classpathMavenInfo[0] ) &&
+                       mavenProject.getArtifactId().equals( classpathMavenInfo[1] ) &&
+                       mavenProject.getVersion().equals( classpathMavenInfo[2] );
+            }
+            catch( CoreException e )
+            {
+                // TODO : Handle this
+                System.out.println("CoreException in MavenProjectJdtResourceListener.classpathEqualsProject()");
+            }
         }
 
         return false;
@@ -183,5 +203,27 @@ public class MavenProjectJdtResourceListener implements IResourceChangeListener
     {
         // TODO: Check if the project has the q4e maven nature??: MavenNatureHelper.hasMavenNature( project );
         return project.getFile( POM_XML ).exists();
+    }
+    
+    private static String[] getMavenProjectInfo( IClasspathEntry classpathEntry )
+    {
+        int repoSegmentCount = MavenManager.getMaven().getLocalRepository().getBaseDirectoryPath().segmentCount();
+        IPath classpath = classpathEntry.getPath();
+        int segmentCount = classpath.segmentCount();
+        String[] mavenProjectInfo = new String[3]; 
+        mavenProjectInfo[2] = classpath.segment( segmentCount - 2 );
+        mavenProjectInfo[1] = classpath.segment( segmentCount - 3 );
+
+        StringBuilder groupId = new StringBuilder( "" );
+        for ( int i = repoSegmentCount; i < segmentCount - 3; i++ )
+        {
+            // Attach the dot
+            if ( i != repoSegmentCount )
+                groupId.append( "." );
+            groupId.append( classpath.segment( i ) );
+        }
+        mavenProjectInfo[0] = groupId.toString();
+        
+        return mavenProjectInfo;
     }
 }
