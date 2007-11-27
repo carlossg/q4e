@@ -112,24 +112,6 @@ Features and plugins created to use third party libraries
 }}}
 
 
-= Working with sources = 
-
- * [Installation Install latest version] from update site to get all required libraries
- * Check out the [http://code.google.com/p/q4e/source sources] from Subversion
- * Import all existing projects in your Eclipse workspace.
-   * At this point, org.devzuz.q.buckminster.maven might display build errors. You can safely ignore them (or close the project).
-
-Then you can do your changes and run with
-
- * Run - open debug dialog
- * Right click on Eclipse application, select New
- * Give it a name
- * In the plugin tabs make sure all the org.devzuz.q plugins are checked in the Workspace section and unchecked in the Target platform section
- * Click the Debug button
-
-A new Eclipse instance is launched with all the plugins you checked, including the Q ones built from sources
-
-
 = Making a release =
 
  * change all versions x.y.z.qualifier to x2.y2.z2.qualifier, where x2.y2.z2 is the new version to release
