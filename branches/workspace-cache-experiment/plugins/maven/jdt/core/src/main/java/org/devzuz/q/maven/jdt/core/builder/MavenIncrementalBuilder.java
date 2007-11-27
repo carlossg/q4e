@@ -45,7 +45,9 @@ public class MavenIncrementalBuilder extends IncrementalProjectBuilder
             IResourceDelta member = delta.findMember( pomPath );
             if ( member != null )
             {
-                onPomChange( member.getResource().getProject() , monitor );
+                IProject project = member.getResource().getProject(); 
+                MavenManager.getMavenProjectsManager().setMavenProjectModified( project );
+                onPomChange( project , monitor );
             }
         }
         else
@@ -74,7 +76,6 @@ public class MavenIncrementalBuilder extends IncrementalProjectBuilder
             MavenJdtCoreActivator.getLogger().log( ce );
         }
         
-        MavenManager.getMavenProjectsManager().setMavenProjectModified( project );
         new UpdateClasspathJob( project ).schedule();
     }
 }

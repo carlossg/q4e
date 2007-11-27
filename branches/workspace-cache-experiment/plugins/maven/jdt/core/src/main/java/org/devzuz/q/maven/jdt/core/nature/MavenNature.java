@@ -184,7 +184,7 @@ public class MavenNature
         IJavaProject javaProject = JavaCore.create( project );
         try
         {
-            IMavenProject mavenProject = MavenManager.getMavenProjectsManager().getMavenProject( project, false );
+            IMavenProject mavenProject = MavenManager.getMavenProjectsManager().getMavenProject( project, true );
             
             // use a Set that will keep the order of elements added
             Set<IClasspathEntry> classpathEntriesSet = new ListOrderedSet();

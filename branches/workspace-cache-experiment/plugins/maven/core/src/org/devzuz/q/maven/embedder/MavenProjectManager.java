@@ -83,7 +83,7 @@ public class MavenProjectManager
         public static MavenProjectCachedInfo newMavenProjectCachedInfo( IMavenProject mavenProject , boolean resolvedTransitively )
         {
             // TODO : add digest so we could detect if mavenProject's POM has changed
-            return new MavenProjectCachedInfo( mavenProject , resolvedTransitively , true );
+            return new MavenProjectCachedInfo( mavenProject , resolvedTransitively , false );
         }
         
         private MavenProjectCachedInfo( IMavenProject project , boolean resolvedTransitively, boolean modified )
