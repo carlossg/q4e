@@ -19,7 +19,8 @@ The following list contains the typical information required for great bug repor
   * *Version information:* If you got q4e from the update site, which version was it? If you've built it from SVN, which revision have you checked out?
     * For accurate version reporting, use the _About Eclipse Platform_ dialog (in the _Help_ menu for Windows and Linux, _Eclipse_ menu for mac) and choose _Configuration Details_. Copy the displayed text to a text file and attach it to the issue report.
     * It is always nice to read the summary of this information in the bug report, so if you know it, state the q4e and eclipse version you're using.
-  * *Error messages and exception traces*, reported on the Eclipse Error Log or on the Maven Events View. Both allow copy&paste or exporting its contents to a file.
+  * *Error messages and exception traces*, reported on the Eclipse Error Log or on the Maven Events View. Both allow copy&paste or exporting its contents to a file. 
+    * If you're able to reproduce the problem, it is most useful if you clear the views before, so you only send the output generated from your test.
   * *A test case*. Can be one of the following:
     * an eclipse workspace. In such case, just attach a zip file to the issue when creating it.
     * a publicly available project. The developers will need the repository and version/tag to checkout
