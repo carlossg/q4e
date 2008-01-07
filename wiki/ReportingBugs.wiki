@@ -5,7 +5,7 @@
 
 The q4e developers test each release, add new features, provide support on the lists, review bug reports... That's quite a lot of work!
 
-One place where you can help is in providing good reports when entering a new bug in the  [[http://code.google.com/p/q4e/issues/list Issue Tracker]].
+One place where you can help is in providing good reports when entering a new bug in the  [http://code.google.com/p/q4e/issues/list Issue Tracker].
 
 
 = Is it a Q4E bug ? =
@@ -14,7 +14,7 @@ First step is to check if the issue is really in Q4E code. There are many librar
 
 We request that everybody check their problem against the command line version of Maven. For instance if you have a problem running the Maven install goal in Eclipse, please try {{{mvn install}}} in the command line. Unfortunately the Maven libraries used by Q4E are not yet released and you should use the command line Maven version {{{2.1.0-xyz}}} that matches your Q4E version.
 
-To find what version you need to download, in Eclipse, go to Help - About Eclipse Platform - Plug-in details and find the version for the plugin with id {{{org.apache.maven.embedder}}}, then go to [Downloads] and get the one that matches.
+To find what version you need to download, in Eclipse, go to Help - About Eclipse Platform - Plug-in details and find the version for the plugin with id {{{org.apache.maven.embedder}}}, then go to [http://code.google.com/p/q4e/downloads/list Downloads] and get the one that matches.
 
 If you experience the same problem with the command line version then we are afraid the problem is not in Q4E, but in Maven itself and you should report the issue to the Maven developers through the [http://maven.apache.org/mail-lists.html Maven Developer List] or the [http://maven.apache.org/issue-tracking.html issue tracker]. Make sure you reference the version that has the problem for faster resolution.
 
