@@ -29,7 +29,8 @@ Provide *all* the information the developer's will need for finding the same bug
 
 The following list contains the typical information required for great bug reports. In some circumstances, some of them might not be available. Telling so in the issue report is usually good enough.
 
-  * *Version information:* If you got q4e from the update site, which version was it? If you've built it from SVN, which revision have you checked out? Include the version  of the Maven command line binary you used to determine that it isn't a Maven command line bug (see previous section)
+  * *Version information:* If you got q4e from the update site, which version was it? If you've built it from SVN, which revision have you checked out?
+    * Include the version  of the Maven command line binary you used to determine that it isn't a Maven command line bug (see previous section)
     * For accurate version reporting, use the _About Eclipse Platform_ dialog (in the _Help_ menu for Windows and Linux, _Eclipse_ menu for mac) and choose _Configuration Details_. Copy the displayed text to a text file and attach it to the issue report.
     * It is always nice to read the summary of this information in the bug report, so if you know it, state the q4e and eclipse version you're using.
   * *Error messages and exception traces*, reported on the Eclipse Error Log or on the Maven Events View. Both allow copy&paste or exporting its contents to a file. 
