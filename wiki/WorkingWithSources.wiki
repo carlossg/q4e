@@ -24,6 +24,18 @@ If you are a committer, use `https`...
 svn co https://q4e.googlecode.com/svn/trunk q4e
 }}}
 
+To get the contents of the sandbox
+
+{{{
+svn co http://q4e.googlecode.com/svn/trunk q4e
+}}}
+or
+{{{
+svn co https://q4e.googlecode.com/svn/sandbox q4e-sandbox
+}}}
+
+
+
 = Set up your Eclipse = 
 == Same Eclipse ==
 
