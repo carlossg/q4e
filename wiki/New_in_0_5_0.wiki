@@ -6,4 +6,6 @@ This is the list of the most important changes made for the 0.5.0 release.
 For a complete list, check the [Status] page. 
 
 
+* Ability to import pom projects, see ImportingMultiprojects
+
 ... no changes yet ...
