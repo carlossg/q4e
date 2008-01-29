@@ -9,3 +9,5 @@ For a complete list, check the [Status] page.
  * Ability to import pom projects, see ImportingMultiprojects
 
  * Maven execution can now be canceled. The points where it checks for cancellation are at the start of each phase (plugin execution), before downloading each file and for each log call. Therefore note that you won't be able to stop a running plugin if it does not send any value to the log (quite strange in any case).
+
+ * It is possible to display the project dependencies as a tree and analyze them to assess where the actual dependencies and versions come from.
