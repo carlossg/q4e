@@ -45,6 +45,27 @@ Follow this procedure to verify that the Q for Eclipse Plugin successfully insta
  # On the pop-up, click Plug-in Details. A list of all plugins installed on Eclipse will appear. 
  # Scroll down and look for the Q for Eclipse Plugin you just installed by looking for the name Kepler in the Plug-in Name. 
 
+= Recommended third party plugins =
+
+We suggest the installation of the [http://www.eclipse.org/webtools/ Web Tools Platform] XML editor so you can benefit from auto completion, error checking,... while editing the pom.xml files.
+
+You can install it from the Europa Discovery Site that you should already have in your Update sites list, or following the instructions in the [http://download.eclipse.org/webtools/downloads/ WTP downloads page]
+
+In your poms make sure you use the full header with the schema declaration:
+
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+<!-- your pom contents -->
+
+</project>
+}}}
+
+
+
 = Questions =
 
 if you have any questions or experience problems, please give us your feedback at [http://groups.google.com/group/q4e-users our user mailing list]
