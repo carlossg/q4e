@@ -44,7 +44,7 @@ This is the list of plug-ins which support generating traces and the description
 This section tries to set the _standard_ way in *q4e* for adding new trace options in to a plug-in, or how to implement tracing in a plug-in that does not support tracing yet.
 
 For reference, check the implementation in `org.devzuz.q.maven.jdt.core`:
-  * The [http://q4e.googlecode.com/svn/trunk/plugins/maven/jdt/core/src/main/java/org/devzuz/q/maven/jdt/core/Activator.java Activator]'s trace method.
+  * The [http://q4e.googlecode.com/svn/trunk/plugins/maven/jdt/core/src/main/java/org/devzuz/q/maven/jdt/core/MavenJdtCoreActivator.java MavenJdtCoreActivator]'s trace method.
   * The [http://q4e.googlecode.com/svn/trunk/plugins/maven/jdt/core/src/main/java/org/devzuz/q/maven/jdt/core/internal/TraceOption.java TraceOption] enum.
 
 == TraceOption ==
@@ -115,7 +115,7 @@ The method is defined as:
 
 As explained in the javadoc, `trace` signature uses the vararg feature in java 5. This allows callers to avoid building a `String` to call this method, which will reduce the performance impact of tracing.
 
-A client will tipically call this method as:
+A client will typically call this method as:
 
 {{{
   Activator.trace(TraceOption.MY_OPTION, "The object ", myObject, " has been traced!");
