@@ -63,8 +63,7 @@ Click _New_. In the wizard that opens, fill a name for the archetype provider an
 
 [http://q4e.googlecode.com/svn/wiki/img/archetype/New-Archetype-Source.png]
 
-Now click _Next_. Another page allows us to select an url where the file can be found. For simplicity, lets enter a url on our filesystem (in the example: `file:/opt/m2/archetypes.csv
-`).
+Now click _Next_. Another page allows us to select an url where the file can be found. For simplicity, lets enter a url on our filesystem (in the example: `file:/opt/m2/archetypes.csv`).
 
 The tricky part now is finding a regular expression that matches our file format. One possible expression for our CSV file is: `([^;\n]+);([^;\n]+);([^;\n]+);([^;\n]+);([^;\n]*)\n`.
 
