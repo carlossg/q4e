@@ -12,7 +12,7 @@ Starting in Q4E 0.5.0 you can import the parent poms in a nested mutiproject set
  * myproject/moduleA/pom.xml
  * myproject/moduleB/pom.xml
 
-The problem comes with other plugins like Subclipse, that will not activate themselves in the modules projects, only in the parent one. If you try to activate it in all the projects then synchronization problems occur.
+The problem comes with other plugins like Subclipse, that will not activate themselves in the modules projects, only in the parent one. If you try to activate it in all the projects then synchronization problems occur. Some users have reported that the Subversive plugin may behave better than Subclipse.
 
 == A possible better approach ==
 
