@@ -1,0 +1,8 @@
+#summary Analysis of dependencies in Maven projects
+
+= Introduction =
+
+The new Dependency Analysis view allows debugging common problems with dependencies, like why old versions are being selected, or where a undesired dependency comes from
+
+
+= Details =
