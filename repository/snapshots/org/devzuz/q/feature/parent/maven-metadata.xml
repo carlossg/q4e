@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+  <groupId>org.devzuz.q.feature</groupId>
+  <artifactId>parent</artifactId>
+  <version>1-SNAPSHOT</version>
+  <versioning>
+    <versions>
+      <version>1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20080304073242</lastUpdated>
+  </versioning>
+</metadata>
