@@ -19,3 +19,5 @@ For a complete list, check the [Status] page.
    * *Note* that resources are no longer added to the build path as source folders.
 
  * The dependency graph is no longer a pop up window. It has its own Eclipse view.
+
+ * Allow maven goals to use artifacts in the workspace when launched from q4e, even if they are not installed on the repository.
