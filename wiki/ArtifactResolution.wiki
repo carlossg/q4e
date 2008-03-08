@@ -1,0 +1,32 @@
+#summary Resolving maven artifacts from the workspace
+#labels Phase-Support
+= Introduction =
+
+Resolving artifacts from the workspace allow you to works on two levels:
+  # Compiling with eclipse: if you have a dependency on an artifact on your workspace and using eclipse, the compiler will use your project to satisfy the dependencies.
+  # Using maven: if you launch maven goals from q4e, the artifacts are also reolved from the workspace, without using the local or remote repositories.
+
+== Compiling with eclipse ==
+
+If `project_a` has a dependency on `project_b` and both are on your workspace under q4e control, `project_a` buildpath will be updated to use `project_b`.
+
+This feature is a must for any developer, so there is no need to `mvn install` after every change on `project_a` just to work with `project_b` in Eclipse.
+
+== Compiling with maven ==
+
+Sometimes you just need to use maven.
+
+But (starting with `q4e 0.5.0`) you can still use the projects on your workspace. You can't still avoid calling `mvn install`.
+
+In few words... if you need to execute a goal on any project, use _Maven 2 > Execute goal_ on the project's context menu and you'll save the step of installing to the repository.
+
+
+[http://www.screencast.com/users/amuino/folders/Jing/media/756ea2db-a4ee-4352-802d-176869da774e Watch this screencast to see it in action]
+
+=== The long story ===
+
+Not every maven mojo supports running from the workspace.
+
+Most notably, plug-ins that fork execution and/or require the presence of jar files will fail.
+
+Here's were your feedback is needed. We need to identify the plug-ins most often used from q4e so we can set up priorities and add the required support (in q4e or, if possible, in the plug-in).
