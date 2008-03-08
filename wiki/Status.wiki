@@ -1,11 +1,15 @@
 #summary Quick links to follow the development status.
 #labels Phase-Implementation
 
+= 0.6.0 =
+
+  * [http://code.google.com/p/q4e/issues/list?can=2&q=milestone%3A0.6.0&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Pending tasks]
+  * [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.6.0+status%3AFixed&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Finished tasks]
+
 = 0.5.0 =
 
-  * [http://code.google.com/p/q4e/issues/list?can=2&q=milestone%3A0.5.0&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Pending tasks]
-  * [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.5.0+status%3AFixed&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Finished tasks]
+  * [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.5.0+status%3AFixed&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Changelog ]
 
 = 0.4.0 =
 
-  * [http://code.google.com/p/q4e/issues/list?can=1&q=milestone:0.4.0%20status:Fixed&sort=milestone&colspec=ID%20Type%20Status%20Priority%20Milestone%20Owner%20Summary Changelog ]
+  * [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.4.0%20status:Fixed&sort=milestone&colspec=ID%20Type%20Status%20Priority%20Milestone%20Owner%20Summary Changelog ]
