@@ -20,6 +20,7 @@ But (starting with `q4e 0.5.0`) you can still use the projects on your workspace
 
 In few words... if you need to execute a goal on any project, use _Maven 2 > Execute goal_ on the project's context menu and you'll save the step of installing to the repository.
 
+[http://www.screencast.com/users/amuino/folders/Jing/media/756ea2db-a4ee-4352-802d-176869da774e http://content.screencast.com/media/0dd2d22a-dc62-4f29-a6b3-0cc89cd586e3_8401be7d-71b4-43db-a2f3-28bc909cc10c_static_0_0_Thumbnail.gif]
 
 [http://www.screencast.com/users/amuino/folders/Jing/media/756ea2db-a4ee-4352-802d-176869da774e Watch this screencast to see it in action]
 
