@@ -18,6 +18,6 @@ For a complete list, check the [Status] page.
    * Inclussion/Exclussion patterns for resources are honored. Now it is possible to share a folder for java sources and resources.
    * *Note* that resources are no longer added to the build path as source folders.
 
- * The dependency graph is no longer a pop up window. It has its own Eclipse view.
+ * The [DependencyGraphViewer dependency graph] is no longer a pop up window. It has its own Eclipse view.
 
  * Allow maven goals to [ArtifactResolution use artifacts in the workspace] when launched from q4e, even if they are not installed on the repository.
