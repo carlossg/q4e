@@ -132,6 +132,34 @@ APIs and code to integrate with Maven repositories
  */
 }}}
 
+Eclipse can be configured to use this license in every new file created.
+
+  * Open eclipse preferences
+  * Go to _Java > Code Style > Code Templates_
+  * Select _Comments > Files_
+  * Edit the comment and paste the provided text
+
+[http://q4e.googlecode.com/svn/wiki/img/DevelopmentGuide/license-template-comment.png]
+
+A template can also be defined in _Java > Editor > Templates_.
+  * Create a new template for the java context
+  * Give it an easy to remember name (like `license`)
+  * Use the license text as the content.
+  * You can now type `license` and press _CTRL+Space_ to have the license text automatically inserted.
+
+This is an example:
+
+[http://q4e.googlecode.com/svn/wiki/img/DevelopmentGuide/license-template.png]
+
+= Coding conventions =
+
+Q for Eclipse uses the [http://maven.apache.org/developers/committer-environment.html maven coding conventions]. 
+
+Download the eclipse formatter settings ([http://maven.apache.org/developers/maven-eclipse-codestyle.xml maven-eclipse-codestyle.xml]) and import them from _Java > Code Style > Formatter_.
+
+[http://q4e.googlecode.com/svn/wiki/img/DevelopmentGuide/maven-formatter.png]
+
+From now on, every time the code is formatted, it will be adjusted to the right conventions (this and other cleanups can be automated so they occur on every save by using the _Java > Editor > Save Actions_ preferences).
 
 = Making a release =
 
