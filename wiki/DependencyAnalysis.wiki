@@ -7,4 +7,4 @@ The new Dependency Analysis view allows debugging common problems with dependenc
 
 = Details =
 
-http://q4e.googlecode.com/svn/wiki/img/DependencyAnalysis/analysedependencies.GIF
+http://q4e.googlecode.com/svn/wiki/img/DependencyAnalysis/analysedependencies.gif
