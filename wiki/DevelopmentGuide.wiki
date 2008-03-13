@@ -161,6 +161,16 @@ Download the eclipse formatter settings ([http://maven.apache.org/developers/mav
 
 From now on, every time the code is formatted, it will be adjusted to the right conventions (this and other cleanups can be automated so they occur on every save by using the _Java > Editor > Save Actions_ preferences).
 
+= Generating an update site =
+ # Open `site.xml`
+ # Click "_Add Feature..._"
+ # Search for "`*q.feature`"
+ # OK
+ # Select the new entry "`org.devzuz.q.feature (0.6.0.qualifier)`" under `Community` (the specific version number should match the current development)
+ # Click on "_Build_"
+ # After the build, the entry will have been renamed to "`features/org.q.devzuz.feature_0.6.0.XXX`" where "XXX" is the build time/date.
+ # Do the same for "`*.q.dep`". It will end up under "`Optional`".
+
 = Making a release =
 
  * change all versions x.y.z.qualifier to x2.y2.z2.qualifier, where x2.y2.z2 is the new version to release
