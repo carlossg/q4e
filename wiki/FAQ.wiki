@@ -43,8 +43,11 @@ You can also check a [http://docs.codehaus.org/display/MAVENUSER/Eclipse+Integra
 == Can I run Maven 2.0.x or a different Maven installation with Q? ==
 
 No. Q4E runs Maven in process, not forking a new jvm, so it uses the libraries included in Q4E.
+
 Why? performance, event and error handling, simplicity... 
+
 For instance, if you have a Maven project open in Eclipse but not installed in your repository Q4E will work wth it from the Eclispe workspace because we can intercept the calls in the Maven libraries.
+
 Another example, if your build fails with any error we can build a meaningful message and add an error marker to Eclipse without having to parse the Maven standard and error output and figuring out what went wrong.
 
 
