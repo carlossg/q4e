@@ -1,5 +1,5 @@
 #summary New and Noteworthy features in 0.5.0
-#labels Phase-Support
+#labels Phase-Support,Featured
 
 This is the list of the most important changes made for the 0.5.0 release.
 
