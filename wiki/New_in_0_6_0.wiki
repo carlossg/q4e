@@ -1,0 +1,9 @@
+#summary New and Noteworthy features in 0.6.0
+#labels Featured
+
+
+This is the list of the most important changes made for the 0.6.0 release.
+
+For a complete list, check the [Status] page. 
+
+ * WTP support, see the [http://www.screencast.com/users/amuino/folders/Jing/media/5af1cc9a-a6dd-4571-be54-c471a0de9377 demo video]
