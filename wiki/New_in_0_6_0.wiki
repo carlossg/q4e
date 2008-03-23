@@ -6,4 +6,4 @@ This is the list of the most important changes made for the 0.6.0 release.
 
 For a complete list, check the [Status] page. 
 
- * [http://www.eclipse.org/webtools/ Web Tools Platform (WTP)] support, see the [http://personales.ya.com/abelmuino/q4e-wtp.swf demo video]
+ * [http://www.eclipse.org/webtools/ Web Tools Platform (WTP)] support, see the [http://joakim.erdfelt.com/q4e/q4e-wtp.swf demo video]
