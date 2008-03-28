@@ -50,6 +50,24 @@ For instance, if you have a Maven project open in Eclipse but not installed in y
 
 Another example, if your build fails with any error we can build a meaningful message and add an error marker to Eclipse without having to parse the Maven standard and error output and figuring out what went wrong.
 
+== Resources folders are not created as source folders when importing/enabling Maven 2 projects ==
+
+It is actually by design.  In version 0.5.0 functionality was added so
+that Q4E uses Maven itself to perform the processing of resources.
+This allows include/exclude elements and property replacement
+filtering to be performed.
+
+Whenever you change the POM resource
+configuration, do a clean/manual build, or modify a resource that is
+matched by the resource includes in the POM Q4E will invoke the Maven
+resources:resources or resources:testResources goals as appropriate.
+
+If you look at the Maven Events view you should be able to see this
+process happening. There is also some work in progress to allow other
+plugins bound to the process-resources and process-test-resources
+phases to operate, so things like build numbering, ant scripts that
+copy resources, etc, work.
+
 
 == Why the name Q? ==
 
