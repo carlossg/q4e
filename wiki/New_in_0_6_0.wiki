@@ -6,6 +6,7 @@ This is the list of the most important changes made for the 0.6.0 release.
 
 For a complete list, check the [Status] page. 
 
+ * Welcome Mike Poindexter as a new q4e committer.
  * [http://www.eclipse.org/webtools/ Web Tools Platform (WTP)] support, see the [http://joakim.erdfelt.com/q4e/q4e-wtp.swf demo video]
  * Ability to choose which goals get executed during the incremental build.
  * Profile view displays the available and enabled profiles.
