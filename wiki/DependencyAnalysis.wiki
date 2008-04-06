@@ -2,7 +2,7 @@
 
 = Introduction =
 
-The Analyse Dependencies view shows a tree view of a project's direct and transitive dependencies, and locating them easily in the tree.  This is often useful in debugging common dependency problems.  In addition it also provides access to some advanced dependency management features.
+The Analyse Dependencies view shows a tree view of a project's direct and transitive dependencies which can be used in debugging common dependency problems.  In addition it also provides some advanced dependency management features.
 
 = Debugging Features =
 
