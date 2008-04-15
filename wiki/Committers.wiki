@@ -13,7 +13,7 @@ My name is Carlos Sanchez, I'm from [http://en.wikipedia.org/wiki/A_Coru%C3%B1a 
 I'm a Software Developer at Exist Global Inc. and currently residing in Cebu City,
 Philippines. Software development has been my passion ever since I saw a source code
 printout of a qbasic software my older sister wrote. Right now, am dabbling in eclipse
-plugin development ( for q4e ) and GWT. Link me [http://www.linkedin.com/pub/2/603/499 linked-in profile].
+plugin development ( for q4e ) and GWT. View more about me here [http://www.linkedin.com/pub/2/603/499 linked-in profile].
 
 == Abel Muiño ==
 
