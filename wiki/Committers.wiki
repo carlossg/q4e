@@ -8,12 +8,12 @@ Committers are listed in by join date.
 
 My name is Carlos Sanchez, I'm from [http://en.wikipedia.org/wiki/A_Coru%C3%B1a A Coruña], Spain where I studied Computer Engineering. I've been involved in the Open Source for several years at the Apache Software Foundation and other projects. Currently I spend most of the year in Los Angeles, CA.
 
-== Erle Mantos ==
+== Erle Czar Mantos ==
 
-Senior Software Engineer at Exist Global Inc.
-  * Currently involved in the design and development of an open-source project called
-q4e which aims to integrate maven with the Eclipse IDE.
-  * Previously involved in the development of an open-source network management and monitoring application called Livetribe. 
+I'm a Software Developer at Exist Global Inc. and currently residing in Cebu City,
+Philippines. Software development has been my passion ever since I saw a source code
+printout of a qbasic software my older sister wrote. Right now, am dabbling in eclipse
+plugin development ( for q4e ) and GWT. Link me [http://www.linkedin.com/pub/2/603/499 linked-in profile].
 
 == Abel Muiño ==
 
