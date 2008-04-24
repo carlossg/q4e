@@ -60,4 +60,27 @@ http://q4e.googlecode.com/svn/wiki/img/DependencyAnalysis/exclude-all-dialog.gif
 
 = Extensibility =
 
-The Analyse Dependency view provides an extension point `org.devzuz.q.dependency.analysis.selection`, which allows other plugins access to the maven project and current set of selected dependency items from the view.  This is used to provide the Force Version and Exclude All functions, but can also be used to provide other functionality.
+The dependency analysis view exposes the Artifact, Version and Instance objects for extension.  Providing a context menu item for these items involves:
+
+  * Add an `objectContribution` entry to the `org.eclipse.ui.popupMenus` eclipse extension point.
+  * The `objectClass` should be one of:
+    * `org.devzuz.q.maven.dependency.analysis.model.Artifact`
+    * `org.devzuz.q.maven.dependency.analysis.model.Version`
+    * `org.devzuz.q.maven.dependency.analysis.model.Interface`
+  * The `action.class` must extend `org.eclipse.ui.IObjectActionDelegate`
+  * The action class must implement the selectionChanged method and keep track of the selection as per below:  
+{{{
+    public void selectionChanged( IAction action, ISelection selection )
+    {
+        if ( selection instanceof IStructuredSelection )
+        {
+            this.selection = (IStructuredSelection) selection;
+        }
+    }
+}}}
+  * The selected items can be accessed from the IStructuredSelection object
+  * The action class must use the interfaces defined in `org.devzuz.q.maven.dependency.analysis.extension` as the model objects are not available externally.  This is by design, so prefer adding functionality to the interfaces to making the model classes accessable outside the dependency analysis bundle
+  
+== Extensability Examples ==
+
+Examples of how to declare extensions can be found in the [http://code.google.com/p/q4e/source/browse/trunk/plugins/maven/dependency-analysis/plugin.xml plugin.xml].  Examples of the actions can be found at [http://code.google.com/p/q4e/source/browse/trunk/plugins/maven/dependency-analysis/src/main/java/org/devzuz/q/maven/dependency/analysis/actions/ExcludeAllAction.java Exclude All Action] and [http://code.google.com/p/q4e/source/browse/trunk/plugins/maven/dependency-analysis/src/main/java/org/devzuz/q/maven/dependency/analysis/actions/ForceVersionAction.java Force Version Action].
