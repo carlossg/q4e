@@ -1,0 +1,15 @@
+#summary New and Noteworthy features in 0.7.0
+#labels Featured
+
+
+This is the list of the most important changes made for the 0.7.0 release.
+
+For a complete list, check the [Status] page. 
+
+Features in Q for Eclipse *core*:
+ * Open artifact search framework.
+ * GroupId, PackageId and Version proposals on the XML-based pom editor.
+ * Profile activation/deactivation through the profile view.
+
+On the *WTP* front:
+ * Automatic synchronization of J2EE project dependencies from maven dependencies for war projects.
