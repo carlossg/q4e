@@ -11,18 +11,26 @@ For a complete list, check the [Status] page.
 == Maven suggestions in the XML editor ==
   When editing `pom.xml` files, values for the !GroupId, !PackageId and Version tags when adding a dependency are available.
 
+  http://q4e.googlecode.com/svn/wiki/img/new070/pomXmlSuggestion.png
+
   This feature uses the Open Artifact Search Framework outlined below.
 
 == Always updated dependencies ==
   No need to `mvn install` the dependencies on the workspace when running maven goals. The most current version is always used.
+
+  http://q4e.googlecode.com/svn/wiki/img/new070/dependencyPackaging.png
 
   This means that you can modify a project on your workspace and use it in the surefire tests of a different one depending on it. Instantly. 
 
 == Profile activation/deactivation == 
   The profile view allows for quickly enabling and disabling profiles when running maven.
 
+  http://q4e.googlecode.com/svn/wiki/img/new070/profilesView.png
+
 == Open Artifact Search Framework ==
   New extension points allow third parties to develop and register search engines for their indexing solution.
+
+  http://q4e.googlecode.com/svn/wiki/img/new070/searchEngines.png
 
   Several implementations are bundled with the install so you can use it out of the box.
 
@@ -31,4 +39,6 @@ For a complete list, check the [Status] page.
 == J2EE Project Dependencies management ==
   Automatic synchronization of J2EE project dependencies from maven dependencies for war projects.
 
-  All your dependencies in the workspace will be available when running the project on a J2EE server. No more `ClassNotFoundException` for you.
+  http://q4e.googlecode.com/svn/wiki/img/new070/j2eeDependencies.png
+
+  All your dependencies in the workspace will be available when running the project on a J2EE server.
