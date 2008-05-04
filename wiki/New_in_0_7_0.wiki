@@ -10,6 +10,7 @@ Features in Q for Eclipse *core*:
  * Open artifact search framework.
  * !GroupId, !PackageId and Version proposals on the XML-based pom editor.
  * Profile activation/deactivation through the profile view.
+ * No need to `mvn install` the dependencies on the workspace when running maven goals. The most current version is always used.
 
 On the *WTP* front:
  * Automatic synchronization of J2EE project dependencies from maven dependencies for war projects.
