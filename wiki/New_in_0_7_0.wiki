@@ -6,11 +6,29 @@ This is the list of the most important changes made for the 0.7.0 release.
 
 For a complete list, check the [Status] page. 
 
-Features in Q for Eclipse *core*:
- * Open artifact search framework.
- * !GroupId, !PackageId and Version proposals on the XML-based pom editor.
- * Profile activation/deactivation through the profile view.
- * No need to `mvn install` the dependencies on the workspace when running maven goals. The most current version is always used.
+= Features in Q for Eclipse *core* =
 
-On the *WTP* front:
- * Automatic synchronization of J2EE project dependencies from maven dependencies for war projects.
+== Maven suggestions in the XML editor ==
+  When editing `pom.xml` files, values for the !GroupId, !PackageId and Version tags when adding a dependency are available.
+
+  This feature uses the Open Artifact Search Framework outlined below.
+
+== Always updated dependencies ==
+  No need to `mvn install` the dependencies on the workspace when running maven goals. The most current version is always used.
+
+  This means that you can modify a project on your workspace and use it in the surefire tests of a different one depending on it. Instantly. 
+
+== Profile activation/deactivation == 
+  The profile view allows for quickly enabling and disabling profiles when running maven.
+
+== Open Artifact Search Framework ==
+  New extension points allow third parties to develop and register search engines for their indexing solution.
+
+  Several implementations are bundled with the install so you can use it out of the box.
+
+= WTP support =
+
+== J2EE Project Dependencies management ==
+  Automatic synchronization of J2EE project dependencies from maven dependencies for war projects.
+
+  All your dependencies in the workspace will be available when running the project on a J2EE server. No more `ClassNotFoundException` for you.
