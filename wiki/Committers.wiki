@@ -42,6 +42,10 @@ I've always found the Eclipse architecture, particularly how it's designed to be
 
 At work we have ~20 interdependent Maven projects that we've just migrated from Maven 1.x to Maven 2, so when I was looking for an Eclipse plugin I tried Q4E and found it was quite helpful.  I'm looking forward to helping Q4E move forward so I spend less time worrying about build issues at work (and hopefully everyone at work can stop asking me questions about Q4E when anything goes wrong :-) )
 
+== Allan G. Ramirez ==
+
+I'm a junior Software Developer in Exist Quest Inc. here in Cebu Philippines. I just received my Computer Engineering degree last year. Just like Erle, programming is my passion. I used to practice web app especially at home. But when I bumped unto q4e and eclipse, I then enjoyed the beauty of open source and spent most of my time on it because these guys are so cool and supportive.
+
 = Supporting companies =
 
 [http://www.exist.com http://www.exist.com/images/exist_logo.jpg] 
