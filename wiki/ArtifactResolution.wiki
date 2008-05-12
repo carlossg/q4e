@@ -28,6 +28,8 @@ In few words... if you need to execute a goal on any project, use _Maven 2 > Exe
 
 Not every maven mojo supports running from the workspace.
 
-Most notably, plug-ins that fork execution and/or require the presence of jar files will fail.
+~~Most notably, plug-ins that fork execution and/or require the presence of jar files will fail.~~
 
-Here's were your feedback is needed. We need to identify the plug-ins most often used from q4e so we can set up priorities and add the required support (in q4e or, if possible, in the plug-in).
+Starting in 0.7.0, Q for Eclipse will automatically package the workspace artifacts when the plug-ins involved in the current build require it. Note that nothing is installed in the repository at this point.
+
+We would be glad to work with maven plug-in authors to help them support working from the workspace with Q for Eclipse. 
