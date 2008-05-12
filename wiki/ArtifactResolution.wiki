@@ -1,10 +1,10 @@
 #summary Resolving maven artifacts from the workspace
-#labels Phase-Support
+#labels Phase-Support,Audience-Users
 = Introduction =
 
-Resolving artifacts from the workspace allow you to works on two levels:
+Resolving artifacts from the workspace allow you to work on two levels:
   # Compiling with eclipse: if you have a dependency on an artifact on your workspace and using eclipse, the compiler will use your project to satisfy the dependencies.
-  # Using maven: if you launch maven goals from q4e, the artifacts are also reolved from the workspace, without using the local or remote repositories.
+  # Using maven: if you launch maven goals from q4e, the artifacts are also resolved from the workspace, without using the local or remote repositories. From 0.7.0, this includes [DevelopingMojos resolving maven plug-ins from the workspace].
 
 == Compiling with eclipse ==
 
