@@ -34,6 +34,11 @@ For a complete list, check the [Status] page.
 
   Several implementations are bundled with the install so you can use it out of the box.
 
+== [DevelopingMojos Resolve Maven Mojos from the Workspace] ==
+  It is possible to have maven mojo projects on the workspace and haven them used by q4e.
+
+
+
 = WTP support =
 
 == J2EE Project Dependencies management ==
