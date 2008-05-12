@@ -5,7 +5,7 @@
 
 Q for Eclipse can help you develop traditional java applications, as well as [http://joakim.erdfelt.com/q4e/q4e-wtp.swf web applications using WTP], by handling the resolution of dependencies for your project, no matter if they are local or remote.
 
-This page explaing how to achieve the same result when using or developing maven plug-ins.
+This page explains how to achieve the same result when using or developing maven plug-ins.
 
 
 = The short answer =
@@ -21,6 +21,8 @@ You'll need at least two projects: one for the mojo and another for testing.
 == The mojo project ==
 
 For this example, just create a new maven project `mojodev` using the `maven-archetype-mojo` archetype. Keep the default values for everything.
+
+  http://q4e.googlecode.com/svn/wiki/img/DevelopingMojos/NewMojoProject.png
 
 This archetype creates a `touch` goal which creates a file on the target folder named `touch.txt` and with the same string as the contents.
 
@@ -60,6 +62,8 @@ Any maven goal involving the `process-resources` phase you should run now (for e
 
 Go to the _Project_ menu and _Clean..._ the `mojotest` project.
 
+  http://q4e.googlecode.com/svn/wiki/img/DevelopingMojos/GeneratedFiles.png
+
 There are two things you should notice in the _Package Explorer_ after cleaning.
   # The mojo project has been packaged for you
   # A new file `touch.txt` exists on `mojotest/target` 
@@ -70,12 +74,20 @@ Just for having fun, lets change the contents of the generated `touch.xml` file.
 
 Open also `MyMojo.java` in project `mojodev` and change line 61. For example, add the current date to the message.
 
-To give it a twist, now right click on `mojotest` and choose _Maven 2 > Package Artifact_. And _voilà!_... the contents of `touch.txt` have changed to include the date.
+  http://q4e.googlecode.com/svn/wiki/img/DevelopingMojos/EditMyMojo.png
+
+To give it a twist, now right click on `mojotest` and choose _Maven 2 > Package Artifact_.
+
+  http://q4e.googlecode.com/svn/wiki/img/DevelopingMojos/PackageArtifact.png
+
+And _voilà!_... the contents of `touch.txt` have changed to include the date.
+
+  http://q4e.googlecode.com/svn/wiki/img/DevelopingMojos/ModifiedTouchTxt.png
 
 == Closing remarks ==
 
-In case you are wondering... the same would have happened if you've chosen to clean the project. But it would have been boring! A wizard never uses the same trick twice!
+In case you are wondering... the same would have happened if you've chosen to clean the project. But it would have been boring!
 
-Also, the packaging is not done every time... Q for Eclipse is clever enough to only repackage the project as needed (this is also true for plain old workspace dependencies).
+Another remark worth making is that the packaging only performed when needed (this is also true for plain old workspace dependencies). If the packaged artifact/mojo is up-to-date or is not needed for the current maven run, no time will be lost packaging it.
 
 Enjoy!
