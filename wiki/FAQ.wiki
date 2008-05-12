@@ -1,5 +1,5 @@
 #summary Frequently Asked Questions
-#labels faq,Featured
+#labels faq,Featured,Audience-Users
 
 = Frequently asked questions about Q for Eclipse =
 
@@ -29,16 +29,21 @@ When ready, we can go through the creation review process.
 
 == What are the differences between this plugin and m2eclipse? ==
 
-The objective of this plugin is to be part of the [http://www.eclipse.org Eclipse Foundation], for that reason the license is EPL and we are going to follow the foundation procedures. Thanks to the sponsorship of [http://www.devzuz.com DevZuz], an [http://www.eclipse.org/membership/showMember.php?member_id=824 Eclipse Strategic Developer Member] we are in a good position to achieve this goal. So far Q4E has been proposed as a Eclipse Foundation official project, [http://www.eclipse.org/proposals/iam Eclipse IAM].
+The objective of this Q for Eclipse was to be part of the [http://www.eclipse.org Eclipse Foundation], at a time were m2eclipse was not considering that option. 
 
-Besides the objective, there are technical differences. While m2eclipse shows Maven output in a console, Q is based in events and will show them in an organized way that allows filtering by severity, search,... Functionality like the dependency graph, or creation of new projects using the archetype mechanism are only present in Q.
+We still have that objective and thanks to the sponsorship of [http://www.devzuz.com DevZuz], an [http://www.eclipse.org/membership/showMember.php?member_id=824 Eclipse Strategic Developer Member] we are in a good position to achieve this goal. So far Q4E has been proposed as a Eclipse Foundation official project, [http://www.eclipse.org/proposals/iam Eclipse IAM].
 
-Also it's implemented in several modules with reusability and extension in mind so other people can develop their own plugins taking advantage of the functionality they need (see for instance [http://ramblingabout.wordpress.com/2007/09/02/candy-for-appfuse-will-be-under-extreme-refactoring/ Candy for Appfuse]).
+After the m2eclipse rewrite, most of the architectural differences are blurred, and we are actively seeking to find some common ground in eclipse-maven integration efforts between both plug-ins.
 
 In any case the underlying Maven libraries used for both plugins are the same (the Maven Embedder) and both plugin developers collaborate in its development.
 
-You can also check a [http://docs.codehaus.org/display/MAVENUSER/Eclipse+Integration third-party comparison of m2eclipse and Q4E at Maven User's wiki]
 
+Some technical differences still hold, thought:
+
+ * Q4E is event-oriented.
+ * Q4E uses the maven embedder for every task. We believe that this provides deeper integration and better performance.
+
+You can also check a [http://docs.codehaus.org/display/MAVENUSER/Eclipse+Integration third-party comparison of m2eclipse and Q4E at Maven User's wiki] (any user can add & edit data to the comparison).
 
 == Can I run Maven 2.0.x or a different Maven installation with Q? ==
 
@@ -46,7 +51,7 @@ No. Q4E runs Maven in process, not forking a new jvm, so it uses the libraries i
 
 Why? performance, event and error handling, simplicity... 
 
-For instance, if you have a Maven project open in Eclipse but not installed in your repository Q4E will work wth it from the Eclispe workspace because we can intercept the calls in the Maven libraries.
+For instance, if you have a Maven project open in Eclipse but not installed in your repository Q4E will work with it from the Eclispe workspace because we can intercept the calls in the Maven libraries.
 
 Another example, if your build fails with any error we can build a meaningful message and add an error marker to Eclipse without having to parse the Maven standard and error output and figuring out what went wrong.
 
