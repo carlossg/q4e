@@ -46,6 +46,10 @@ At work we have ~20 interdependent Maven projects that we've just migrated from 
 
 I'm a junior Software Developer in Exist Quest Inc. here in Cebu Philippines. I just received my Computer Engineering degree last year. Just like Erle, programming is my passion. I used to practice web app especially at home. But when I bumped unto q4e and eclipse, I then enjoyed the beauty of open source and spent most of my time on it because these guys are so cool and supportive.
 
+== Korina K. Cordero ==
+
+I'm a Software Developer at Exist Global.  I just started Java programming 2 years ago.  Before that, I was a Software Engineer at NEC Telecom Software Philippines for 5 years, with C++ as my major programming language.  I've been staring at computer monitors for hours, for the past 19 years. ;)
+
 = Supporting companies =
 
 [http://www.exist.com http://www.exist.com/images/exist_logo.jpg] 
