@@ -37,7 +37,13 @@ For a complete list, check the [Status] page.
 == [DevelopingMojos Resolve Maven Mojos from the Workspace] ==
   It is possible to have maven mojo projects on the workspace and haven them used by q4e.
 
+== [Archetype2ArchetypeProvider New Archetype Provider for the Archetype Catalog format] ==
+  The archetype catalog xml format used by the archetype 2.0 plug-in can now be used with q4e for selecting an archetype in the [NewMavenProject New Maven Project wizard].
 
+  This format is used to register an internal catalog by default, which replaces the wiki provider (although it can still be manually added).
+
+== Upgraded embedder ==
+  The new embedder contains support for new maven features (like the [http://docs.codehaus.org/display/MAVEN/Toolchains toolchain] support). And don't forget about the bug fixes.
 
 = WTP support =
 
