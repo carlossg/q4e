@@ -1,0 +1,8 @@
+#summary Wizard for maven project creation based on archetypes.
+#labels Phase-Support,Audience-Users
+
+= Introduction =
+
+_To be done_
+
+You can help by suggesting content on the mailing lists.
