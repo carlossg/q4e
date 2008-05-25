@@ -1,15 +1,20 @@
 #summary How to create a new archetype list.
-#labels Phase-Support
+#labels Phase-Support,Audience-Users
 
 = Introduction =
 
-Q4E comes configured with a default archetype list provider (the _Wiki Provider_), which uses the contents of [http://docs.codehaus.org/display/MAVENUSER/Archetypes+List this wiki page] (more precisely, [http://docs.codehaus.org/pages/viewpagesrc.action?pageId=48400 the source form] of the page) to create the list of available archetypes presented by the new maven project wizard.
+Q4E comes configured with two default archetype list providers: the _Wiki Provider_ and the _Archetype 2.0 Catalog Provider_.
 
-The _Wiki Provider_ can be configured for accessing other URLs, so you can provide your own list of archetypes. Accepted URL protocols are `http://`, `https://` and also `file://` (so you can have your local archetype list).
+This document describes the use of the wiki provider to parse custom archetype lists based on regular expressions.
+
+However, if you feel comfortable with xml formats, it is recommended that you use the [Archetype2ArchetypeProvider Archetype 2.0 Catalog Provider] to define your custom archetype lists.
 
 = The default _Wiki Provider_ =
 
-When you install q4e, it will configure the default archetype list provider described in the [#Introduction].
+When creating a new _Wiki Provider_, it will provide default values for using the contents of [http://docs.codehaus.org/display/MAVENUSER/Archetypes+List this wiki page] (more precisely, [http://docs.codehaus.org/pages/viewpagesrc.action?pageId=48400 the source form] of the page) to create the list of available archetypes presented by the new maven project wizard.
+
+The _Wiki Provider_ can be configured for accessing other URLs, so you can provide your own list of archetypes. Accepted URL protocols are `http://`, `https://` and also `file://` (so you can have your local archetype list).
+
 
 This provider understands files with the following format:
 
