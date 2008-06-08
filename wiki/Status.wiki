@@ -1,9 +1,15 @@
 #summary Quick links to follow the development status.
 #labels Phase-Implementation
 
+
+= 0.8.0 =
+  * [http://code.google.com/p/q4e/issues/list?can=2&q=milestone%3A0.8.0&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Pending tasks]
+  * [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.8.0+status%3AFixed%2CVerified&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Finished tasks]
+
 = 0.7.0 =
-  * [http://code.google.com/p/q4e/issues/list?can=2&q=milestone%3A0.7.0&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Pending tasks]
-  * [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.7.0+status%3AFixed%2CVerified&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Finished tasks]
+Released on June 2nd, 2008
+
+  * [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.7.0+status%3AFixed%2CVerified&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Changelog]
 
 = 0.6.0 =
 Released on April 14, 2008.
