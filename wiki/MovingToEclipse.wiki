@@ -4,3 +4,19 @@
 = IP process =
 
 == Dependencies ==
+
+|| *Dependency* || *In Orbit?* || *Needs upgrade?* ||
+|| com.jcraft.jsch_0.1.31.jar || Y || N ||
+|| org.apache.commons.cli_1.0.0.v200709131616.jar || Y || Y ||
+|| org.apache.commons.collections_3.2.0.jar || Y || Y ||
+|| org.apache.commons.lang_2.1.0.v200709131643.jar || Y || Y ||
+|| org.apache.maven.embedder_2.1.0.659801.jar || N || ||
+|| org.apache.maven.shared.dependency.tree_1.1.0.v200803012119.jar || N || ||
+|| org.apache.xerces_2.8.0.v200705301630.jar || Y || Y ||
+|| org.apache.xml.resolver_1.1.0.v200705310020.jar || Y || Y ||
+|| org.aspectj.runtime_1.5.4.200705211336.jar || Y || N ||
+|| org.w3c.tidy_0.0.0.4aug2000r7-dev-200711190855.jar || N || ||
+
+Several Orbit bundles need to be upgraded to match the downloads from Orbit or make sure they were available in previous release of Orbit
+
+[http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/ Orbit downloads]
