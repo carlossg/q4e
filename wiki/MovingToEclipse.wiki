@@ -1,0 +1,6 @@
+#summary Steps necessary to migrate the project to the Eclipse Foundation
+#labels Audience-Developers
+
+= IP process =
+
+== Dependencies ==
