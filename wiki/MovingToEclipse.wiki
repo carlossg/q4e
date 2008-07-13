@@ -1,5 +1,5 @@
+#summary Steps necessary to migrate the project to the Eclipse Foundation
 #labels Audience-Developers
-summary Steps necessary to migrate the project to the Eclipse Foundation
 
 = IP process =
 
@@ -40,6 +40,10 @@ summary Steps necessary to migrate the project to the Eclipse Foundation
 || org.apache.maven.wagon:wagon-ssh-common:jar:1.0-beta-2:compile || N || ||
 || org.apache.maven.wagon:wagon-ssh-external:jar:1.0-beta-2:compile || N || ||
 || org.apache.maven.wagon:wagon-file:jar:1.0-beta-2:compile || N || ||
+|| ./plugins/maven/wizard/commons-io-1.3.1.jar || Y || Y ||
+|| ./plugins/thirdparty/org.apache.lucene/lucene-core-2.3.1.jar || N ||  ||
+|| ./plugins/thirdparty/org.dom4j/dom4j-1.6.1.jar || N ||  ||
+|| ./plugins/thirdparty/org.apache.maven.shared.dependency.tree/lib/maven-dependency-tree-1.1.jar || N ||  ||
 
 Several Orbit bundles need to be upgraded to match the downloads from Orbit or make sure they were available in previous release of Orbit
 
