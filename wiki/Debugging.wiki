@@ -9,7 +9,7 @@ This is described in WorkingWithSources.
 
 Q4e plug-ins can generate traces to standard out when the traces are enabled.
 
-This document describes how to enable tracing in a run-time workbench, what kind of traces will generate each supported trace option and how to implement traces in other plug-ins.
+This document describes how to enable tracing for q4e, what kind of traces will generate each supported trace option and how to implement traces in other plug-ins.
 
 For a general introduction to tracing in eclipse, you can refer to the [http://help.eclipse.org/help33/index.jsp?topic=/org.eclipse.pde.doc.user/guide/tools/launchers/tracing.htm eclipse help] or this [http://ramblingabout.wordpress.com/2007/10/20/tracing-plug-ins-in-eclipse/ blog entry].
 
@@ -17,7 +17,40 @@ You can use [http://groups.google.com/group/q4e-dev/browse_thread/thread/eb0a9aa
 
 = Usage =
 
-To enable tracing when starting a new run-time workbench, two changes are needed in the launch configuration:
+== I'm a plug-in user ==
+
+If you're using q4e and experiencing problems (or just curious about the inner workings of q4e), you can obtain extra information by enabling traces in your Eclipse Workbench.
+
+First, you'll need to pass an additional parameter (`-debug`) to eclipse when launching, indicating the file that Eclipse should use to know which traces are to be enabled:
+
+{{{
+eclipse.exe -debug c:\eclipse\iam.debug
+}}}
+
+The contents of the `iam.debug` file will look like this:
+{{{
+# Debugging options for the Q4E/IAM plugin
+
+# Global trace switch for this plug-in. This option must be enabled if tracing this plug-in is desired.
+org.devzuz.q.maven.jdt.core/debug = true
+
+# Trace for events related to the resource listener.
+org.devzuz.q.maven.jdt.core/debug/jdtResourceListener = true
+
+# Trace for events related to classpath updates.
+org.devzuz.q.maven.jdt.core/debug/classpathUpdate = true
+
+#  This switch enables/disables time information in every other trace.
+org.devzuz.q.maven.jdt.core/debug/timing = true
+}}}
+
+This format is similar to the `.options` files described below. You can use the following sections for a reference of which traces can be specified.
+
+== I'm a plug-in developer ==
+
+If you are a plug-in developer, you would probably prefer to be able to enable traces in a more dynamic way through the run-time workbench launch configurations.
+
+To enable tracing for this scenario, two changes are needed in the launch configuration:
 
   # Add the `-debug` flag the program arguments. This is the master switch for enabling traces.
     * [http://q4e.googlecode.com/svn/wiki/img/trace/trace-commandline.png]
