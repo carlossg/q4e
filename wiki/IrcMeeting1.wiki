@@ -6,6 +6,7 @@
   * Abel Muiño
   * Allan Ramirez
   * Jake Pezaro
+  * Erle Mantos
 
 = Topic =
 
