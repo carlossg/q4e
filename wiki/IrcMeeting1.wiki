@@ -4,7 +4,7 @@
 = Participants =
 
   * Abel Muiño
-  * Allan Rodriguez
+  * Allan Ramirez
   * Jake Pezaro
 
 = Topic =
