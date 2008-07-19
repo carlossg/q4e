@@ -25,6 +25,6 @@
  * Cleaning the embedder
 
 Lines of work:
- * Don't lock the workspace, lock on maven embedder instead [http://code.google.com/p/q4e/issues/detail?id=509 Issue 509]
- * Set up a performance regression test
- * Develop a pom diff generator to optimize the processing of changes
+ * Don't lock the workspace, lock on maven embedder instead: [http://code.google.com/p/q4e/issues/detail?id=509 Issue 509]
+ * Set up a performance regression test: [http://code.google.com/p/q4e/issues/detail?id=509 Issue 510]
+ * Develop a pom diff generator to optimize the processing of changes: [http://code.google.com/p/q4e/issues/detail?id=508 Issue 508]
