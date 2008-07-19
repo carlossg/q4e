@@ -1,0 +1,30 @@
+#summary Summary of the IRC meeting held on July 19, 2008
+#labels Audience-Developers
+
+= Participants =
+
+  * Abel Muiño
+  * Allan Rodriguez
+  * Jake Pezaro
+
+= Topic =
+
+== Times and Dates for IRC meetings ==
+
+  * Times should  "rotate" so timezones are right for people in just 2 locations (America & Europe, Europe & Asia, Asia & America)
+
+== Releasing 0.8.0 ==
+
+  * Wait for all "significant contributions" to be merged (currently XML editing and synchronization code in [http://code.google.com/p/q4e/source/browse/branches/forms-xml-editor-sync/ the forms-xml-editor-sync branch] )
+  * Sumbit of CQ's to eclipse for review is currently broken (see [https://bugs.eclipse.org/bugs/show_bug.cgi?id=240999 issue 240999]) 
+
+== Performance ==
+ Some problems with the perceived and real performsnce
+ * Workspace locking
+ * Work done by the incremental builder
+ * Cleaning the embedder
+
+Lines of work:
+ * Don't lock the workspace, lock on maven embedder instead
+ * Set up a performance regression test
+ * Develop a pom diff generator to optimize the processing of changes
