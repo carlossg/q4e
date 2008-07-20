@@ -11,6 +11,12 @@ This environment properties are used to refer to system-dependant locations.
 || `$TEST_BASE` || base folder where the test will be run ||
 || `$ECLIPSE_TEST_HOME` || base folder where eclipse is installed (with q4e installed) ||
 
+== Collecting results ==
+
+Please use this [http://spreadsheets.google.com/ccc?key=pVVP0XaCIaduJQa7RKloQAw&inv=q4e-dev@googlegroups.com&t=2349835949762579839&guest Google Spreadsheet] for entering the results.
+
+You must be logged in to Google for using it.
+
 == Set up ==
 
 These steps are to be performed just once.
@@ -69,6 +75,8 @@ This is required to make sure that the code imported into eclipse
 does not have the eclipse generated files (`.classpath`, `.project`, `.settings/`).
 
 {{{
+cd $TEST_BASE
+rm -rf cocoon-test
 cp -r cocoon-r678123 cocoon-test
 }}}
 
@@ -80,8 +88,13 @@ rm -rf $TEST_BASE/workspace
 
 === Launch Eclipse with traces enabled ===
 
+*Notes*:
+
+  * Increase memory to 1024 megabytes to avoid measuring gc collection. It will also be interesting to compare the results with other memory sizes.
+  * Set `MaxPermSize` to the same value used by eclipse-jee in Ganymede.
+
 {{{
-$ECLIPSE_TEST_HOME/eclipse -debug $TEST_BASE/trace.options -data $TEST_BASE/workspace -vmargs -Xmx512m > trace.log
+$ECLIPSE_TEST_HOME/eclipse -debug $TEST_BASE/trace.options -data $TEST_BASE/workspace -vmargs -Xmx1024m -XX:MaxPermSize=256m > trace-`date +%Y%m%d-%H%M%S`.log
 }}}
 
 Now configure your environment for launching the tests:
@@ -114,3 +127,48 @@ This is a partial example of the generated output.
   * The `[PROJECT_IMPORT]` lines allow measuring the time used in importing the projects.
   * Then, each project classpath is computed.
   * Finally, the projects are built.
+
+=== Time used in the import ====
+
+Get the start and end of the project import.
+{{{
+grep PROJECT_IMPORT trace-20080720-215653.log | cut -c -80
+}}}
+
+{{{
+22:37:35.664  [PROJECT_IMPORT] Starting [org.apache.maven.model.Model@baba00:/Us
+22:48:14.165  [PROJECT_IMPORT] Done [org.apache.maven.model.Model@baba00:/Users/
+}}}
+
+Total import time: 10m 29s
+
+=== Time until last classpath update ===
+Get the last update:
+{{{
+grep CLASSPATH_UPDATE trace-20080720-215653.log | cut -c -80 | tail -l 1 
+}}}
+
+{{{
+23:43:30.714  [CLASSPATH_UPDATE] Refreshing classpath for maven project cocoon-2
+}}}
+
+Total classpath update time: 55m 16s (from end of project import) 
+
+=== Time used until last incremental build ===
+
+Get the last build event.
+
+{{{
+grep MAVEN_INCREMENTAL_BUILDER trace-20080720-215653.log | cut -c -80 | tail -l 1 
+}}}
+
+{{{
+23:49:24.217  [MAVEN_INCREMENTAL_BUILDER] Processing resources on P/cocoon-webap
+}}}
+
+Total build time: 05m 54s (from last classpath update)
+
+=== Total time ===
+
+Sum of the above measures: 1h 11m 49s.
+
