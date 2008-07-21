@@ -145,7 +145,7 @@ Total import time: 10m 29s
 === Time until last classpath update ===
 Get the last update:
 {{{
-grep CLASSPATH_UPDATE trace-20080720-215653.log | cut -c -80 | tail -l 1 
+grep CLASSPATH_UPDATE trace-20080720-215653.log | cut -c -80 | tail -n 1 
 }}}
 
 {{{
@@ -159,7 +159,7 @@ Total classpath update time: 55m 16s (from end of project import)
 Get the last build event.
 
 {{{
-grep MAVEN_INCREMENTAL_BUILDER trace-20080720-215653.log | cut -c -80 | tail -l 1 
+grep MAVEN_INCREMENTAL_BUILDER trace-20080720-215653.log | cut -c -80 | tail -n 1 
 }}}
 
 {{{
@@ -171,4 +171,3 @@ Total build time: 05m 54s (from last classpath update)
 === Total time ===
 
 Sum of the above measures: 1h 11m 49s.
-
