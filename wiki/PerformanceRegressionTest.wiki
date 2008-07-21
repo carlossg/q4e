@@ -171,3 +171,7 @@ Total build time: 05m 54s (from last classpath update)
 === Total time ===
 
 Sum of the above measures: 1h 11m 49s.
+
+'''IMPORTANT NOTE:''' Take these numbers with a grain of salt, they are not accurate since CLASSPATH_UPDATEs and MAVEN_INCREMENTAL_BUILDERs are run in burst (i.e. the last CLASSPATH_UPDATE comes after several MAVEN_INCREMENTAL_BUILDER events).
+
+Review the generated logs to get some insight into what's really going on.
