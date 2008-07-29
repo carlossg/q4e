@@ -5,15 +5,15 @@
 
 == Dependencies as of July 12 2008 ==
 
-|| *Dependency* || *In Orbit?* || *Needs upgrade?* || *CQ* ||
-|| com.jcraft.jsch_0.1.31.jar || Y || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2203 2203] ||
-|| org.apache.commons.cli_1.0.0.v200709131616.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.cli_1.0.0.v20080604-1500.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1590 1590]  ||
-|| org.apache.commons.collections_3.2.0.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.collections_3.2.0.v200803061811.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1909 1909] ||
-|| org.apache.commons.lang_2.1.0.v200709131643.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.lang_2.1.0.v200803061811.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1595 1595] ||
+|| *Dependency* || *In Orbit?* || *Needs upgrade?* || *CQ* || requested? ||
+|| com.jcraft.jsch_0.1.31.jar || Y || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2203 2203] || Y ||
+|| org.apache.commons.cli_1.0.0.v200709131616.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.cli_1.0.0.v20080604-1500.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1590 1590]  || Y ||
+|| org.apache.commons.collections_3.2.0.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.collections_3.2.0.v200803061811.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1909 1909] || Y ||
+|| org.apache.commons.lang_2.1.0.v200709131643.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.lang_2.1.0.v200803061811.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1595 1595] || Y ||
 || org.apache.maven.embedder_2.1.0.659801.jar || N || ||
 || org.apache.maven.shared.dependency.tree_1.1.0.v200803012119.jar || N || ||
-|| org.apache.xerces_2.8.0.v200705301630.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2093 2093] ||
-|| org.apache.xml.resolver_1.1.0.v200705310020.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2151 2151] ||
+|| org.apache.xerces_2.8.0.v200705301630.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2093 2093] || Y ||
+|| org.apache.xml.resolver_1.1.0.v200705310020.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2151 2151] || Y ||
 || org.aspectj.runtime_1.5.4.200705211336.jar || Y || N ||
 || org.w3c.tidy_0.0.0.4aug2000r7-dev-200711190855.jar || N || ||
 || org.apache.maven:maven-embedder:jar:2.1-SNAPSHOT:compile || N || ||
