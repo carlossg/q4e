@@ -141,3 +141,19 @@ are identical in different projects. I found no way to tell q4e to use
 project.
 
 (Stefano Bagnara).
+
+== Maven 2 POM Creation Wizard ==
+It would be nice if there was a "Maven 2 POM Creation Wizard" for
+creating an initial pom.xml file:
+File -> New -> Other -> Maven 2 Project -> Maven 2 POM Creation Wizard
+
+Additionally, the "Maven 2" context menu (in Package Explorer) is not
+available unless the project has a pom.xml file. It would be nice if
+the "Maven 2" context menu was available with the "Maven 2 POM
+Creation Wizard" as an option (the only option?).
+
+For exiting Q4E users these features are not a must, but I believe
+that new users will find this a more intuitive way to add Maven
+support to existing Java projects.
+
+(Patrick Crocker).
