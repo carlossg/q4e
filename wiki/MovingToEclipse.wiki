@@ -14,7 +14,7 @@
 || org.apache.maven.shared.dependency.tree_1.1.0.v200803012119.jar || N || ||
 || org.apache.xerces_2.8.0.v200705301630.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2093 2093] || Y ||
 || org.apache.xml.resolver_1.1.0.v200705310020.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2151 2151] || Y ||
-|| org.aspectj.runtime_1.5.4.200705211336.jar || Y || N ||
+|| org.aspectj.runtime_1.5.4.200705211336.jar || Y || N || || request not needed ||
 || org.w3c.tidy_0.0.0.4aug2000r7-dev-200711190855.jar || N || ||
 || org.apache.maven:maven-embedder:jar:2.1-SNAPSHOT:compile || N || ||
 || org.apache.maven:maven-core:jar:2.1-SNAPSHOT:compile || N || ||
