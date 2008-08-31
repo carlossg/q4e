@@ -37,6 +37,13 @@ svn co https://q4e.googlecode.com/svn/sandbox q4e-sandbox
 
 
 = Set up your Eclipse = 
+
+There are two paths you can follow: develop and test against the same Eclipse install or use a different one for developing and testing.
+
+
+Regardless of which path you choose, you will need to *install PDE on your development Eclipse platform*.
+
+
 == Same Eclipse ==
 
 If you want to use the same eclipse for developing and testing, your first step must be to get all the dependencies installed.
