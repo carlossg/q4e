@@ -3,7 +3,7 @@
 
 = IP process =
 
-== Dependencies as of July 12 2008 ==
+== Dependencies as of July 12 2008 in branch https://q4e.googlecode.com/svn/branches/embedder-upgrade ==
 
 || *Dependency* || *In Orbit?* || *Needs upgrade?* || *CQ* || requested? ||
 || com.jcraft.jsch_0.1.31.jar || Y || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2203 2203] || Y ||
