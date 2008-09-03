@@ -24,7 +24,7 @@
 || org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-9:compile || N || ||
 || org.apache.maven:maven-profile:jar:2.1-SNAPSHOT:compile || N || ||
 || org.apache.maven:maven-model:jar:2.1-SNAPSHOT:compile || N || ||
-|| org.apache.maven.artifact:maven-artifact:jar:3.0-SNAPSHOT:compile || N || ||
+|| org.apache.maven.artifact:maven-artifact:jar:3.0-SNAPSHOT:compile || N || to 3.0-alpha-1 ||
 || org.apache.maven:maven-plugin-api:jar:2.1-SNAPSHOT:compile || N || ||
 || org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-6:compile || N || ||
 || org.codehaus.plexus:plexus-utils:jar:1.5.1:compile || N || ||
