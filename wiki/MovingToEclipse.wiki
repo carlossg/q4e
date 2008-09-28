@@ -5,6 +5,8 @@
 
 == Dependencies as of July 12 2008 in branch https://q4e.googlecode.com/svn/branches/embedder-upgrade ==
 
+There is an *autometed IP log* for Eclipde IAM: http://www.eclipse.org/projects/ip_log.php?projectid=technology.iam
+
 || *Dependency* || *In Orbit?* || *Needs upgrade?* || *CQ* || requested? ||
 || com.jcraft.jsch_0.1.31.jar || Y || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2203 2203] || Y ||
 || org.apache.commons.cli_1.0.0.v200709131616.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.cli_1.0.0.v20080604-1500.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1590 1590]  || Y ||
