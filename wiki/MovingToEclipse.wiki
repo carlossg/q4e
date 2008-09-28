@@ -40,9 +40,9 @@
 || org.apache.maven.wagon:wagon-ssh-common:jar:1.0-beta-2:compile || N || ||
 || org.apache.maven.wagon:wagon-ssh-external:jar:1.0-beta-2:compile || N || ||
 || org.apache.maven.wagon:wagon-file:jar:1.0-beta-2:compile || N || ||
-|| ./plugins/thirdparty/org.apache.lucene/lucene-core-2.3.1.jar || N ||  ||
+|| ./plugins/thirdparty/org.apache.lucene/lucene-core-2.3.2.jar || N || Y ||[https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2725 2725] || Y ||
 || ./plugins/thirdparty/org.dom4j/dom4j-1.6.1.jar || N || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2724 2724] || Y ||
-|| ./plugins/thirdparty/org.apache.maven.shared.dependency.tree/lib/maven-dependency-tree-1.1.jar || N ||  ||
+|| ./plugins/thirdparty/org.apache.maven.shared.dependency.tree/lib/maven-dependency-tree-1.1.jar || N || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2726 2726] || Y ||
 
 Several Orbit bundles need to be upgraded to match the downloads from Orbit or make sure they were available in previous release of Orbit
 
