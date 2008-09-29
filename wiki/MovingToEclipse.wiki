@@ -7,15 +7,14 @@
 
 There is an *autometed IP log* for Eclipde IAM: http://www.eclipse.org/projects/ip_log.php?projectid=technology.iam
 
-|| *Dependency* || *In Orbit?* || *Needs upgrade?* || *CQ* || requested? ||
-|| com.jcraft.jsch_0.1.31.jar || Y || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2203 2203] || Y ||
-|| org.apache.commons.cli_1.0.0.v200709131616.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.cli_1.0.0.v20080604-1500.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1590 1590]  || Y ||
-|| org.apache.commons.collections_3.2.0.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.collections_3.2.0.v200803061811.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1909 1909] || Y ||
-|| org.apache.commons.lang_2.1.0.v200709131643.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.lang_2.1.0.v200803061811.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1595 1595] || Y ||
+|| *Dependency* || *In Orbit?* || *Needs upgrade?* || *CQ* || *Requested?* || *Approved?* (1) ||
+|| com.jcraft.jsch_0.1.31.jar || Y || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2203 2203] || Y || Y ||
+|| org.apache.commons.cli_1.0.0.v200709131616.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.cli_1.0.0.v20080604-1500.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1590 1590]  || Y || Y ||
+|| org.apache.commons.collections_3.2.0.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.collections_3.2.0.v200803061811.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1909 1909] || Y || Y ||
+|| org.apache.commons.lang_2.1.0.v200709131643.jar || Y || [http://download.eclipse.org/tools/orbit/downloads/drops/R20080611105805/bundles/org.apache.commons.lang_2.1.0.v200803061811.jar Y] || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=1595 1595] || Y || Y ||
 || org.apache.maven.embedder_2.1.0.659801.jar || N || ||
-|| org.apache.maven.shared.dependency.tree_1.1.0.v200803012119.jar || N || ||
-|| org.apache.xerces_2.8.0.v200705301630.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2093 2093] || Y ||
-|| org.apache.xml.resolver_1.1.0.v200705310020.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2151 2151] || Y ||
+|| org.apache.xerces_2.8.0.v200705301630.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2093 2093] || Y || Y ||
+|| org.apache.xml.resolver_1.1.0.v200705310020.jar || Y || N (Orbit R200709171314) || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2151 2151] || Y || Y ||
 || org.aspectj.runtime_1.5.4.200705211336.jar || Y || N || || request not needed ||
 || org.w3c.tidy_0.0.0.4aug2000r7-dev-200711190855.jar || N || ||
 || org.apache.maven:maven-embedder:jar:2.1-SNAPSHOT:compile || N || ||
@@ -42,9 +41,11 @@ There is an *autometed IP log* for Eclipde IAM: http://www.eclipse.org/projects/
 || org.apache.maven.wagon:wagon-ssh-common:jar:1.0-beta-2:compile || N || ||
 || org.apache.maven.wagon:wagon-ssh-external:jar:1.0-beta-2:compile || N || ||
 || org.apache.maven.wagon:wagon-file:jar:1.0-beta-2:compile || N || ||
-|| ./plugins/thirdparty/org.apache.lucene/lucene-core-2.3.2.jar || N || Y ||[https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2725 2725] || Y ||
-|| ./plugins/thirdparty/org.dom4j/dom4j-1.6.1.jar || N || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2724 2724] || Y ||
-|| ./plugins/thirdparty/org.apache.maven.shared.dependency.tree/lib/maven-dependency-tree-1.1.jar || N || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2726 2726] || Y ||
+|| ./plugins/thirdparty/org.apache.lucene/lucene-core-2.3.2.jar || N || Y ||[https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2725 2725] || Y || parallel ||
+|| ./plugins/thirdparty/org.dom4j/dom4j-1.6.1.jar || N || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2724 2724] || Y || Y ||
+|| ./plugins/thirdparty/org.apache.maven.shared.dependency.tree/lib/maven-dependency-tree-1.1.jar || N || N || [https://dev.eclipse.org/ipzilla/show_bug.cgi?id=2726 2726] || Y || parallel ||
+
+ * (1) _parallel_ value in the _approved_ column means we're allowed to use it under the [http://wiki.eclipse.org/Development_Resources/HOWTO/Parallel_IP_Process parallel IP process].
 
 Several Orbit bundles need to be upgraded to match the downloads from Orbit or make sure they were available in previous release of Orbit
 
