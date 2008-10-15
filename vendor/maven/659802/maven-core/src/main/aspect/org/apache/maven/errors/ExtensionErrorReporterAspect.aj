@@ -1,6 +1,5 @@
 package org.apache.maven.errors;
 
-import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactResolutionException;
 import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
 import org.apache.maven.artifact.resolver.ArtifactResolutionResult;
@@ -23,7 +22,6 @@ import org.apache.maven.model.Plugin;
 import org.apache.maven.extension.ExtensionScanningException;
 import org.apache.maven.extension.DefaultBuildExtensionScanner;
 import org.apache.maven.project.artifact.InvalidDependencyVersionException;
-import org.apache.maven.project.ProjectBuilderConfiguration;
 import org.apache.maven.project.interpolation.ModelInterpolator;
 import org.apache.maven.project.interpolation.ModelInterpolationException;
 import org.apache.maven.extension.ExtensionManagerException;
@@ -34,17 +32,18 @@ import org.apache.maven.plugin.version.DefaultPluginVersionManager;
 import org.apache.maven.realm.RealmManagementException;
 import org.apache.maven.execution.RuntimeInformation;
 import org.apache.maven.artifact.metadata.ArtifactMetadataSource;
+import org.apache.maven.artifact.versioning.VersionRange;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public privileged aspect ExtensionErrorReporterAspect
     extends AbstractCoreReporterAspect
 {
 
     before( ProjectBuildingException cause ):
-        withincode( List<ArtifactRepository> DefaultBuildExtensionScanner.getInitialRemoteRepositories( ProjectBuilderConfiguration ) )
+        withincode( List DefaultBuildExtensionScanner.getInitialRemoteRepositories() )
         && call( ExtensionScanningException.new( String, ProjectBuildingException ) )
         && args( *, cause )
     {
@@ -55,14 +54,14 @@ public privileged aspect ExtensionErrorReporterAspect
         execution( void DefaultBuildExtensionScanner.scanInternal( File, MavenExecutionRequest, .. ) )
         && args( pomFile, request, .. );
 
-    after( File pomFile, MavenExecutionRequest request, Model model, ProjectBuilderConfiguration config )
+    after( File pomFile, MavenExecutionRequest request, Model model, Map inheritedValues )
     throwing( ModelInterpolationException cause ):
         cflow( dbes_scanInternal( pomFile, request ) )
         && within( DefaultBuildExtensionScanner )
-        && call( Model ModelInterpolator+.interpolate( Model, File, ProjectBuilderConfiguration, .. ) )
-        && args( model, *, config, .. )
+        && call( Model ModelInterpolator+.interpolate( Model, Map, .. ) )
+        && args( model, inheritedValues, .. )
     {
-        getReporter().reportErrorInterpolatingModel( model, new HashMap( config.getExecutionProperties() ), pomFile, request, cause );
+        getReporter().reportErrorInterpolatingModel( model, inheritedValues, pomFile, request, cause );
     }
 
     private pointcut dem_addExtension( Artifact extensionArtifact, Artifact projectArtifact, List remoteRepos, MavenExecutionRequest request ):

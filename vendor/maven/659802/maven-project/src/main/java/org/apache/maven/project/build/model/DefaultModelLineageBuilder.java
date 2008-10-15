@@ -107,11 +107,6 @@ public class DefaultModelLineageBuilder
 
         do
         {
-            currentRemoteRepositories = updateRepositorySet( current.getModel(),
-                                                             currentRemoteRepositories,
-                                                             current.getFile(),
-                                                             config,
-                                                             current.isValidProfilesXmlLocation() );
             if ( lineage.size() == 0 )
             {
                 lineage.setOrigin( current.getModel(),
@@ -127,6 +122,11 @@ public class DefaultModelLineageBuilder
                                    current.isValidProfilesXmlLocation() );
             }
 
+            currentRemoteRepositories = updateRepositorySet( current.getModel(),
+                                                             currentRemoteRepositories,
+                                                             current.getFile(),
+                                                             config,
+                                                             current.isValidProfilesXmlLocation() );
 
             current = resolveParentPom( current,
                                         currentRemoteRepositories,

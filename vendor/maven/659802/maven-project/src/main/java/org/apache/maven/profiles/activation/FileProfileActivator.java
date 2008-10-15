@@ -22,14 +22,13 @@ package org.apache.maven.profiles.activation;
 import org.apache.maven.model.Activation;
 import org.apache.maven.model.ActivationFile;
 import org.apache.maven.model.Profile;
-import org.codehaus.plexus.interpolation.EnvarBasedValueSource;
-import org.codehaus.plexus.interpolation.InterpolationException;
-import org.codehaus.plexus.interpolation.MapBasedValueSource;
-import org.codehaus.plexus.interpolation.RegexBasedInterpolator;
 import org.codehaus.plexus.logging.LogEnabled;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.StringUtils;
+import org.codehaus.plexus.util.interpolation.EnvarBasedValueSource;
+import org.codehaus.plexus.util.interpolation.MapBasedValueSource;
+import org.codehaus.plexus.util.interpolation.RegexBasedInterpolator;
 
 import java.io.IOException;
 
@@ -68,21 +67,7 @@ public class FileProfileActivator
 
             if ( StringUtils.isNotEmpty( fileString ) )
             {
-                try
-                {
-                    fileString = StringUtils.replace( interpolator.interpolate( fileString, "" ), "\\", "/" );
-                }
-                catch ( InterpolationException e )
-                {
-                    if ( logger.isDebugEnabled() )
-                    {
-                        logger.debug( "Failed to interpolate exists file location for profile activator: " + fileString, e );
-                    }
-                    else
-                    {
-                        logger.warn( "Failed to interpolate exists file location for profile activator: " + fileString + ". Run in debug mode (-X) for more information." );
-                    }
-                }
+                fileString = StringUtils.replace( interpolator.interpolate( fileString, "" ), "\\", "/" );
 
                 boolean result = FileUtils.fileExists( fileString );
 
@@ -99,21 +84,7 @@ public class FileProfileActivator
 
             if ( StringUtils.isNotEmpty( fileString ) )
             {
-                try
-                {
-                    fileString = StringUtils.replace( interpolator.interpolate( fileString, "" ), "\\", "/" );
-                }
-                catch ( InterpolationException e )
-                {
-                    if ( logger.isDebugEnabled() )
-                    {
-                        logger.debug( "Failed to interpolate missing file location for profile activator: " + fileString, e );
-                    }
-                    else
-                    {
-                        logger.warn( "Failed to interpolate missing file location for profile activator: " + fileString + ". Run in debug mode (-X) for more information." );
-                    }
-                }
+                fileString = StringUtils.replace( interpolator.interpolate( fileString, "" ), "\\", "/" );
 
                 boolean result = !FileUtils.fileExists( fileString );
 

@@ -22,7 +22,6 @@ package org.apache.maven.project;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.profiles.ProfileManager;
-import org.apache.maven.project.interpolation.ModelInterpolationException;
 
 import java.io.File;
 import java.util.List;
@@ -42,7 +41,6 @@ public interface MavenProjectBuilder
     /**
      * @deprecated Use {@link MavenProjectBuilder#build(File, ProjectBuilderConfiguration)} instead.
      */
-    @Deprecated
     MavenProject build( File project,
                         ArtifactRepository localRepository,
                         ProfileManager globalProfileManager )
@@ -64,7 +62,6 @@ public interface MavenProjectBuilder
     /**
      * @deprecated Use {@link MavenProjectBuilder#buildProjectWithDependencies(File, ProjectBuilderConfiguration)} instead.
      */
-    @Deprecated
     MavenProjectBuildingResult buildProjectWithDependencies( File project,
                                                              ArtifactRepository localRepository,
                                                              ProfileManager globalProfileManager )
@@ -77,7 +74,6 @@ public interface MavenProjectBuilder
         throws ProjectBuildingException;
 
     /** @deprecated We do not want to allow projects to not have POMs. Maven 1.x repositories be damned. */
-    @Deprecated
     MavenProject buildFromRepository( Artifact artifact,
                                       List remoteArtifactRepositories,
                                       ArtifactRepository localRepository,
@@ -87,29 +83,15 @@ public interface MavenProjectBuilder
     /**
      * @deprecated Use {@link MavenProjectBuilder#buildStandaloneSuperProject(ProjectBuilderConfiguration)} instead.
      */
-    @Deprecated
     MavenProject buildStandaloneSuperProject()
         throws ProjectBuildingException;
 
     /**
      * @deprecated Use {@link MavenProjectBuilder#buildStandaloneSuperProject(ProjectBuilderConfiguration)} instead.
      */
-    @Deprecated
     MavenProject buildStandaloneSuperProject( ProfileManager profileManager )
         throws ProjectBuildingException;
 
     MavenProject buildStandaloneSuperProject( ProjectBuilderConfiguration config )
         throws ProjectBuildingException;
-
-    // ----------------------------------------------------------------------------
-    // API BELOW IS USED TO PRESERVE DYNAMISM IN THE BUILD SECTION OF THE POM.
-    // ----------------------------------------------------------------------------
-
-    void calculateConcreteState( MavenProject project,
-                                 ProjectBuilderConfiguration config )
-        throws ModelInterpolationException;
-
-    void restoreDynamicState( MavenProject project,
-                              ProjectBuilderConfiguration config )
-        throws ModelInterpolationException;
 }

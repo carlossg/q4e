@@ -117,7 +117,6 @@ public class PluginParameterExpressionEvaluator
      * @deprecated Use {@link PluginParameterExpressionEvaluator#PluginParameterExpressionEvaluator(MavenSession, MojoExecution, PathTranslator, LifecycleExecutionContext, Logger, Properties)}
      * instead.
      */
-    @Deprecated
     public PluginParameterExpressionEvaluator( MavenSession context,
                                                MojoExecution mojoExecution,
                                                PathTranslator pathTranslator,
@@ -251,7 +250,7 @@ public class PluginParameterExpressionEvaluator
         {
             value = project.getExecutionProject();
         }
-        else if ( expression.startsWith( "project" ) || expression.startsWith( "pom" ) )
+        else if ( expression.startsWith( "project" ) )
         {
             try
             {

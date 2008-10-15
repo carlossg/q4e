@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  * @author Jason van Zyl
- * @version $Revision: 671936 $
+ * @version $Revision: 640236 $
  */
 public class CLIManager
 {
@@ -55,8 +55,6 @@ public class CLIManager
     public static final char HELP = 'h';
 
     public static final char VERSION = 'v';
-
-    public static final char SHOW_VERSION = 'V';
 
     public static final char NON_RECURSIVE = 'N';
 
@@ -163,10 +161,6 @@ public class CLIManager
 
         options.addOption( OptionBuilder.withLongOpt( "log-file" ).hasArg().withDescription(
             "Log file to where all build output will go." ).create( LOG_FILE ) );
-
-        options.addOption(
-                          OptionBuilder.withLongOpt( "show-version" ).withDescription( "Display version information WITHOUT stopping build" ).create(
-                              SHOW_VERSION ) );
     }
 
     public CommandLine parse( String[] args )

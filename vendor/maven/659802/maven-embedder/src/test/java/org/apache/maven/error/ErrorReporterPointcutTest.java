@@ -1,24 +1,10 @@
 package org.apache.maven.error;
 
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpConnectionManager;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.maven.artifact.resolver.MultipleArtifactsNotFoundException;
 import org.apache.maven.embedder.Configuration;
 import org.apache.maven.embedder.DefaultConfiguration;
@@ -28,6 +14,7 @@ import org.apache.maven.errors.CoreErrorReporter;
 import org.apache.maven.execution.DefaultMavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.plugin.PluginManagerException;
 import org.apache.maven.settings.Settings;
 import org.codehaus.plexus.util.FileUtils;
@@ -37,16 +24,20 @@ import org.easymock.MockControl;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 
 import junit.framework.TestCase;
 
 public class ErrorReporterPointcutTest
     extends TestCase
 {
+
+    private static final int ONE_SECOND = 1000;
+
     private MockControl reporterCtl;
 
     private CoreErrorReporter reporter;
@@ -55,7 +46,10 @@ public class ErrorReporterPointcutTest
 
     private String basedir;
 
-    @Override
+    private static boolean isOffline;
+
+    private static boolean offlineIsSet = false;
+
     public void setUp()
         throws Exception
     {
@@ -78,18 +72,84 @@ public class ErrorReporterPointcutTest
 
         Configuration configuration = new DefaultConfiguration().setClassLoader( classLoader )
                                                                 .setMavenEmbedderLogger( new MavenEmbedderConsoleLogger() );
-        configuration.setUserSettingsFile( MavenEmbedder.DEFAULT_USER_SETTINGS_FILE );       
-        
+
         maven = new MavenEmbedder( configuration );
     }
 
-    @Override
     public void tearDown()
         throws Exception
     {
         super.tearDown();
 
         maven.stop();
+    }
+
+    private boolean checkOnline()
+    {
+        if ( !offlineIsSet )
+        {
+            HttpClient client = new HttpClient();
+            GetMethod get = new GetMethod(
+                                           "http://repo1.maven.org/maven2/org/apache/maven/maven-core/2.0/maven-core-2.0.pom" );
+
+            HttpConnectionManager mgr = client.getHttpConnectionManager();
+            mgr.getParams().setConnectionTimeout( 3 * ONE_SECOND );
+
+            try
+            {
+                int result = client.executeMethod( get );
+                if ( result == HttpStatus.SC_OK )
+                {
+                    String body = get.getResponseBodyAsString();
+                    new MavenXpp3Reader().read( new StringReader( body ) );
+                    isOffline = false;
+                }
+                else
+                {
+                    System.out.println( "Got HTTP status of: " + result );
+                    System.out.println( "System is offline" );
+                    isOffline = true;
+                }
+            }
+            catch ( HttpException e )
+            {
+                System.out.println( "Got error: " + e.getMessage() );
+                System.out.println( "System is offline" );
+                isOffline = true;
+            }
+            catch ( IOException e )
+            {
+                System.out.println( "Got error: " + e.getMessage() );
+                System.out.println( "System is offline" );
+                isOffline = true;
+            }
+            catch ( XmlPullParserException e )
+            {
+                System.out.println( "Got error: " + e.getMessage() );
+                System.out.println( "System is offline" );
+                isOffline = true;
+            }
+            finally
+            {
+                offlineIsSet = true;
+            }
+        }
+
+        if ( isOffline )
+        {
+            String method = getTestMethodName();
+            System.out.println( "Test: " + method
+                                + " requires an access to the Maven central repository. SKIPPING." );
+            return false;
+        }
+
+        return true;
+    }
+
+    private String getTestMethodName()
+    {
+        String method = new Throwable().getStackTrace()[2].getMethodName();
+        return method;
     }
 
     private File prepareProjectDir( String basename )
@@ -126,8 +186,13 @@ public class ErrorReporterPointcutTest
 
     private void buildTestAccessory( File basedir )
     {
-        MavenExecutionRequest request =
-            createRequest( basedir, new DummyCoreErrorReporter() ).setGoals( Arrays.asList( "clean", "install" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( basedir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( new DummyCoreErrorReporter() )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "clean",
+                                                                              "install"
+                                                                          } ) );
 
         MavenExecutionResult result = maven.execute( request );
 
@@ -135,16 +200,6 @@ public class ErrorReporterPointcutTest
         {
             reportExceptions( result, basedir, true );
         }
-    }
-
-    private MavenExecutionRequest createRequest( File basedir, CoreErrorReporter reporter )
-    {
-        return createRequest( reporter ).setBaseDirectory( basedir );
-    }
-
-    private MavenExecutionRequest createRequest( CoreErrorReporter reporter )
-    {
-        return new DefaultMavenExecutionRequest().setShowErrors( true ).setErrorReporter( reporter );
     }
 
     private void reportExceptions( MavenExecutionResult result,
@@ -166,8 +221,9 @@ public class ErrorReporterPointcutTest
         writer.write( basedir.getPath() );
         writer.write( "\nEncountered the following errors:" );
 
-        for ( Throwable error : (Collection<Throwable>) result.getExceptions() )
+        for ( Iterator it = result.getExceptions().iterator(); it.hasNext(); )
         {
+            Throwable error = (Throwable) it.next();
             writer.write( "\n\n" );
             error.printStackTrace( pWriter );
         }
@@ -200,9 +256,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( project, reporter ).setLocalRepositoryPath( localRepo ).setGoals(
-                                                                                             Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setLocalRepositoryPath( localRepo )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -212,6 +272,11 @@ public class ErrorReporterPointcutTest
     public void testReportAggregatedMojoFailureException()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "aggregate-mojo-failure");
 
         buildTestAccessory( new File( projectDir, "plugin" ) );
@@ -224,9 +289,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( basedir, reporter ).setGoals(
-                                                         Arrays.asList( "org.apache.maven.errortest:aggregate-mojo-failure-maven-plugin:1:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( basedir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "org.apache.maven.errortest:aggregate-mojo-failure-maven-plugin:1:test"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -236,6 +304,11 @@ public class ErrorReporterPointcutTest
     public void testReportAttemptToOverrideUneditableMojoParameter()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "config-rdonly-mojo-param");
 
         buildTestAccessory( new File( projectDir, "plugin" ) );
@@ -255,7 +328,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( basedir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( basedir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -265,6 +343,11 @@ public class ErrorReporterPointcutTest
     public void testReportErrorApplyingMojoConfiguration()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "mojo-config-error");
         File plugin = new File( projectDir, "plugin" );
         File project = new File( projectDir, "project" );
@@ -277,9 +360,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( project, reporter ).setGoals(
-                                                         Arrays.asList( "org.apache.maven.errortest:mojo-config-error-maven-plugin:1:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "org.apache.maven.errortest:mojo-config-error-maven-plugin:1:test"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -305,7 +391,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( project, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -315,6 +406,11 @@ public class ErrorReporterPointcutTest
     public void testReportErrorFormulatingBuildPlan()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "bad-build-plan" );
 
         buildTestAccessory( new File( projectDir, "plugin" ) );
@@ -327,9 +423,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( basedir, reporter ).setGoals(
-                                                         Arrays.asList( "org.apache.maven.errortest:bad-build-plan-maven-plugin:1:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( basedir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "org.apache.maven.errortest:bad-build-plan-maven-plugin:1:test"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -339,16 +438,28 @@ public class ErrorReporterPointcutTest
     public void testReportErrorInterpolatingModel_UsingProjectInstance()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "interp-from-project");
+        File localRepo = new File( projectDir, "local-repo" );
         File project = new File( projectDir, "project" );
 
         reporter.reportErrorInterpolatingModel( null, null, null );
         reporterCtl.setMatcher( MockControl.ALWAYS_MATCHER );
-        reporterCtl.setVoidCallable( MockControl.ONE_OR_MORE );
+        reporterCtl.setVoidCallable();
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( project, reporter ).setGoals( Arrays.asList( "compile" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setLocalRepositoryPath( localRepo )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "compile"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -372,9 +483,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( project, reporter ).setSettings( settings ).setGoals(
-                                                                                 Arrays.asList( "org.apache.maven.errortest:err-loading-plugin-maven-plugin:1:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setSettings( settings )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "org.apache.maven.errortest:err-loading-plugin-maven-plugin:1:test"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -384,6 +499,11 @@ public class ErrorReporterPointcutTest
     public void testReportErrorManagingRealmForExtension()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "ext-realm-error" );
 
         buildTestAccessory( new File( projectDir, "ext" ) );
@@ -396,7 +516,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( project, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -416,9 +541,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( project, reporter ).setLocalRepositoryPath( localRepo ).setGoals(
-                                                                                             Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setLocalRepositoryPath( localRepo )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -438,9 +567,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( project, reporter ).setLocalRepositoryPath( localRepo ).setGoals(
-                                                                                             Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setLocalRepositoryPath( localRepo )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -464,8 +597,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( project, reporter ).setSettings( settings ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setSettings( settings )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -491,9 +629,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( project, reporter ).setLocalRepositoryPath( localRepo ).setGoals(
-                                                                                             Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setLocalRepositoryPath( localRepo )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -518,9 +660,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( project, reporter ).setLocalRepositoryPath( localRepo ).setGoals(
-                                                                                             Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setLocalRepositoryPath( localRepo )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -538,7 +684,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -556,9 +707,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( projectDir, reporter ).setGoals(
-                                                            Arrays.asList( "org.apache.maven.plugins:maven-compiler-plugin:2.0.2:compile" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "compiler:compile"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -581,8 +735,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( projectDir, reporter ).setSettings( settings ).setGoals( Arrays.asList( "invalid:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setSettings( settings )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "invalid:test"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -597,8 +756,11 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( reporter ).setGoals( Arrays.asList( "name:of:invalid:direct:mojo:for:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "name:of:invalid:direct:mojo:for:test"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -608,6 +770,11 @@ public class ErrorReporterPointcutTest
     public void testReportMissingRequiredMojoParameter()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "missing-req-mojo-param" );
 
         buildTestAccessory( new File( projectDir, "plugin" ) );
@@ -620,9 +787,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( basedir, reporter ).setGoals(
-                                                Arrays.asList( "org.apache.maven.errortest:missing-req-mojo-param-maven-plugin:1:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( basedir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "org.apache.maven.errortest:missing-req-mojo-param-maven-plugin:1:test"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -632,6 +802,11 @@ public class ErrorReporterPointcutTest
     public void testReportMojoExecutionException()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "mojo-exec-err" );
 
         buildTestAccessory( new File( projectDir, "plugin" ) );
@@ -644,9 +819,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( basedir, reporter ).setGoals(
-                                                Arrays.asList( "org.apache.maven.errortest:mojo-exec-err-maven-plugin:1:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( basedir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "org.apache.maven.errortest:mojo-exec-err-maven-plugin:1:test"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -656,6 +834,11 @@ public class ErrorReporterPointcutTest
     public void testReportMojoLookupError()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "mojo-lookup-err" );
 
         buildTestAccessory( new File( projectDir, "plugin" ) );
@@ -666,9 +849,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( projectDir, reporter ).setGoals(
-                                                Arrays.asList( "org.apache.maven.errortest:mojo-lookup-err-maven-plugin:1:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "org.apache.maven.errortest:mojo-lookup-err-maven-plugin:1:test"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -683,7 +869,9 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( reporter ).setGoals( Collections.EMPTY_LIST );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Collections.EMPTY_LIST );
 
         maven.execute( request );
 
@@ -701,7 +889,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -721,7 +914,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "compile" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "compile"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -731,7 +929,13 @@ public class ErrorReporterPointcutTest
     public void testReportProjectDependenciesUnresolvable()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "err-resolving-project-dep" );
+        File localRepo = new File( projectDir, "local-repo" );
         File project = new File( projectDir, "project" );
 
         reporter.reportProjectDependenciesUnresolvable( null, null, null );
@@ -740,7 +944,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( project, reporter ).setGoals( Arrays.asList( "compile" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setLocalRepositoryPath( localRepo )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "compile"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -758,8 +968,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( projectDir, reporter ).setGoals( Arrays.asList( "clean", "package" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "clean",
+                                                                              "package"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -783,8 +998,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( project, reporter ).setSettings( settings ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setSettings( settings )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -802,7 +1022,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -812,6 +1037,11 @@ public class ErrorReporterPointcutTest
     public void testReportActivatorLookupError()
         throws IOException
     {
+        if ( !checkOnline() )
+        {
+            return;
+        }
+
         File projectDir = prepareProjectDir( "profile-activator-lookup-err" );
 
         buildTestAccessory( new File( projectDir, "ext" ) );
@@ -824,7 +1054,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( project, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -842,7 +1077,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "compile" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "compile"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -860,7 +1100,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -878,7 +1123,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -896,7 +1146,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "compile" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "compile"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -914,7 +1169,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "compile" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "compile"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -932,7 +1192,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "compile" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "compile"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -953,7 +1218,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -971,7 +1241,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -990,7 +1265,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( childDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( childDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -1009,7 +1289,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( childDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( childDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -1027,7 +1312,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -1045,19 +1335,23 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( reporter ).setPom( new File( projectDir, "pom.xml" ) ).setGoals(
-                                                                                            Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setPom( new File(
+                                                                                             projectDir,
+                                                                                             "pom.xml" ) )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
         reporterCtl.verify();
     }
 
-    // FIXME: Something keeps flip-flopping about this test, between the two reporter methods below...need to revisit
-    // this pronto.
-// public void testReportErrorCreatingArtifactRepository_fromProfilesXml()
-// throws IOException
+    // FIXME: Something keeps flip-flopping about this test, between the two reporter methods below...need to revisit this pronto.
+//    public void testReportErrorCreatingArtifactRepository_fromProfilesXml()
+//        throws IOException
 //    {
 //        File projectDir = prepareProjectDir( "bad-profile-repo" );
 //
@@ -1102,8 +1396,13 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request =
-            createRequest( projectDir, reporter ).setSettings( settings ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setSettings( settings )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -1121,7 +1420,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -1139,7 +1443,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -1157,7 +1466,12 @@ public class ErrorReporterPointcutTest
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "initialize" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "initialize"
+                                                                          } ) );
 
         maven.execute( request );
 
@@ -1173,14 +1487,22 @@ public class ErrorReporterPointcutTest
 
         buildTestAccessory( plugin );
 
+        Settings settings = new Settings();
+        settings.addPluginGroup( "org.apache.maven.errortest" );
+
         reporter.reportInvalidPluginForDirectInvocation( null, null, null, null );
         reporterCtl.setMatcher( MockControl.ALWAYS_MATCHER );
         reporterCtl.setVoidCallable();
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( projectDir, reporter ).setGoals( Arrays.asList( "org.apache.maven.errortest:missing-direct-invoke-mojo-maven-plugin:1:test" ) )
-                                                                             .setLoggingLevel( MavenExecutionRequest.LOGGING_LEVEL_DEBUG );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( projectDir )
+                                                                          .setSettings( settings )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "missing-direct-invoke-mojo:test"
+                                                                          } ) );
 
         MavenExecutionResult result = maven.execute( request );
 
@@ -1200,13 +1522,22 @@ public class ErrorReporterPointcutTest
 
         buildTestAccessory( plugin );
 
+        Settings settings = new Settings();
+        settings.addPluginGroup( "org.apache.maven.errortest" );
+
         reporter.reportDuplicateAttachmentException( null, null, null );
         reporterCtl.setMatcher( MockControl.ALWAYS_MATCHER );
         reporterCtl.setVoidCallable();
 
         reporterCtl.replay();
 
-        MavenExecutionRequest request = createRequest( project, reporter ).setGoals( Arrays.asList( "org.apache.maven.errortest:duplicated-attachments-maven-plugin:1:test" ) );
+        MavenExecutionRequest request = new DefaultMavenExecutionRequest().setBaseDirectory( project )
+                                                                          .setSettings( settings )
+                                                                          .setShowErrors( true )
+                                                                          .setErrorReporter( reporter )
+                                                                          .setGoals( Arrays.asList( new String[] {
+                                                                              "duplicated-attachments:test"
+                                                                          } ) );
 
         MavenExecutionResult result = maven.execute( request );
 

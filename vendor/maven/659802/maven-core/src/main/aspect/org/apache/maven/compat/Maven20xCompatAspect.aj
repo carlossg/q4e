@@ -46,6 +46,7 @@ import org.codehaus.plexus.logging.Logger;
 import java.util.List;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Collection;
 import java.util.Set;
 import java.util.LinkedHashSet;
 
@@ -155,16 +156,16 @@ public privileged aspect Maven20xCompatAspect
 
     // Intercept retrieval of artifact dependencies of an extension, inject plexus-utils if it's not there.
     private pointcut extDepArtifactsResolved( DefaultExtensionManager mgr ):
-        call( public Set<Artifact> ResolutionGroup+.getArtifacts() )
+        call( public Set ResolutionGroup+.getArtifacts() )
         && within( DefaultExtensionManager+ )
         && this( mgr )
         && notHere();
 
     // We use the same hack here to make sure that plexus 1.1 is available for extensions that do
     // not declare plexus-utils but need it. MNG-2900
-    Set<Artifact> around( DefaultExtensionManager mgr ): extDepArtifactsResolved( mgr )
+    Set around( DefaultExtensionManager mgr ): extDepArtifactsResolved( mgr )
     {
-        Set<Artifact> result = proceed( mgr );
+        Set result = proceed( mgr );
 
         result = checkPlexusUtils( result, mgr.artifactFactory );
 
@@ -173,14 +174,14 @@ public privileged aspect Maven20xCompatAspect
 
     // Intercept retrieval of artifact dependencies of a plugin, inject plexus-utils if it's not there.
     private pointcut pluginDepArtifactsResolved( DefaultPluginManager mgr ):
-        call( public Set<Artifact> ResolutionGroup+.getArtifacts() )
-        && cflow( execution( List<Artifact> DefaultPluginManager+.getPluginArtifacts(..) ) )
+        call( public Set ResolutionGroup+.getArtifacts() )
+        && cflow( execution( Set DefaultPluginManager+.getPluginArtifacts(..) ) )
         && this( mgr )
         && notHere();
 
-    Set<Artifact> around( DefaultPluginManager mgr ): pluginDepArtifactsResolved( mgr )
+    Set around( DefaultPluginManager mgr ): pluginDepArtifactsResolved( mgr )
     {
-        Set<Artifact> result = proceed( mgr );
+        Set result = proceed( mgr );
 
         result = checkPlexusUtils( result, mgr.artifactFactory );
 
@@ -305,7 +306,7 @@ public privileged aspect Maven20xCompatAspect
     // UTILITIES
     // --------------------------
 
-    private Set<Artifact> checkPlexusUtils( Set<Artifact> dependencyArtifacts, ArtifactFactory artifactFactory )
+    private Set checkPlexusUtils( Set dependencyArtifacts, ArtifactFactory artifactFactory )
     {
         // ----------------------------------------------------------------------------
         // If the plugin already declares a dependency on plexus-utils then we're all
@@ -353,7 +354,7 @@ public privileged aspect Maven20xCompatAspect
                                                                   "jar" );
         }
 
-        Set<Artifact> result = new LinkedHashSet<Artifact>( dependencyArtifacts );
+        Set result = new LinkedHashSet( dependencyArtifacts );
         result.add( plexusUtilsArtifact );
 
         return result;
