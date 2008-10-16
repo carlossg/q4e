@@ -1,0 +1,6 @@
+#summary New and Noteworthy features in 0.8.0
+
+
+This is the list of the most important changes made for the 0.8.0 release.
+
+For a complete list, check the [Status] page. 
