@@ -5,3 +5,5 @@ Released on September 8th, 2008
 The 0.8.0 release is mainly a maintenance release
 
 For a complete list of changes, check the [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.8.0+status%3AFixed%2CVerified&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Changelog]
+
+See [New_in_0_7_0 new features in 0.7.0].
