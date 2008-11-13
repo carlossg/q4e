@@ -13,19 +13,9 @@ Refer to [Installation]
 
 == Why the plugin is not at the Eclipse Foundation? ==
 
-A new project proposal has been approved at the Eclipse Foundation to add Q4E as an official Eclipse project.
+It is, although renamed as [http://eclipse.org/iam Eclipse IAM]. 
 
-The proposal is called [http://www.eclipse.org/proposals/iam/ Eclipse Integration for Apache Maven (Eclipse IAM)]  and is the first step to become a project.
-
-Discussions about the creation will happen in the newsgroup at
- * server: news.eclipse.org
- * group: eclipse.technology.iam
- * [http://www.eclipse.org/newsportal/thread.php?group=eclipse.technology.iam Web interface]
-
-The discussions will have as objective gathering the community interested in having the project in the Eclipse Foundation and finding two mentors from the [http://www.eclipse.org/org/foundation/council.php#architecture Eclipse Architecture Council]
-
-When ready, we can go through the creation review process.
-
+The code is already hosted at eclipse, and the Eclipse bugzilla and wiki will replace the documentation hosted here.
 
 == What are the differences between this plugin and m2eclipse? ==
 
