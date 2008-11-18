@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <body>
+    <menu name="Modules" ref="modules">
+      <item name="Maven Workspace" href="maven-workspace/index.html" />
+      <item name="Maven Lifecycle Model" href="maven-lifecycle/index.html" />
+      <item name="Maven Reporting API" href="maven-reporting-api/index.html" />
+      <item name="Maven Model" href="maven-model/index.html" />
+      <item name="Maven Profile Model" href="maven-profile/index.html" />
+      <item name="Maven Plugin API" href="maven-plugin-api/index.html" />
+      <item name="Maven Project Builder" href="maven-project/index.html" />
+      <item name="Maven Core" href="maven-core/index.html" />
+      <item name="Maven Toolchains" href="/index.html" />
+      <item name="Maven Embedder" href="maven-embedder/index.html" />
+      <item name="Maven Distribution" href="maven-distribution/index.html" />
+    </menu>
+    <menu ref="reports" />
+  </body>
+</project>
