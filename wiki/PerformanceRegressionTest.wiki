@@ -51,7 +51,7 @@ org.devzuz.q.maven.jdt.core/debug/mavenBuilder=true
 # This switch enables/disables time information in every other trace 
 }}}
 
-See [wiki:Debugging] for more information.
+See [Debugging] for more information.
 
 === Populate your local repository ===
 
@@ -68,7 +68,7 @@ mvn clean
 
 Go for some coffee, this will take some time.
 
-== Runnint the test ===
+== Running the test ===
 
 === Make a copy of the original sources ===
 This is required to make sure that the code imported into eclipse 
