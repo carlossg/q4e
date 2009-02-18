@@ -3,7 +3,7 @@
 
 = Introduction =
 
-After the development has moved to the Eclipse Foundation the new project Eclipse IAM had to introduce some changes, specifically naming.
+After the development has moved to the Eclipse Foundation the new project Eclipse IAM had to introduce some changes, specifically naming, that require a little more work to upgrade than usual.
 
 
 = Upgrading from Q4E to Eclipse IAM =
