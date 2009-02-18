@@ -1,0 +1,22 @@
+#summary Instructions to upgrade Q4E 0.8.x to Eclipse IAM.
+#labels Phase-Deploy,Featured
+
+= Introduction =
+
+After the development has moved to the Eclipse Foundation the new project Eclipse IAM had to introduce some changes, specifically naming.
+
+
+= Upgrading from Q4E to Eclipse IAM =
+
+
+Eclipse IAM builds are still published in the Q4E update site for the time being.
+
+* Uninstall previous versions of Q4E
+** Help - Software Updates - Installed software
+** Select all entries starting with "Q for Eclipse" and the one "Pom XML Editor Feature"
+** Click uninstall
+
+* Install Eclipse IAM
+** Developer builds are already at http://q4e.googlecode.com/svn/trunk/updatesite-dev
+
+Eclips IAM will recognize Q4E projects automatically, no need to import them again.
