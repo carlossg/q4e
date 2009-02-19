@@ -5,7 +5,7 @@
 
 The q4e developers test each release, add new features, provide support on the lists, review bug reports... That's quite a lot of work!
 
-One place where you can help is in providing good reports when entering a new bug in the  [http://code.google.com/p/q4e/issues/list Issue Tracker].
+One place where you can help is in providing good reports when entering a new bug in [https://bugs.eclipse.org/bugs/enter_bug.cgi?product=IAM IAM's Bugzilla at the Eclipse Foundation].
 
 
 = Is it a Q4E bug ? =
