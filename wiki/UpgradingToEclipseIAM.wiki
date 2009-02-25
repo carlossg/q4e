@@ -15,7 +15,7 @@ Eclipse IAM builds are still published in the Q4E update site for the time being
   * Help - Software Updates - Installed software
   * Select all entries starting with "Q for Eclipse" and the one "Pom XML Editor Feature"
   * Click uninstall
- * Delete org.devzuz.q.* from your eclipse/plugins directory
+ * Delete {{{org.devzuz.q.*}}} files and directories from your eclipse/plugins directory if still present
  * Restart Eclipse with the -clean parameter
  * Install Eclipse IAM
   * Developer builds are already at http://q4e.googlecode.com/svn/trunk/updatesite-dev
