@@ -19,5 +19,4 @@ Eclipse IAM builds are still published in the Q4E update site for the time being
  * Restart Eclipse with the -clean parameter
  * Install Eclipse IAM
   * Developer builds are already at http://q4e.googlecode.com/svn/trunk/updatesite-dev
-
-Eclips IAM will recognize Q4E projects automatically, no need to import them again.
+ * Select all projects that you want to handle with IAM and in the right click menu click on Maven 2 -> "Use Maven dependency management"
