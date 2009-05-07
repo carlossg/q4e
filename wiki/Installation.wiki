@@ -3,7 +3,11 @@
 
 = Update site =
 
-*If you had Q4E version 0.8.1 or lower read the instructions at [UpgradingToEclipseIAM]*
+*Q4E is now [http://www.eclipse.org/iam/ Eclipse IAM]*
+
+Releases will still be published in this site until full migration to the Eclipse Foundation happens.
+
+*If you had Q4E version 0.8.1 or lower read the [UpgradingToEclipseIAM Upgrading to Eclipse IAM instructions]*
 
 ==`http://q4e.googlecode.com/svn/trunk/updatesite-iam/`==
 
