@@ -1,5 +1,5 @@
 #summary New and Noteworthy features in 0.9.0
-#labels Audience-Users
+#labels Audience-Users,Featured
 
 Released on May 6th, 2009
 
@@ -7,8 +7,13 @@ The 0.9.0 release is the first release after moving the code to the Eclipse Foun
 
 Plugin now targets Eclipse 3.4.x, although some features can still work in 3.3.x
 
+ * Reworked the builder for improved performance
+  * Changes to pom sections that don't affect the build won't trigger it
+ * More performance improvements
+ * Form based POM editor
  * Edit settings file from within Eclipse
  * Sync eclipse compiler config with maven-compiler-plugin config
+ * Nexus repository manager index support in dependency search
 
 
 For a complete list of changes, check the [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.9.0+status%3AFixed%2CVerified&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Changelog]
