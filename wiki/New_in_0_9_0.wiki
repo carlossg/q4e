@@ -5,6 +5,8 @@ Released on May 6th, 2009
 
 The 0.9.0 release is the first release after moving the code to the Eclipse Foundation as Eclipse IAM
 
+Plugin now targets Eclipse 3.4.x, although some features can still work in 3.3.x
+
  * Edit settings file from within Eclipse
  * Sync eclipse compiler config with maven-compiler-plugin config
 
