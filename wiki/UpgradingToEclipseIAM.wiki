@@ -17,21 +17,5 @@ Eclipse IAM builds are still published in the Q4E update site for the time being
   * Click uninstall
  * Delete {{{org.devzuz.q.*}}} files and directories from your eclipse/plugins directory if still present
  * Restart Eclipse with the -clean parameter
- * Install Eclipse IAM
-  * Developer builds are already at http://q4e.googlecode.com/svn/trunk/updatesite-dev
-  * Make sure you also have checked in the Manage Sites menu these update sites to download some dependencies if needed
-   * EMF Update Site [http://download.eclipse.org/tools/emf/updates/]
-   * Web Tools (WTP) Update Site [http://download.eclipse.org/webtools/updates/]
+ * Install Eclipse IAM as described in [Installation]
  * Select all projects that you want to handle with IAM, right click and select Maven 2 -> "Use Maven dependency management"
-
-= Installing optional integrations =
-
-For the optional integration features you'll need to add some extra update sites to install the requirements.
-
- * Team Support integration
-  * [http://www.polarion.com/products/svn/subversive.php?src=eclipseproject Latest installation instructions]
-  * http://download.eclipse.org/technology/subversive/0.7/update-site/
-  * http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/
- * Buckminster integration
-  * [http://www.eclipse.org/buckminster/downloads.html Latest installation instructions]
-  * http://download.eclipse.org/tools/buckminster/updates
