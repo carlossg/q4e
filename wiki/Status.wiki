@@ -1,5 +1,5 @@
 #summary Quick links to follow the development status.
-#labels Phase-Implementation
+#labels Phase-Implementation,Deprecated
 
 
 = 0.8.0 =
