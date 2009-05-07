@@ -16,6 +16,7 @@ Some changes in this version:
  * Reworked the builder for improved performance
   * Changes to pom sections that don't affect the build won't trigger it
  * More performance improvements
+ * [http://wiki.eclipse.org/Archiva_Search_Integration Archiva search integration], find real time what's available in your Archiva repository
  * Form based POM editor
  * Buttons to view parent pom and effective pom from editor
  * Edit settings file from within Eclipse
