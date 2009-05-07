@@ -1,4 +1,5 @@
 #summary New and Noteworthy features in 0.7.0
+#labels Audience-Users,Deprecated
 
 
 This is the list of the most important changes made for the 0.7.0 release.
