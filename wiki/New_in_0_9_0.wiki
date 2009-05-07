@@ -9,6 +9,10 @@ The 0.9.0 release is the first release after moving the code to the Eclipse Foun
 
 Plugin now targets Eclipse 3.4.x, although some features can still work in 3.3.x
 
+[http://wiki.eclipse.org/What%27s_in_IAM List of features] in the Eclipse IAM site
+
+Some changes in this version:
+
  * Reworked the builder for improved performance
   * Changes to pom sections that don't affect the build won't trigger it
  * More performance improvements
