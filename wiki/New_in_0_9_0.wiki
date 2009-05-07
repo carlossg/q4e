@@ -14,6 +14,7 @@ Plugin now targets Eclipse 3.4.x, although some features can still work in 3.3.x
  * Edit settings file from within Eclipse
  * Sync eclipse compiler config with maven-compiler-plugin config
  * Nexus repository manager index support in dependency search
+ * Integration with Eclipse Buckminster
 
 
-For a complete list of changes, check the [http://code.google.com/p/q4e/issues/list?can=1&q=milestone%3A0.9.0+status%3AFixed%2CVerified&sort=milestone&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles Changelog]
+For a complete list of changes, check the [https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&short_desc_type=allwordssubstr&short_desc=&product=IAM&long_desc_type=allwordssubstr&long_desc=[0.9.0-Q4E]&bug_file_loc_type=allwordssubstr&bug_file_loc=&status_whiteboard_type=allwordssubstr&status_whiteboard=&keywords_type=allwords&keywords=&bug_status=CLOSED&emailtype1=substring&email1=&emailtype2=substring&email2=&bugidtype=include&bug_id=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&cmdtype=doit&order=Reuse+same+sort+as+last+time&field0-0-0=noop&type0-0-0=noop&value0-0-0= Changelog]
