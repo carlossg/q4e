@@ -11,6 +11,7 @@ Plugin now targets Eclipse 3.4.x, although some features can still work in 3.3.x
   * Changes to pom sections that don't affect the build won't trigger it
  * More performance improvements
  * Form based POM editor
+ * Buttons to view parent pom and effective pom from editor
  * Edit settings file from within Eclipse
  * Sync eclipse compiler config with maven-compiler-plugin config
  * Nexus repository manager index support in dependency search
