@@ -11,6 +11,7 @@ After the development has moved to the Eclipse Foundation the new project Eclips
 
 Eclipse IAM builds are still published in the Q4E update site for the time being.
 
+ * Select all projects managed with Q4E, right click and deselect Maven 2 -> "Use Maven dependency management"
  * Uninstall previous versions of Q4E
   * Help - Software Updates - Installed software
   * Select all entries starting with "Q for Eclipse" and the one "Pom XML Editor Feature"
