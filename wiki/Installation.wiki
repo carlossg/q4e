@@ -14,7 +14,7 @@ Releases will still be published in this site until full migration to the Eclips
 The Eclipse IAM update site is at `http://q4e.googlecode.com/svn/trunk/updatesite-iam/`
 
 Make sure you also have checked in the Manage Sites menu these update sites to download some dependencies if needed
- * EMF Update Site [`http://download.eclipse.org/tools/emf/updates/`]
+ * EMF Update Site [`http://download.eclipse.org/modeling/emft/updates/releases/ `] (this has been *updated* for 0.10.0, and is required for Eclipse 3.4 -Ganymede-)
  * Web Tools (WTP) Update Site [`http://download.eclipse.org/webtools/updates/`]
 
 = Installing optional integrations =
