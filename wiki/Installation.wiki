@@ -30,7 +30,7 @@ For the optional integration features you'll need to add some extra update sites
   * `http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/`
  * Buckminster integration
   * [http://www.eclipse.org/buckminster/downloads.html Latest installation instructions]
-  * `http://download.eclipse.org/tools/buckminster/updates`
+  * `http://download.eclipse.org/tools/buckminster/updates-3.4`
 
 There's also a developer's update site used for testing prereleases at `http://q4e.googlecode.com/svn/trunk/updatesite-dev/`
 
