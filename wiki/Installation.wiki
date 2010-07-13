@@ -11,26 +11,42 @@ Releases will still be published in this site until full migration to the Eclips
 
 ==`http://q4e.googlecode.com/svn/trunk/updatesite-iam/`==
 
+We recommend installing into _Eclipse IDE for Java EE Developers_ as it already includes most of the dependencies.
+
 Go to Help - Software Updates - Available Software
 
-Click on Manage Sites - Add and add the Eclipse IAM update site at `http://q4e.googlecode.com/svn/trunk/updatesite-iam/`
+Click on _Manage Sites - Add_ and add the Eclipse IAM update site at `http://q4e.googlecode.com/svn/trunk/updatesite-iam/`
 
-Make sure you also have checked in the Manage Sites menu these update sites to download some dependencies if needed
- * EMF Update Site `http://download.eclipse.org/modeling/emft/updates/releases/ ` (this has been *updated* for 0.10.0, and is required for Eclipse 3.4 -Ganymede-)
- * Web Tools (WTP) Update Site `http://download.eclipse.org/webtools/updates/` (If installing IAM on Eclipse 3.4 -Ganymede-, use the Web Tools (WTP) Update Site found under the Ganymede Update Site.)
- * If installing IAM on Eclipse 3.4.1, install Graphical Editing Framework (GEF) found under the Ganymede Update Site.
+Also add the following Update Sites, or make sure they are checked in the _Manage Sites_ screen, depending on your version of Eclipse
 
-= Installing optional integrations =
+== Eclipse 3.5 Galileo and 3.6 Helios ==
+
+ * EMF Update Site `http://download.eclipse.org/modeling/emft/updates/releases/`
+ * Web Tools (WTP) Update Site `http://download.eclipse.org/webtools/updates/`
+ * `http://download.eclipse.org/technology/subversive/0.7/update-site/` (needed for Team Support integration, see below)
+
+== Eclipse 3.4 Ganymede ==
+
+ * Ganymede Update Site `http://download.eclipse.org/releases/ganymede` (checked by default)
+ * `http://download.eclipse.org/modeling/emft/updates/releases/`
+ * `http://download.eclipse.org/technology/subversive/0.7/update-site/` (needed for Team Support integration, see below)
+
+= Optional integrations =
 
 For the optional integration features you'll need to add some extra update sites to install the requirements.
 
- * Team Support integration
-  * [http://www.polarion.com/products/svn/subversive.php?src=eclipseproject Latest installation instructions]
-  * `http://download.eclipse.org/technology/subversive/0.7/update-site/`
-  * `http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/`
- * Buckminster integration
-  * [http://www.eclipse.org/buckminster/downloads.html Latest installation instructions]
-  * `http://download.eclipse.org/tools/buckminster/updates-3.4`
+== Team Support (Subversive) integration requirements ==
+
+ * [http://www.polarion.com/products/svn/subversive.php?src=eclipseproject Latest installation instructions]
+ * `http://download.eclipse.org/technology/subversive/0.7/update-site/`
+ * `http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/`
+
+== Buckminster integration requirements ==
+
+*No longer maintained*
+
+ * [http://www.eclipse.org/buckminster/downloads.html Latest installation instructions]
+ * `http://download.eclipse.org/tools/buckminster/updates-3.4`
 
 There's also a developer's update site used for testing prereleases at `http://q4e.googlecode.com/svn/trunk/updatesite-dev/`
 
