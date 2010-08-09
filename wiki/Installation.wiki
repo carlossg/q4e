@@ -33,6 +33,7 @@ Also add the following Update Sites, or make sure they are checked in the _Manag
 
  * Ganymede Update Site `http://download.eclipse.org/releases/ganymede` (checked by default)
  * `http://download.eclipse.org/modeling/emft/updates/releases/`
+ * `http://download.eclipse.org/tools/gef/updates/releases/`
  * `http://download.eclipse.org/technology/subversive/0.7/update-site/` (needed for Team Support integration, see below)
 
 = Optional integrations =
